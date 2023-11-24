@@ -1,0 +1,65 @@
+\RequirePackage{plautopatch}
+\documentclass[report,paper=a4, fontsize=12pt, line_length=16cm, number_of_lines=33,dvipdfmx]{jlreq}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+%\usepackage[bold,uplatex]{otf}
+\usepackage{jlreq-deluxe}
+%% Fonts
+\usepackage{tgtermes,tgheros,tgcursor}
+\renewcommand{\bfdefault}{bx}
+\usepackage[libertine]{newtxmath}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue}
+
+\usepackage{graphicx}
+\graphicspath{{fig/}}
+
+\usepackage{physics}
+\usepackage{color}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+%\usepackage{cleveref}
+
+% font warningを出さないため
+% \DeclareFontShape{JY2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+% \DeclareFontShape{JY2}{hgt}{m}{it}{<->ssub*hgt/m/n}{}
+% \DeclareFontShape{JT2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
+% \DeclareFontShape{JT2}{hgt}{m}{it}{<->ssub*hgt/m/n}{}
+
+\newenvironment{myquote}{\begin{tcolorbox}[
+  colback = blue!5, after = \noindent] }{\end{tcolorbox}}
+\newenvironment{important}{\begin{tcolorbox}[
+  colback = white,
+  colframe = red!35,
+  boxrule = 2mm,
+  fonttitle = \bfseries,
+  after = \noindent] }{\end{tcolorbox}}
+\newenvironment{mycite}{\\ \qquad \textbullet\ }{\\}
+
+\numberwithin{equation}{chapter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          often used macro
+\newcommand{\del}{\partial}
+\newcommand{\Cb}{\mathbb{C}}
+\newcommand{\Zb}{\mathbb{Z}}
+\newcommand{\CP}{\Cb \mathrm{P}}
+\newcommand{\strong}[1]{{\sffamily \gtfamily \bfseries #1}}
+
+\title{一般化対称性について}
+\author{山口　哲}
+\date{\today}
+\begin{document}
+\maketitle
+\section*{まえがき}
+
+\chapter{導入}
+\section{対称性とは？}
+\section{対称性の使い方の例}
+\section{いくつかの注意}
+\chapter{対称性とトポロジカル欠陥}
+\chapter{２次元Ising模型}
+\chapter{高次形式対称性}
+\chapter{高次元の非可逆対称性}
+
+\end{document}

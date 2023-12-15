@@ -46,6 +46,18 @@
   sharp corners,
   boxrule=0.5mm
 }
+\newtcolorbox{proposition}[1][]{
+  colback=white,
+  colframe=green!40,
+  coltitle=black,
+  title={#1},
+  fonttitle=\sffamily \bfseries, 
+  sharp corners,
+  boxrule=0.5mm
+}
+
+\newcommand{\qed}{■}
+\newcommand{\kyou}[1]{{\sffamily \bfseries #1}}
 
 \numberwithin{equation}{chapter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,6 +70,7 @@
 \newcommand{\Ztwo}{\mbox{$\mathbb{Z}_{2}$}}
 \newcommand{\Hh}{\widehat{H}}
 \newcommand{\Uh}{\widehat{U}}
+\newcommand{\Vh}{\widehat{V}}
 
 
 \title{一般化対称性について}
@@ -109,8 +122,56 @@
 
 \section{対称性の使い方の例}
 
+この後、対称性の一般化について説明していくわけですが、対称性を一般化しても有用であるということを説明するために、対称性の使い方の一つをについて説明します。これは簡単な例ですが、量子力学の教科書にはあまり書いてないと思います。
+
+次のような命題が成り立ちます。
+\begin{proposition}[命題]
+$\Uh,\Vh$をユニタリー演算子で、Hamiltonian $\Hh$と可換とします（つまり、②の見方での対称性です。）。そして
+\begin{align}
+  \Uh \Vh = a \Vh \Uh,\quad (a \text{はc数},\ a\ne 1)
+  \label{anomaly}
+\end{align}  
+とします。このとき、\kyou{すべてのエネルギー準位（特に基底状態）は縮退しています。}
+\end{proposition}
+これは、場の理論の文脈では 't Hooft アノマリー整合条件と呼ばれているものの一例です。$a$がこの例での 't Hooft アノマリーになります。おそらく、普通に場の理論でアノマリーを勉強された方には、そのアノマリーとこの$a$がどう関係があるか分からないと思います。大事なことではあるのですが、この講義の主題とは外れるのと、知らなくてもこの命題だけで理解できるので、その説明は省略します。
+
+\kyou{証明} 証明を与えます。背理法で証明します。つまり、縮退していないエネルギー固有状態$\ket{\psi},\ \Hh \ket{\psi}=E\ket{\psi}$があると仮定します。このとき$\Uh\ket{\psi}$がエネルギー$E$の固有状態であることが、次のようにして分かります。
+\begin{align}
+  \Hh \Uh \ket{\psi} =\Uh \Hh \ket{\psi}
+  =E\Uh \ket{\psi}.
+\end{align}
+さらに縮退が無いことがら$\Uh \ket{\psi}\propto \ket{\psi}$なので、次のように表すことができます。
+\begin{align}
+  \Uh \ket{\psi}=u\ket{\psi},\ u\in \Cb,\ |u|=1.
+\end{align}
+$\Vh$に関しても同様です。
+\begin{align}
+  \Vh \ket{\psi}=v\ket{\psi},\ v \in \Cb,\ |v|=1.
+\end{align}
+これらを用いると
+\begin{align}
+  \Uh \Vh \ket{\psi}=uv\ket{\psi}
+\end{align}
+という関係を得ます。ところが、\eqref{anomaly}の関係を用いると、全く同じベクトルが
+\begin{align}
+  \Uh \Vh \ket{\psi}=a\Vh \Uh \ket{\psi}=a u v \ket{\psi}
+\end{align}
+とも書けます。ここから
+\begin{align}
+  auv\ket{\psi}=uv\ket{\psi}
+\end{align}
+という関係式を得ます。$uv\ket{\psi}\ne 0$ですから、この式は$a\ne 1$に矛盾します。\qed 
+
+ここで考えてみたいことは、\kyou{$\Uh,\Vh$ がユニタリーでなかったらどうなるか？}ということです。この場合、$\Uh,\Vh$ ユニタリーではありませんから、従来の意味での対称性ではありません。しかし、証明を見てもらって分かるように、ユニタリー性を用いているところは$uv\ket{\psi}\ne 0$の部分のみです。ですから、この場合も命題を少し修正することで成り立ちます。このようにして「（従来の意味では）対称性でないもの」を対称性と同じように用いて理論を調べることができるわけです。このように従来の意味では対称性でないが、対称性と同様な使い方ができるものを「一般化対称性」と呼んでいろいろ調べようというのがここでやりたいことです。
+
+上の証明を見てもらって分かるように、対称性の最も重要な性質はHamiltonianと交換するということです。これをゆるめてしまうと、対称性と同じように用いることは、なかなか難しくなります。したがって、ここではこの条件はゆるめないことにします。一方、ユニタリーのような条件はゆるめても、そこそこ使えるものになります。これを「一般化対称性」と呼んで、いろいろ調べよう、というのがこの講義の目的です。ユニタリーでないがHamiltonianと交換する演算子は場の理論の文脈では「非可逆対称性」と呼ばれます。\footnote{非可逆対称性という名前の由来については、少々複雑です。ちゃんと説明するためには場の理論でのトポロジカル欠陥について知ってもらう必要があります。ここでは、\kyou{非可逆対称性という名前だけれど$\Uh$という演算子が非可逆とは限らない}、ということだけ注意しておきます。}
 
 \section{いくつかの注意}
+ここでは、通常のセミナーなどでは説明が省略されることが多いけれど、注意が必要なことについて説明します。
+
+一つは、Euclideanの定式化についてです。
+
+もう一つは演算子関係式についてです。
 
 レビュー\cite{Shao:2023gho}
 

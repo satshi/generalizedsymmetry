@@ -71,6 +71,9 @@
 \newcommand{\Hh}{\widehat{H}}
 \newcommand{\Uh}{\widehat{U}}
 \newcommand{\Vh}{\widehat{V}}
+\newcommand{\Jh}{\widehat{J}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Ocalh}{\widehat{\mathcal{O}}}
 
 
 \title{一般化対称性について}
@@ -169,11 +172,28 @@ $\Vh$に関しても同様です。
 \section{いくつかの注意}
 ここでは、通常のセミナーなどでは説明が省略されることが多いけれど、注意が必要なことについて説明します。
 
-一つは、Euclideanの定式化についてです。
+一つは、Euclideanの定式化についてです。この講義も含めて、セミナーや論文などでは場の理論をEuclid形式で取り扱うことがよくあります。これは、「Euclid形式の場の理論」という、教科書に出てくる場の理論と異なる理論を考えているのではないことに注意してください。理論は教科書に出てくる場の理論と同じものを取り扱っています。異なるのは定式化の仕方とか計算しやすい量です。例えば正準分配関数はEuclid形式で取り扱いやすい量の一つです。これは
+\begin{align}
+  \Tr e^{-\beta \Hh} = \int D\phi e^{-S_{E}(\phi)}
+\end{align}
+のように表すことができます。ここで、$S_{E}(\phi)$は虚時間方向を長さ$\beta$の円周にしたときのEuclid化した作用です。他にも、$\Ocalh_1(x_1),\dots, \Ocalh_K(x_K)$をすべて同時刻の別々の点に置かれた局所演算子としたとき、
+\begin{align}
+  \expval{\Ocalh_1(x_1) \dots \Ocalh_K(x_K)}{0}
+  =\frac{1}{Z}\int D\phi e^{-S_{E}(\phi)} \Ocal_1(x_1) \dots \Ocal_K(x_K),\quad 
+  Z:=\int D\phi e^{-S_{E}(\phi)}.
+\end{align}
+と表すことができます。このとき$S_E(\phi)$はEuclid化した作用です。他にも様々な量がEuclid形式を用いて計算することができます。この講義でもEuclid形式用いて様々な場の理論の性質を考えることになります。
 
-もう一つは演算子関係式についてです。
+もう一つは演算子関係式についてです。例えば、この講義でも\kyou{量子論で}
+\begin{align}
+  \del_{\mu}J^{\mu}(x)=0\label{egoperatorrelation}
+\end{align}
+というような式を書くことがあります。これは古典論であれば、運動方程式を満たす場の配位において、このような関係式を満たすということですが、量子論においてはどうでしょうか？一つは演算子形式の場の理論で$\Jh^\mu(x)$が上の関係式を満たすということです。この講義で主に用いるのは、もう少し広い応用ができる見方で、相関関数の間の関係式と見ることです。これは、
+\begin{align}
+  \expval{\del_{\mu}J^{\mu}(x)\cdots}=0,&\quad(\text{$\cdots$は任意の局所演算子や非局所演算子の挿入。}\notag\\&\text{ただし$x$は$\cdots$の挿入されている点とは異なる。})
+\end{align}
+というのを省略して書いたのが式\eqref{egoperatorrelation}ということです。問題は「ただし…」のところは文脈によって色々変わるところです。この講義では分かりにくそうな場合はなるべく補足するようにはしますが、もし分からなければ聞いてください。
 
-レビュー\cite{Shao:2023gho}
 
 \chapter{対称性とトポロジカル欠陥}
 \section{欠陥}

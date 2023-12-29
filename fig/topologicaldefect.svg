@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="80mm"
+   height="50.000999mm"
+   viewBox="0 0 79.999996 50.000997"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="topologicaldefect.svg"
+   inkscape:export-filename="topologicaldefect.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="4.710799"
+     inkscape:cx="132.35547"
+     inkscape:cy="116.01004"
+     inkscape:window-width="2144"
+     inkscape:window-height="1408"
+     inkscape:window-x="400"
+     inkscape:window-y="43"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="0.26458333"
+       spacingy="0.26458334"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:500;font-size:4.9389px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text Medium Italic';fill:none;stroke:#000000;stroke-width:0.4;stroke-dasharray:none;stroke-opacity:1"
+       x="37.041668"
+       y="14.552084"
+       id="text28"><tspan
+         sodipodi:role="line"
+         id="tspan28"
+         style="stroke:#000000;stroke-width:0.4;stroke-opacity:1"
+         x="37.041668"
+         y="14.552084" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:500;font-size:4.9389px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text Medium Italic';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.4;stroke-dasharray:none;stroke-opacity:1"
+       x="37.76062"
+       y="17.89995"
+       id="text29"><tspan
+         sodipodi:role="line"
+         id="tspan29"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.4"
+         x="37.76062"
+         y="17.89995">=</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 21.802681,22.159446 c 0,0 -0.168496,-0.280827 1.460297,-2.639768 1.628793,-2.358942 1.123305,-1.572628 2.471272,-3.145256 1.347967,-1.572628 1.628793,-2.13428 3.369916,-3.145255 1.741125,-1.010975 4.156231,-1.404132 4.156231,-1.404132"
+       id="path419" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 46.938098,22.159446 c 0,0 -0.168496,-0.280827 1.460297,-2.639768 1.628793,-2.358942 3.170304,-0.749133 4.518271,-2.321761 1.347967,-1.572628 -0.418206,-2.957775 1.322917,-3.96875 1.741125,-1.010975 4.156231,-1.404132 4.156231,-1.404132"
+       id="path419-1"
+       sodipodi:nodetypes="csssc" />
+  </g>
+</svg>

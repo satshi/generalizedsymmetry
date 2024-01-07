@@ -310,7 +310,37 @@ $U$は時間一定面で他の部分とは異なっているので、余次元1�
 \end{emphasize}
 最初の方で、自発的対称性の破れがあるときには$\Uh$がうまく定義できないと言いました。しかし、これは定義しようとしている空間が無限であるところからくるものです。したがって、$M$が有限である場合には$U(M)$は自発的対称性の破れがあるかどうかにかかわらず定義でき、理論の解析に用いることができます。
 
-\subsection{演算子への作用}
+\subsection{局所演算子への作用}
+
+次に対称性の局所演算子への作用について考えてみます。場の理論の演算子形式では、局所演算子$\Oh(x)$変換は
+\begin{align}
+  \Uh \Oh(x) \Uh^{\dag}=\Oh'(x)
+  \label{transformation0}
+\end{align}
+と書けます。\footnote{量子力学の教科書とは異なるconventionを用いています。場の理論の論文では、ここで用いるconventionの方が一般的です。}
+$\Uh,\Uh^{\dag}$は$\Hh$と可換ですから、$\Uh$を少しだけ虚時間で未来に移動し、$\Uh^{\dag}$を少しだけ過去に移動することで
+\begin{align}
+  \includegraphics{transformation0.pdf}
+\end{align}
+という絵で表すことができます。別の言い方をすると式\eqref{transformation0}の左辺は、
+\begin{align}
+  T(\Uh(M_1)\Oh(x)\Uh(M_2))=T(\Uh(M)\Oh(x)),\quad
+  M:=M_1 \cup (-M_2)
+\end{align}
+と表すことができます。$T()$は虚時間順序積を表します。さらに$\cdots$を$x$と同時刻にはない任意の演算子の挿入として\eqref{transformation0}より
+\begin{align}
+  \ev{T(\Uh(M)\Oh(x)\cdots)}{0}=\ev{T(\Oh'(x)\cdots)}{0}
+\end{align}
+という式が成り立ちます。この両辺に現れる量をEuclidean経路積分で表すことを想定して
+\begin{align}
+  \expval{U(M)\Ocal(x)\cdots}=\expval{\Ocal'(x)\cdots}
+\end{align}
+と書くのでした。さらにこれを略記して
+\begin{align}
+  U(M)\Ocal(x) = \Ocal'(x)
+\end{align}
+と書きます。$U(M)$はトポロジカルですから、連続変形して
+
 
 \section{対称性とトポロジカル欠陥その２}
 \section{対称性欠陥のまとめ}

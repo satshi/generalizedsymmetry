@@ -7,13 +7,17 @@
 \documentclass[report,paper=a4, fontsize=12pt, line_length=16cm, number_of_lines=33,dvipdfmx]{jlreq}
 \usepackage{jlreq-deluxe}
 \usepackage{amsmath,amssymb}
-\usepackage{tgtermes,tgheros,tgcursor}
-\renewcommand{\bfdefault}{bx}
-\usepackage[libertine]{newtxmath}
-
+% \usepackage{libertine}
+% \usepackage{libertinust1math}
+% \usepackage[T1]{fontenc}
+% \usepackage{mlmodern}
+% \usepackage[T1]{fontenc}
+% \usepackage{tgtermes,tgheros,tgcursor}
+% \renewcommand{\bfdefault}{bx}
+% \usepackage[libertine]{newtxmath}
 
 %% Fonts
-%\usepackage[notext]{stix2}
+\usepackage{stix2}
 %\usepackage{lmodern}
 %\usepackage[T1]{fontenc}
 
@@ -348,8 +352,11 @@ $\Uh,\Uh^{\dag}$は$\Hh$と可換ですから、$\Uh$を少しだけ虚時間で
 \begin{align}
   U(M)\Ocal(x) = \Ocal'(x)
 \end{align}
-と書きます。$U(M)$はトポロジカルですから、連続変形して
-
+と書きます。$U(M)$はトポロジカルですから、連続変形して（変形後の面も同じ記号$M$で表すことにして）
+\begin{align}
+  \includegraphics{transformation1.pdf}
+\end{align}
+という絵で書きます。これが、局所演算子の変換性をトポロジカル欠陥を用いて表したものになります。後で示すように、これはWard-Takahashi恒等式を有限変換の場合にも適用できる形にしたものと言うこともできます。
 
 \section{対称性とトポロジカル欠陥その２}
 \section{対称性欠陥のまとめ}

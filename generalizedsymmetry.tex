@@ -436,11 +436,15 @@ $G$は群ですから、演算子への作用も表現になっています。�
 \begin{align}
   \Ocal^{g}_{a}(x)=\sum_{b}\Ocal_{b}(x)R(g)^{b}{}_{a}
 \end{align}
-と書くことができます。これを用いるとWard-Takahashi恒等式は
-\begin{align}
-  \includegraphics{EgWTid2.pdf}
-\end{align}
-と表せます。
+と書くことができます。
+これらすべてまとめて次のように言うことができます。
+\begin{emphasize}
+  離散的な群の場合も含めて、トポロジカル欠陥が対称性の局所的な記述を与える。この対称性を記述するトポロジカル欠陥を\kyou{対称性欠陥}と呼ぶ。Ward-Takahashi恒等式は
+  \begin{align}
+    \includegraphics{EgWTid2.pdf}
+  \end{align}
+  と表せる。    
+\end{emphasize}
 
 \subsection{背景ゲージ場}
 対称性を表すトポロジカル欠陥の便利な見方の一つは、背景ゲージ場を考えることです。結論から言うと、flatな背景ゲージ場の背景が対称性のトポロジカル欠陥の配位と同一視できます。それをこれから説明していきます。
@@ -451,7 +455,52 @@ $G$は群ですから、演算子への作用も表現になっています。�
 \end{align}
 と表すことができます。
 
+ここでゲージ変換について考えてみます。$A=0$のところから、前項で考えたゲージ変換\eqref{gaugetransf}をしてみます。このとき、$A\to A'$と変化します。ゲージ不変性は仮定しているので
+\begin{align}
+  Z(A=0)=Z(A')
+\end{align}
+となります。前項で議論したように、左辺は$M=\del D$に対称性欠陥が入った分配関数です。これがゲージ場$A'$が入っているのと同じということです。
 
+$A'$は$A=0$から\eqref{gaugetransf}から得られたものですから、$A'$は$M$上だけでデルタ関数的に非０の値を持っています（図\ref{fig:localizedgaugefield}参照）。その値は$D$の中の点から外の点への経路で$M$と１回交わる経路を$C$として
+\begin{align}
+  P e^{i\int_{C}A'} = g
+\end{align}
+となるようになっています。また、もともと場の強さは$0$でしたから、ゲージ変換した後も$0$となります。このように場の強さが０となるゲージ場の配位を\kyou{flat}なゲージ場といいます。
+
+\begin{figure}
+  \centering
+  \includegraphics[width=6cm]{localizedgaugefield.pdf}
+  \caption{対称性欠陥と背景ゲージ場の配位。$M$上にある対称性欠陥は$M$上にデルタ関数的に局在した背景ゲージ場の配位として表すことができる。$P e^{i\int_{C}A'} = g$ となるようになっている。}
+  \label{fig:localizedgaugefield}
+\end{figure}
+
+この結果をまとめると
+\begin{emphasize}
+  対称性欠陥は、デルタ関数的に局在した背景ゲージ場の配位である。
+\end{emphasize}
+と言えます。
+
+この逆を考えてみましょう。flatな背景ゲージ場の配位が与えられたとします。するとある点のまわりの球体のトポロジーを持つ領域でゲージ変換して、$A=0$とすることができます。これを図\ref{fig:localizedgaugefield}のように空間のいろんな部分からやっていって、ほとんどの部分で$A=0$とすることができます。しかし、二人の人が別の点からゲージ変換していって、ぶつかったときに、その間ですべて$A=0$とすることができるとは限りません。いっぱんに２つの領域の境目で$A\ne 0$となります。言い換えると、２つの領域の境目が対称性欠陥となります。
+
+\begin{figure}
+  \centering
+  \includegraphics{flatgaugefield.pdf}
+  \caption{flatな背景ゲージ場の配位と対称性欠陥の関係。右のようにいろんな点のまわりの球体の領域でゲージ変換を行って$A=0$となるようにする。領域の境目のみで$A\ne 0$になるが、これが対称性欠陥になる。}
+  \label{fig:flatgaugefield}
+\end{figure}
+
+図\ref{fig:flatgaugefield}を見てもらっても分かるように、この操作を行うと一般的に対称性欠陥が枝分かれしている\kyou{ジャンクション}ができます。ゲージ変換によってジャンクションも連続的に動かすことができるので、このジャンクションもトポロジカルです。このジャンクションで繋がれるトポロジカル欠陥は何でもよいわけではなく、flatであることからジャンクションまわりのWilsonループが1になるので、それぞれの欠陥に割り振られる群の元は
+\begin{align}
+  \includegraphics{junction.pdf}
+\end{align}
+という関係になります。
+
+図\ref{fig:flatgaugefield}では２次元的に書いているので余次元２のジャンクションだけですが、高次元ではこのようなジャンクションがさらに集まったジャンクションもできます。３次元空間の中で泡が集まっているようなものを思い浮かべてください。
+
+まとめると
+\begin{emphasize}
+  flatなゲージ場の配位は、様々な次元のトポロジカルなジャンクションを含む対称性欠陥の配位で表される。
+\end{emphasize}
 
 \subsection{Ising模型のspin flipの例}
 

@@ -92,6 +92,9 @@
 \newcommand{\Ocalh}{\widehat{\mathcal{O}}}
 \newcommand{\U}{\mbox{U}}
 
+\newcommand{\link}[1]{\expval{#1}}
+
+
 \title{一般化対称性について}
 \author{山口　哲}
 \date{\today}
@@ -214,7 +217,7 @@ $\Vh$に関しても同様です。
 \begin{align}
   \includegraphics{EgWTid.pdf}
 \end{align}
-というようなものがあります。これは$x$は時空の点で$\Ocal(x),\Ocal'(x)$は局所演算子、$\Sigma$はcodimension 1の面で$U(\Sigma)$は$\Sigma$に局在した演算子（欠陥）です。この「式」の意味は
+というようなものがあります。これは$x$は時空の点で$\Ocal(x),\Ocal'(x)$は局所演算子、$\Sigma$は余次元1の面で$U(\Sigma)$は$\Sigma$に局在した演算子（欠陥）です。この「式」の意味は
 \begin{align}
   \expval{U(\Sigma)\Ocal(x)\cdots}=\expval{\Ocal'(x)\cdots},\qquad&(\text{$\cdots$は両辺で共通の任意の演算子の挿入。 }\notag \\
   &\text{ただし、$\cdots$は$\Sigma$の内側には挿入されていない。})
@@ -502,10 +505,85 @@ $A'$は$A=0$から\eqref{gaugetransf}から得られたものですから、$A'$
   flatなゲージ場の配位は、様々な次元のトポロジカルなジャンクションを含む対称性欠陥の配位で表される。
 \end{emphasize}
 
+一般のこのような対称性欠陥の配位の元での分配関数は理論の詳細によります。しかし、対称性のみから導かれるWard-Takahashi恒等式から分かる部分もあります。
+
 \subsection{Ising模型のspin flipの例}
+前項までは、連続的な場の理論の描像で対称性がトポロジカル欠陥で表されることを見てきました。連続的な場合には正則化など場の理論特有の微妙な問題もあって、数学的に厳密な取り扱いが難しいです。この項では、格子上でのIsing模型のspin flipの対称性を例にとって、対称性とトポロジカル欠陥を考えてみます。この場合には、経路積分が有限和になりますから、数学的に厳密な取り扱いが可能となります。
+
+まず、Ising模型を定義します。$d$次元の立方格子を考えます。周期境界条件を課して有限個のサイトがあるような場合を考えます。サイトのラベルを$i,j,\dots$とします。各サイト$i$に自由度$a_i=0,1$を置きます。そして$K$を正の実数として、分配関数をすべての$a_i=0,1$の足し上げ
+\begin{align}
+  Z:=\sum_{\{a\}}e^{-S(a)},\quad
+  S(a):=K \sum_{\link{ij}:\text{すべてのリンク}}(-1)^{a_i+a_j}
+  \label{ddimIsing}
+\end{align}
+で定義します。ここでサイト$i,j$をつなぐリンクを$\link{ij}$で表しました。これは有限和ですから、数学的に厳密な取り扱いができます。\footnote{ここで数学的に厳密に取り扱いを説明するという意味ではありません。}
+
+このIsing模型にはspin flipの対称性
+\begin{align}
+  a_i \to a_i+1 \mod{2}
+\end{align}
+があります。この対称性を表すトポロジカル欠陥がどのようなものかを考えてみましょう。そのために領域（サイトの集合）$D$をとり、変換
+\begin{align}
+  a'_i=
+  \begin{cases}
+    a_i+1,& i\in D\\
+    a_i,& i \notin D
+  \end{cases}
+  \label{gaugespinflip}
+\end{align}
+を考えます。ここで、\eqref{ddimIsing}の分配関数は
+\begin{align}
+  Z=\sum_{\{a\}}e^{-S(a)}=\sum_{\{a'\}}e^{-S(a')}=\sum_{\{a\}}e^{-S_{D}(a)}
+\end{align}
+と変形できます。最初は和を取っている変数の文字を変えただけです。次は\eqref{gaugespinflip}を代入し、明らかに成り立つ性質$\sum_{\{a'\}}=\sum_{\{a\}}$を用いました。また、$S_{D}(a):=S(a')$を定義しました。
+
+$S_{D}(a)$と$S(a)$の違いを見てみましょう。リンク$\link{ij}$に関して、$i,j\notin D$の場合には変換しないので変化なし、$i,j\in D$の場合にも両方のスピンが反転するので、相互作用は変化しません。変化するのは片方が$D$に入っていて、もう片方は$D$に入っていない場合、つまりリンクが$D$の境界にある場合です。このようなリンクは、分配関数への寄与が
+\begin{align}
+  \exp\left(-K(-1)^{a_i+a_j}\right)
+\end{align}
+と反強磁性の相互作用になります。したがって$M=\del D$の部分でのみ相互作用が反強磁性になっていて、他の部分と異なっています。したがって、これは余次元1の欠陥になります。また、いろんな領域をとって\eqref{gaugespinflip}の変換をすることによって、分配関数の値を変えずに連続的に\footnote{格子理論で「連続的」は奇妙な感じがしますが、ここでは、境界付近にあるサイト一つだけまたぐ変形を繰り返してできる変形を「連続的な変形」と呼んでいます。}欠陥を動かすことができるので、この欠陥はトポロジカルです。つまり、この欠陥が対称性を表すトポロジカル欠陥である「対称性欠陥」です。
+
+このspin flipのトポロジカル欠陥とゲージ場の配位の関係についても見ておきましょう。先程出てきた$S_{D}$は次のように書くことができます。
+\begin{align}
+  S_{D}(a):=-K\sum_{\link{ij}}(-1)^{a_i+a_j+b_{ij}},\quad
+  b_{ij}=\begin{cases}
+    0, & \link{ij}\notin M\\
+    1, & \link{ij} \in M
+  \end{cases}.
+\end{align}
+この$b_{ij}$は、リンクに群$\Zb_2$の元$0,1$が配置されているので、格子理論における$\Zb_2$背景ゲージ場と思うことができます。格子ゲージ理論については、後ほど詳しく説明します。このゲージ場の配位$b_{ij}$は次のようにflatという性質を満たします。格子においてサイトを頂点とする最小の正方形をプラケット（plaquette）と呼ぶことにします。任意のプラケットをとってきて、それを囲む4つのリンクを$\link{ij},\link{jk},\link{kl},\link{li}$とします。このとき上の$b$は
+\begin{align}
+  b_{ij}+b_{jk}+b_{kl}+b_{li}=0 \mod{2}
+\end{align}
+を満たします。このようなゲージの配位はflatな配位といいます。
+
+逆にflatなゲージ場の配位が与えられたとします。すると$b_{ij}=1$となるようなリンクを横切るように欠陥を繋いでいくことで、対称性欠陥の配位と思うことができます。対称性欠陥が端がなく、ちゃんとつながっていることは次のように保証されます。flatなので、すべてのプラケットに関して$b_{ij}=1$のリンクは偶数個あります。ですから、あるプラケットに入ってきた欠陥は、必ず出ていくことができます。
 
 \section{対称性欠陥のまとめ}
+これまでいろんな面から対称性の見方③余次元１のトポロジカル欠陥で群構造を持つもの、というのを見てきました。その声質をまとめておきます。
 
+普通の対称性は次のようなものです。群$G$を考えます。$\forall g\in G$と時空の中の余次元1の向きのついた面$M$に対して、トポロジカル欠陥$U_{g}(M)$があって次のような性質を満たします。
+\begin{itemize}
+  \item 群構造
+  \begin{enumerate}
+    \item フュージョン（fusion）は群の積。
+    \begin{align}
+      \includegraphics{groupmul.pdf}
+    \end{align}
+    \item 群の単位元には、自明な欠陥が対応。
+    \begin{align}
+      \includegraphics{groupidentity.pdf}
+    \end{align}
+    \item 逆元に対応するのは、向きを裏返したもの
+    \begin{align}
+      \includegraphics{groupinverse.pdf}
+    \end{align}
+  \end{enumerate}
+  \item 局所演算子への作用
+  \begin{align}
+    \includegraphics{EgWTid2.pdf}
+  \end{align}
+\end{itemize}
 
 \section{一般化対称性}
 

@@ -92,9 +92,11 @@
 \newcommand{\Ocalh}{\widehat{\mathcal{O}}}
 \newcommand{\U}{\mbox{U}}
 \newcommand{\ZIsing}{Z_{\mathrm{Ising}}}
-
+\newcommand{\Zgauged}{Z_{\mathrm{Ising}/\Zb_2}}
+\newcommand{\deltamod}[1]{\delta^{\mathrm{mod} \ 2}_{#1}}
 
 \newcommand{\link}[1]{\expval{#1}}
+\newcommand{\plaq}[1]{\expval{#1}}
 
 
 \title{一般化対称性について}
@@ -619,7 +621,7 @@ $S_{D}(a)$と$S(a)$の違いを見てみましょう。リンク$\link{ij}$に�
 まず、Ising模型の作用を書きます。これは前章で導入したものと同じものです。２次元正方格子を周期境界条件で考えます。
 各サイトに自由度$a_i=0,1$を置きます。$K$を正の定数として分配関数は
 \begin{align}
-  \ZIsing(K) =\sum_{\{a\}} \exp (K\sum_{\link{ij}}(-1)^{a_i+a_j})
+  \ZIsing(K) =\sum_{\{a\}} \exp (K\sum_{\link{ij}}(-1)^{a_i+a_j})\label{ZIsing}
 \end{align}
 とします。
 
@@ -639,6 +641,34 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
   a'_{i}&=a_{i}+\lambda_i
 \end{align}
 とします。
+
+\eqref{ZIsing}を変形して、トポロジカルにゲージ化された理論の分配関数を$V$をサイトの数として
+\begin{align}
+  \Zgauged(K) = \frac{1}{2^V}\sum_{\{a\},\{b\}} \exp(K\sum_{\link{ij}} (-1)^{a_i+a_j+b_{ij}})\prod_{\text{すべてのプラケット}\plaq{ijkl}}\deltamod{b_{ij}+b_{jk}+b_{kl}+b_{li},0}
+  \label{gaugedIsing}
+\end{align}
+と定義します。この分配関数について少し説明します。
+
+まず、先頭についている$\frac{1}{2^V}$の分母$2^V$は、「ゲージ体積」です。ゲージ対称性でつながるような配位は物理的に同じ配位とみなすので、分配関数はその冗長性で割っておく必要があります。
+
+最後についている$\deltamod{}$のところについて説明します。まず、この記号は$b$を整数として
+\begin{align}
+  \deltamod{b,0}=
+  \begin{cases}
+    1, & b=0\mod{2}\\
+    0, & b=1\mod{2}
+  \end{cases}
+\end{align}
+と定義します。つまり全てのプラケットについて４辺の$b$の和が偶数の配位、つまりflatな配位のみ足し合わせるということにしています。このような拘束条件をつけたゲージ化を「トポロジカルなゲージ化」と呼ぶことにします。格子の場合には、離散対称性をゲージ化する場合に必ずこのようにしなければならないということではありません。ゲージ場の作用として別のものを選んで、flatに限らないゲージ場の配位をすべて足し合わせるようなゲージ化も可能です。ここでは後のためにトポロジカルなゲージ化を考えようということです。この講義に出てくる離散対称性のゲージ化は８割くらいがこのトポロジカルなゲージ化です。この講義でも後でトポロジカルではないゲージ理論を考えます。論文に出てくる離散対称性のゲージ理論は９割以上がトポロジカルなゲージ化です。
+
+トポロジカルなゲージ化は非常に特殊なことをやっているように見えますが、実はWilsonのプラケット作用で弱結合極限を考えたものとみなすことができます。
+\begin{align}
+  \deltamod{b,0}=\lim_{g\to 0} \exp(\frac{1}{g^2}((-1)^{b}-1))
+\end{align}
+という恒等式が成り立ちます。この式の右辺のexpの中で$b$としてプラケットのリンク変数を全部足したものを代入したものがWilsonのプラケット作用のプラケットの重みでしたから、式\eqref{gaugedIsing}の左辺の$\deltamod{}$の積の項はWilsonのプラケット作用で弱結合極限をとったものとみなすことができます。
+
+\subsection{ゲージ固定}
+
 
 \section{双対対称性}
 \section{Kramers-Wannier 双対性}

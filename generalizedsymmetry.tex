@@ -1,12 +1,13 @@
 \RequirePackage{plautopatch}
 % \documentclass[report,paper=a4, fontsize=12pt, line_length=16cm, number_of_lines=33]{jlreq}
 % \usepackage[haranoaji,deluxe]{luatexja-preset}
-%\usepackage{amsmath,amssymb}
-%\usepackage{libertinus}
+% \usepackage{amsmath,amssymb}
+% \usepackage{libertinus}
 
 \documentclass[report,paper=a4, fontsize=12pt, line_length=16cm, number_of_lines=33,dvipdfmx]{jlreq}
 \usepackage{jlreq-deluxe}
 \usepackage{amsmath,amssymb}
+\usepackage{stix2}
 % \usepackage{libertine}
 % \usepackage{libertinust1math}
 % \usepackage[T1]{fontenc}
@@ -17,9 +18,10 @@
 % \usepackage[libertine]{newtxmath}
 
 %% Fonts
-\usepackage{stix2}
 %\usepackage{lmodern}
 %\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
 
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue}
@@ -87,15 +89,19 @@
 \newcommand{\Jh}{\widehat{J}}
 \newcommand{\Qh}{\widehat{Q}}
 \newcommand{\Oh}{\widehat{\mathcal{O}}}
+\newcommand{\Gh}{\widehat{G}}
 
 \newcommand{\Ocal}{\mathcal{O}}
 \newcommand{\Ocalh}{\widehat{\mathcal{O}}}
 \newcommand{\U}{\mbox{U}}
 \newcommand{\ZIsing}{Z_{\mathrm{Ising}}}
-
+\newcommand{\Zgauged}{Z_{\mathrm{Ising}/\Zb_2}}
+\newcommand{\deltamod}[1]{\delta^{\mathrm{mod} \ 2}_{#1}}
 
 \newcommand{\link}[1]{\expval{#1}}
+\newcommand{\plaq}[1]{\expval{#1}}
 
+\newcommand{\Tcal}{\mathcal{T}}
 
 \title{一般化対称性について}
 \author{山口　哲}
@@ -509,7 +515,7 @@ $A'$は$A=0$から\eqref{gaugetransf}から得られたものですから、$A'$
 
 一般のこのような対称性欠陥の配位の元での分配関数は理論の詳細によります。しかし、対称性のみから導かれるWard-Takahashi恒等式から分かる部分もあります。
 
-\subsection{Ising模型のspin flipの例}
+\subsection{Ising模型のspin flipの例}\label{sec:egspinflip}
 前項までは、連続的な場の理論の描像で対称性がトポロジカル欠陥で表されることを見てきました。連続的な場合には正則化など場の理論特有の微妙な問題もあって、数学的に厳密な取り扱いが難しいです。この項では、格子上でのIsing模型のspin flipの対称性を例にとって、対称性とトポロジカル欠陥を考えてみます。この場合には、経路積分が有限和になりますから、数学的に厳密な取り扱いが可能となります。
 
 まず、Ising模型を定義します。$d$次元の立方格子を考えます。周期境界条件を課して有限個のサイトがあるような場合を考えます。サイトのラベルを$i,j,\dots$とします。各サイト$i$に自由度$a_i=0,1$を置きます。そして$K$を正の実数として、分配関数をすべての$a_i=0,1$の足し上げ
@@ -619,7 +625,7 @@ $S_{D}(a)$と$S(a)$の違いを見てみましょう。リンク$\link{ij}$に�
 まず、Ising模型の作用を書きます。これは前章で導入したものと同じものです。２次元正方格子を周期境界条件で考えます。
 各サイトに自由度$a_i=0,1$を置きます。$K$を正の定数として分配関数は
 \begin{align}
-  \ZIsing(K) =\sum_{\{a\}} \exp (K\sum_{\link{ij}}(-1)^{a_i+a_j})
+  \ZIsing(K) =\sum_{\{a\}} \exp (K\sum_{\link{ij}}(-1)^{a_i+a_j})\label{ZIsing}
 \end{align}
 とします。
 
@@ -640,7 +646,123 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
 \end{align}
 とします。
 
+\eqref{ZIsing}を変形して、トポロジカルにゲージ化された理論の分配関数を$V$をサイトの数として
+\begin{align}
+  \Zgauged(K) = \frac{1}{2^V}\sum_{\{a\},\{b\}} \exp(K\sum_{\link{ij}} (-1)^{a_i+a_j+b_{ij}})\prod_{\text{すべてのプラケット}\plaq{ijkl}}\deltamod{b_{ij}+b_{jk}+b_{kl}+b_{li},0}
+  \label{gaugedIsing}
+\end{align}
+と定義します。この分配関数について少し説明します。
+
+まず、先頭についている$\frac{1}{2^V}$の分母$2^V$は、「ゲージ体積」です。ゲージ対称性でつながるような配位は物理的に同じ配位とみなすので、分配関数はその冗長性で割っておく必要があります。
+
+最後についている$\deltamod{}$のところについて説明します。まず、この記号は$b$を整数として
+\begin{align}
+  \deltamod{b,0}=
+  \begin{cases}
+    1, & b=0\mod{2}\\
+    0, & b=1\mod{2}
+  \end{cases}
+\end{align}
+と定義します。つまり全てのプラケットについて４辺の$b$の和が偶数の配位、つまりflatな配位のみ足し合わせるということにしています。このような拘束条件をつけたゲージ化を「トポロジカルなゲージ化」と呼ぶことにします。格子の場合には、離散対称性をゲージ化する場合に必ずこのようにしなければならないということではありません。ゲージ場の作用として別のものを選んで、flatに限らないゲージ場の配位をすべて足し合わせるようなゲージ化も可能です。ここでは後のためにトポロジカルなゲージ化を考えようということです。この講義に出てくる離散対称性のゲージ化は８割くらいがこのトポロジカルなゲージ化です。この講義でも後でトポロジカルではないゲージ理論を考えます。論文に出てくる離散対称性のゲージ理論は９割以上がトポロジカルなゲージ化です。
+
+トポロジカルなゲージ化は非常に特殊なことをやっているように見えますが、実はWilsonのプラケット作用で弱結合極限を考えたものとみなすことができます。
+\begin{align}
+  \deltamod{b,0}=\lim_{g\to 0} \exp(\frac{1}{g^2}((-1)^{b}-1))
+\end{align}
+という恒等式が成り立ちます。この式の右辺のexpの中で$b$としてプラケットのリンク変数を全部足したものを代入したものがWilsonのプラケット作用のプラケットの重みでしたから、式\eqref{gaugedIsing}の左辺の$\deltamod{}$の積の項はWilsonのプラケット作用で弱結合極限をとったものとみなすことができます。
+
+\subsection{ゲージ固定}
+前章でflatな背景ゲージ場の配位は対称性欠陥の配位と同等であることを見ました。今、トポロジカルなゲージ化では、それぞれのゲージ場の配位はflatなので、対称性欠陥の配位と思うことができます。つまり、ゲージ化とは、すべての対称性欠陥の配位について足し合わせることです。これを\eqref{gaugedIsing}の分配関数で実際に見てみたいと思います。
+
+\eqref{gaugedIsing}では、ゲージ変換でつながっている、物理的には同等な配位を何回も足しています。これを次のようにしてゲージ変換でつながっている対称性は１回だけ足すように変形します。こうすると、ゲージ場に関する和の項の数は非常に少なくなりますが、代わりに欠陥がある特別なリンクが出てきて、格子の並進対称性が明白では無くなります。\footnote{もちろん理論として格子の並進対称性は存在します。並進変換するとゲージ固定条件がこわれますが、ゲージ変換をすることでゲージ固定条件を再び満たすようにできます。これらの変換を組み合わせたものがゲージ固定した後の並進対称性です。}
+
+\begin{figure}
+  \centering
+  \caption{}
+  \label{fig:gaugefix}
+\end{figure}
+
+
+\newcommand{\torusoo}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusio}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7); 
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusoi}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0.7,0)--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusii}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7); 
+    \draw[thick,red] (0.7,0)--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+}
+
+
+まず、図\ref{fig:gaugefix}のように縦方向のリンクの横方向の列$L_1$と横方向のリンクの縦方向の列$L_2$を選びます。任意のflatな$b$の配位において、ゲージ変換で$L_1,L_2$以外のリンクの$b$をすべて$0$にできます。
+\begin{align}
+  b_{\ell}=0,\ \ell \ne L_1, L_2.
+\end{align}
+こういうふうにゲージ固定した上で、$L_1$の中にあるリンクについて考えましょう。flatであることと、接している横方向のリンクの$b$が、$L_2$と交わるところ以外で$0$であることから、となり同士の$b$の値は等しくなります。ですから$L_1$に属するすべてのリンクの$b$の値は等しくなります。同様の考察を$L_2$に関しても行うことができます。まとめると、ゲージ固定した後のゲージ場の配位は次の４種類になります。
+\begin{align}
+  \ell_1\in L_1,\ \ell_2 \in L_2,\quad (b_{\ell_1},b_{\ell_2})=(0,0),(1,0),(0,1),(1,1)
+\end{align}
+この４つの配位はゲージ不変であるWilsonループの値が異なりますから、ゲージ変換では繋がらない配位です。また、$b_{\ell_1}=1$の場合には$L_1$のところに\ref{sec:egspinflip}項で考えたspin flipの欠陥が入っている配位です。$b_{\ell_1}=0$の場合には$L_1$には欠陥は入っていないと言うこともできますし、自明な欠陥が入っていると言っても良いです。$L_2$の方も同様で、自明な欠陥が入っている場合と、spin flipの欠陥が入っている場合があります。$(b_{\ell_1},b_{\ell_2})=(0,0),(1,0),(0,1),(1,1)$場合の欠陥が入ったIsing模型の分配関数を、それぞれspin flip欠陥を赤線で描いた絵を用いて$\torusoo,
+\torusio,\torusoi,\torusii$で表すことにします。
+
+次に全体にかかる定数の規格化を求めるために、このゲージ固定をした後で残っているゲージ対称性について考えましょう。残っているゲージ対称性、つまりゲージ固定条件を変えないゲージ変換のパラメーターは次の２種類だけです。
+\begin{align}
+  \lambda_i=0\ (\text{すべての}i),\quad \lambda_i=1\ (\text{すべての}i).
+\end{align}
+言い換えると、ゲージ体積のうち$2$以外は、このゲージ固定から出てくる冗長性と相殺しています。
+
+これらを合わせると、\eqref{gaugedIsing}の分配関数は
+\begin{align}
+  \Zgauged=\frac{1}{2}\left(
+    \torusoo + \torusio + \torusoi + \torusii
+  \right)
+\end{align}
+となります。
+
 \section{双対対称性}
+この節では、Ising模型を離れて、一般的な２次元の場の理論での有限アーベル群の大域的対称性とそのゲージ化について考えます。
+
+$G$を有限アーベル群、$\Tcal$を２次元の場の理論で大域的$G$対称性があり、$G$はゲージ化可能であるものとします。言い換えると$\Tcal$の$G$対称性には't Hooftアノマリーは無いものとします。$\Tcal$の$G$対称性をゲージ化した理論を$\Tcal/G$と表すことにします。
+
+このとき、次のような命題が成り立ちます。
+\begin{enumerate}
+  \item $\Tcal/G$には$\Gh$（Pontryagin 双対）の大域的対称性があります。この$\Gh$対称性にはアノマリーはありません。
+  \item $\Tcal/G/\Gh \cong \Tcal$
+\end{enumerate}
+Pontryagin双対$\Gh$について説明します。$\Gh$は集合として
+\begin{align}
+  \Gh=\{G\text{の既約表現}\}/(\text{同値})
+\end{align}
+です。アーベル群の既約表現ですから、すべて１次元表現です。群の掛け算は表現のテンソル積$\otimes$で定義します。テンソル積はまた１次元表現になるので、既約表現です。単位元は自明な表現、逆元は双対表現になって$\Gh$は群をなします。別の言い方をすると、$\Gh$は$G$対称性のあり得る電荷の集合です。電荷には足し算の概念があって、それで群になります。
+
+
+
 \section{Kramers-Wannier 双対性}
 \section{Ising模型の演算子}
 \section{KW欠陥}

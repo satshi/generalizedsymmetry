@@ -90,7 +90,8 @@
 \newcommand{\Qh}{\widehat{Q}}
 \newcommand{\Oh}{\widehat{\mathcal{O}}}
 \newcommand{\Gh}{\widehat{G}}
-
+\newcommand{\ah}{\hat{a}}
+\newcommand{\bh}{\hat{b}}
 \newcommand{\Ocal}{\mathcal{O}}
 \newcommand{\Ocalh}{\widehat{\mathcal{O}}}
 \newcommand{\U}{\mbox{U}}
@@ -678,7 +679,8 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
 
 \begin{figure}
   \centering
-  \caption{}
+  \includegraphics{gaugefix.pdf}
+  \caption{ゲージ固定に用いるリンクの列。}
   \label{fig:gaugefix}
 \end{figure}
 
@@ -751,17 +753,145 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
 $G$を有限アーベル群、$\Tcal$を２次元の場の理論で大域的$G$対称性があり、$G$はゲージ化可能であるものとします。言い換えると$\Tcal$の$G$対称性には't Hooftアノマリーは無いものとします。$\Tcal$の$G$対称性をゲージ化した理論を$\Tcal/G$と表すことにします。
 
 このとき、次のような命題が成り立ちます。
-\begin{enumerate}
-  \item $\Tcal/G$には$\Gh$（Pontryagin 双対）の大域的対称性があります。この$\Gh$対称性にはアノマリーはありません。
-  \item $\Tcal/G/\Gh \cong \Tcal$
-\end{enumerate}
+\begin{emphasize}
+  \begin{enumerate}
+    \item[(1)] $\Tcal/G$には$\Gh$（Pontryagin 双対）の大域的対称性があります。この$\Gh$対称性にはアノマリーはありません。
+    \item[(2)] $\Tcal/G/\Gh \cong \Tcal.$
+  \end{enumerate}    
+\end{emphasize}
 Pontryagin双対$\Gh$について説明します。$\Gh$は集合として
 \begin{align}
   \Gh=\{G\text{の既約表現}\}/(\text{同値})
 \end{align}
 です。アーベル群の既約表現ですから、すべて１次元表現です。群の掛け算は表現のテンソル積$\otimes$で定義します。テンソル積はまた１次元表現になるので、既約表現です。単位元は自明な表現、逆元は双対表現になって$\Gh$は群をなします。別の言い方をすると、$\Gh$は$G$対称性のあり得る電荷の集合です。電荷には足し算の概念があって、それで群になります。
 
+この命題について説明していきます。まず、(1)について説明します。前章で説明したとおり、対称性とは余次元1のトポロジカル欠陥で群構造を持つ「対称性欠陥」で表されるのでした。今の場合、\kyou{Wilsonループが対称性欠陥になります。}ゲージ理論においてWilsonループはゲージ群$G$の表現でラベルされる次元１の欠陥です。今は全体の次元が２ですからWilsonループの余次元は１になります。また、今はトポロジカルなゲージ化を考えているので、場の強さは$0$であり、Wilsonループは連続的に変形しても値を変えない、つまりトポロジカルになります。さらに、Wilsonループのフュージョンは表現のテンソル積になります。上で見たように、有限アーベル群の既約表現全体$\Gh$はまたテンソル積でアーベル群になります。こうして、Wilsonループが対称性を表す対称性欠陥であり、対称性の群は$\Gh$ことが分かります。
 
+次に(2)について説明します。簡単のためにトーラスの分配関数を考えます。まず、理論$\Tcal$の分配関数を
+\begin{align}
+  Z_{\Tcal}=
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \draw (0,0) rectangle (1,1);   
+    \end{tikzpicture}
+    \ 
+\end{align}
+$N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の配位を足し上げることで得られるので
+\begin{align}
+  Z_{\Tcal/G}=\frac{1}{N}
+  \sum_{a,b\in G}
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \draw (0,0) rectangle (1,1);   
+      \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+      \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \end{tikzpicture}
+    \ 
+    =:
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \filldraw[fill=yellow,draw=black] (0,0) rectangle (1,1);
+      % \draw[thick,red] (0,0.7)--(1,0.7); 
+      % \draw[thick,red] (0.7,0)--(0.7,1); 
+    \end{tikzpicture}
+    \ 
+  \label{T/G}
+\end{align}
+となります。これを右辺のように黄色い四角で表すことにします。ここから$\Tcal/G/\Gh$の分配関数を考えます。これもWilsonループの配位について足し合わせて
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N}\sum_{\ah, \bh \in \Gh}\begin{tikzpicture}[baseline=0.4cm]
+    \filldraw[fill=yellow,draw=black] (0,0) rectangle (1,1);
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+\end{align}
+ここで、$\Gh$対称性の対称性欠陥であるWilsonループを青い線で表しました。これに\eqref{T/G}を代入して
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N^2}\sum_{a,b\in G}\sum_{\ah, \bh \in \Gh}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+  \ 
+  \label{T/G/Gh}
+\end{align}
+右辺の和の中について考えてみます。これは理論$\Tcal$の中で赤線で表される対称性欠陥、言い換えると背景ゲージ場の下での分配関数に、青線で表されるWilsonループをかけたものです。$\ah$表現での$G$の要素$a$の指標（表現行列のトレース。１次元表現なので$1\times 1$の行列そのもの）を$\chi_{\ah}(a)$とすると
+\begin{align}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+  \ 
+  = \chi_{\bh}(a)\chi_{\ah}(b)
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1);
+  \end{tikzpicture}
+  \ 
+\end{align}
+となります。ところで指標は
+\begin{align}
+  \sum_{\ah \in G}\chi_{\ah}(a)=N\delta_{a,0}
+\end{align}
+という関係式を満たします。これらを用いると\eqref{T/G/Gh}は
+\begin{align}
+  Z_{\Tcal/G/\Gh}
+  =\frac{1}{N^2}\sum_{a,b\in G}\sum_{\ah, \bh \in \Gh}
+  \chi_{\bh}(a)\chi_{\ah}(b)
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+  =\sum_{a,b\in G}\delta_{a,0}\delta_{b,0}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+  =
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+  \end{tikzpicture}
+  \ 
+  =Z_{\Tcal}
+\end{align}
+となります。
+
+先ほどはトーラスの分配関数を考えましたが、一般の閉じたRiemann面を考えるときには計量に関する相殺項に関して少し注意が必要です。まず、特に計量に関する相殺項を入れなかったとすると、その分配関数は
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N^{\chi}}Z_{\Tcal}
+\end{align}
+となります。ここで$\chi$はRiemann面Euler数で、種数$g$や面、辺、頂点の数（それぞれ$F,E,V$）と
+\begin{align}
+  \chi=2-2g=F-E+V
+\end{align}
+の関係にあります。トーラスの場合には、たまたま$\chi=0$なので、先ほどは考える必要がありませんでした。２回やって元にもどるという関係にしたいときには、次のような局所相殺項を入れてゲージ化を定義する必要があります。
+\begin{align}
+  Z_{\Tcal/G,\text{new}}=\sqrt{N}^{\chi}Z_{\Tcal/G, \text{いままでの}}.
+\end{align}
+こうすると、一般の閉じたRiemann面で
+\begin{align}
+  Z_{\Tcal/G/\Gh,\text{new}}=Z_{\Tcal,\text{new}}
+\end{align}
+となります。このEuler相殺項については、Kramers-Wannier双対性を表す非可逆なトポロジカル欠陥を考えるときにも必要になります。
+
+この節では、アーベル群によるゲージ化のみを考えました。では、（有限の）非アーベル群によるゲージ化を考えるとどうなるでしょうか。トポロジカルなゲージ化を考えるので、場の強さが$0$なのは変わりません。したがってWilsonループが余次元１のトポロジカル欠陥になるのも同じです。フュージョンは表現のテンソル積になるのも同じです。違いは非アーベル群の場合には、次元が２以上の既約表現があり、テンソル積の意味で逆が無い場合があるということです。つまり、有限非アーベル群をゲージ化した際の双対対称性（よく$\mathrm{Rep}(G)$と書かれます）は、トポロジカル欠陥で群構造がない「非可逆対称性」になっています。おそらくこれが非可逆対称性の一番簡単な例です。この例も含め２次元の非可逆対称性については\cite{Bhardwaj:2017xup}に詳しく説明されています。この講義では$\mathrm{Rep}(G)$はこれ以上説明しません。もう一つの代表的な非可逆対称性の例で高次元にも類似物があるKramers-Wannier双対性について詳しく説明します。
 
 \section{Kramers-Wannier 双対性}
 \section{Ising模型の演算子}

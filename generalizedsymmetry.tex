@@ -106,7 +106,7 @@
 \newcommand{\Tcal}{\mathcal{T}}
 
 \title{一般化対称性について}
-\author{山口　哲}
+\author{山口 哲}
 \date{\today}
 \begin{document}
 \maketitle
@@ -898,6 +898,10 @@ $N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の
 \section{Kramers-Wannier 双対性}
 この節では、２次元Ising模型のKramers-Wanner双対性を紹介します。Kramers-Wanner双対性はよく統計力学の教科書でも紹介されていますが、ここでは後のためにより精密な双対性について述べます。後に、このKramers-Wanner双対性に対応する非可逆対称性について述べます。
 
+また、Kramers-Wannier双対性とIsing模型の相構造について述べます。
+
+\subsection{Kramers-Wannier双対性と、その証明}
+
 \begin{proposition}[Kramers-Wanner双対性]
 次の恒等式が厳密に成り立ちます。
 \begin{align}
@@ -909,6 +913,7 @@ $N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の
 ここで$K$と$\Kt$は
 \begin{align}
   \sinh 2K \sinh 2\Kt =1
+  \label{dualrelation0}
 \end{align}
 の関係で結びついています。
 \end{proposition}
@@ -929,7 +934,7 @@ $N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の
 
 \eqref{gaugedIsing2}で、ゲージ対称性を用いて、すべてのサイト$i$で$a_i=0$となるようにゲージ固定します。この固定によって$2^V$個のすべてのゲージ体積を相殺します。その後に$\{b\}$の和を評価します。各リンク$\ell$に対して２つのプラケットが接していることに注目して
 \begin{align}
-  \Zgauged(K)&=\frac{1}{2^{V}}\sum_{\{c\}}\prod_{\text{リンク}\ell}Z_{\ell},\\
+  \Zgauged(K)&=\frac{1}{2^{V}}\sum_{\{c\}}\prod_{\text{リンク}\ell}Z_{\ell},\label{KWaux1}\\
   Z_{\ell}&=\sum_{b=0,1}\exp(K(-1)^{b}+\pi i b(c_p+c_q))\quad (p,q \text{は$\ell$に接している２つのプラケット})
 \end{align}
 と書くことができます。$Z_{\ell}$の表式では、和をとっているダミーの変数は$b_{\ell}$だったものですが、ダミーの変数ですから単に$b$と書いています。
@@ -969,10 +974,23 @@ $c:=c_{p}+c_{q} \mod 2$と略記して、$Z_{\ell}$を変形していきます�
   2\cosh K e^{\Kt(-2c)}=
   2\cosh K e^{-\Kt}e^{\Kt(-1)^c}\notag\\&=
   2\cosh K \sqrt{\tanh K}e^{\Kt(-1)^c}=
-  \sqrt{4\cosh^2 K\tanh K}e^{\Kt(-1)^c}=
   \sqrt{2\sinh 2K}e^{\Kt(-1)^c}
 \end{align}
 と変形できるので\eqref{Zell}が成り立つことが分かります。
+
+\eqref{Zell}を\eqref{KWaux1}に代入して変形します。元の格子に双対な格子を導入すると$\ell$に双対なリンクは双対格子のサイト$p,q$をつなぐ双対格子のリンク$\link{pq}$になります。これを踏まえて式変形すると
+\begin{align}
+ \Zgauged(K)&=\frac{1}{2^V}\sum_{\{c\}}\prod_{\link{pq}}\sqrt{2\sinh 2K}e^{\Kt(-1)^{c_p+c_q}}
+ =(\sinh 2K)^{V}\sum_{\{c\}}\exp\left(\sum_{\link{pq}}\Kt(-1)^{c_p+c_q}\right)\notag\\
+ &=(\sinh 2K)^{V} \ZIsing(\Kt)
+\end{align}
+という式を得ます。ここで\eqref{dualrelation}を用いると\eqref{KWduality}を得ます。また\eqref{dualrelation0}は、\eqref{dualrelation}です。\qed
+
+このKramers-Wannier双対性の証明を見てみると、次の重要な事実が分かります。\kyou{Kramers-Wannier双対性の左辺のゲージ化したIsing模型の格子と右辺のIsing模型の格子は互いに双対関係にあります。}この事実は、後にKramers-Wannier双対性を表すトポロジカル欠陥を考える際に非常に重要な役割を果たします。また、今回見たように、トーラス上で正方格子で考えた場合には、双対の格子は同型になってしまうので分かりにくいですが、一般の格子でのKramers-Wannier双対性の両辺は格子は互いに双対の（一般に異なる）格子になります。
+
+\subsection{Ising模型の相構造}
+
+
 
 \section{Ising模型の演算子}
 \section{KW欠陥}

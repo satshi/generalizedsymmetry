@@ -8,6 +8,7 @@
 \usepackage{jlreq-deluxe}
 \usepackage{amsmath,amssymb}
 \usepackage{stix2}
+\renewcommand{\bfdefault}{bx}
 % \usepackage{libertine}
 % \usepackage{libertinust1math}
 % \usepackage[T1]{fontenc}
@@ -98,7 +99,7 @@
 \newcommand{\ZIsing}{Z_{\mathrm{Ising}}}
 \newcommand{\Zgauged}{Z_{\mathrm{Ising}/\Zb_2}}
 \newcommand{\deltamod}[1]{\delta^{\mathrm{mod} \ 2}_{#1}}
-
+\newcommand{\Kt}{\widetilde{K}}
 \newcommand{\link}[1]{\expval{#1}}
 \newcommand{\plaq}[1]{\expval{#1}}
 
@@ -663,6 +664,7 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
     1, & b=0\mod{2}\\
     0, & b=1\mod{2}
   \end{cases}
+  \label{deltamod2}
 \end{align}
 と定義します。つまり全てのプラケットについて４辺の$b$の和が偶数の配位、つまりflatな配位のみ足し合わせるということにしています。このような拘束条件をつけたゲージ化を「トポロジカルなゲージ化」と呼ぶことにします。格子の場合には、離散対称性をゲージ化する場合に必ずこのようにしなければならないということではありません。ゲージ場の作用として別のものを選んで、flatに限らないゲージ場の配位をすべて足し合わせるようなゲージ化も可能です。ここでは後のためにトポロジカルなゲージ化を考えようということです。この講義に出てくる離散対称性のゲージ化は８割くらいがこのトポロジカルなゲージ化です。この講義でも後でトポロジカルではないゲージ理論を考えます。論文に出てくる離散対称性のゲージ理論は９割以上がトポロジカルなゲージ化です。
 
@@ -753,12 +755,12 @@ Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます�
 $G$を有限アーベル群、$\Tcal$を２次元の場の理論で大域的$G$対称性があり、$G$はゲージ化可能であるものとします。言い換えると$\Tcal$の$G$対称性には't Hooftアノマリーは無いものとします。$\Tcal$の$G$対称性をゲージ化した理論を$\Tcal/G$と表すことにします。
 
 このとき、次のような命題が成り立ちます。
-\begin{emphasize}
+\begin{proposition}[命題]
   \begin{enumerate}
     \item[(1)] $\Tcal/G$には$\Gh$（Pontryagin 双対）の大域的対称性があります。この$\Gh$対称性にはアノマリーはありません。
     \item[(2)] $\Tcal/G/\Gh \cong \Tcal.$
-  \end{enumerate}    
-\end{emphasize}
+  \end{enumerate}      
+\end{proposition}
 Pontryagin双対$\Gh$について説明します。$\Gh$は集合として
 \begin{align}
   \Gh=\{G\text{の既約表現}\}/(\text{同値})
@@ -894,6 +896,84 @@ $N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の
 この節では、アーベル群によるゲージ化のみを考えました。では、（有限の）非アーベル群によるゲージ化を考えるとどうなるでしょうか。トポロジカルなゲージ化を考えるので、場の強さが$0$なのは変わりません。したがってWilsonループが余次元１のトポロジカル欠陥になるのも同じです。フュージョンは表現のテンソル積になるのも同じです。違いは非アーベル群の場合には、次元が２以上の既約表現があり、テンソル積の意味で逆が無い場合があるということです。つまり、有限非アーベル群をゲージ化した際の双対対称性（よく$\mathrm{Rep}(G)$と書かれます）は、トポロジカル欠陥で群構造がない「非可逆対称性」になっています。おそらくこれが非可逆対称性の一番簡単な例です。この例も含め２次元の非可逆対称性については\cite{Bhardwaj:2017xup}に詳しく説明されています。この講義では$\mathrm{Rep}(G)$はこれ以上説明しません。もう一つの代表的な非可逆対称性の例で高次元にも類似物があるKramers-Wannier双対性について詳しく説明します。
 
 \section{Kramers-Wannier 双対性}
+この節では、２次元Ising模型のKramers-Wanner双対性を紹介します。Kramers-Wanner双対性はよく統計力学の教科書でも紹介されていますが、ここでは後のためにより精密な双対性について述べます。後に、このKramers-Wanner双対性に対応する非可逆対称性について述べます。
+
+\begin{proposition}[Kramers-Wanner双対性]
+次の恒等式が厳密に成り立ちます。
+\begin{align}
+  \frac{1}{(\sinh 2K)^{V/2}} \Zgauged(K)
+  =
+  \frac{1}{(\sinh 2\Kt)^{V/2}} \ZIsing(\Kt).
+  \label{KWduality}
+\end{align}
+ここで$K$と$\Kt$は
+\begin{align}
+  \sinh 2K \sinh 2\Kt =1
+\end{align}
+の関係で結びついています。
+\end{proposition}
+分配関数の前についている$\sinh$が入った因子は計量のみによく局所的な項として作用に組み込むことができますから、パラメーターが$K$のゲージ化したIsing模型とパラメーターが$\Kt$のIsing模型は同じ理論であるというのが、この命題です。
+
+この命題を証明します。
+
+まず、\eqref{gaugedIsing}を補助的な変数を用いて書き換えます。\eqref{deltamod2}は
+\begin{align}
+  \deltamod{b,0}=\frac{1}{2}\sum_{c=0,1}e^{\pi i cb}
+\end{align}
+という恒等式を満たすことに注目します。すると各プラケット$p$に$c_{p}=0,1$の補助的な自由度を置いて\eqref{gaugedIsing}は
+\begin{align}
+  \Zgauged(K) = \frac{1}{2^{2V}}\sum_{\{a\},\{b\},\{c\}} \exp(K\sum_{\link{ij}} (-1)^{a_i+a_j+b_{ij}}+\pi i\sum_{\substack{\text{プラケット}\\ p=\plaq{ijkl}}} c_{p}(b_{ij}+b_{jk}+b_{kl}+b_{li}))
+  \label{gaugedIsing2}
+\end{align}
+と書くことができます。ここで、プラケットの数は頂点の数と同じであることを用いました。
+
+\eqref{gaugedIsing2}で、ゲージ対称性を用いて、すべてのサイト$i$で$a_i=0$となるようにゲージ固定します。この固定によって$2^V$個のすべてのゲージ体積を相殺します。その後に$\{b\}$の和を評価します。各リンク$\ell$に対して２つのプラケットが接していることに注目して
+\begin{align}
+  \Zgauged(K)&=\frac{1}{2^{V}}\sum_{\{c\}}\prod_{\text{リンク}\ell}Z_{\ell},\\
+  Z_{\ell}&=\sum_{b=0,1}\exp(K(-1)^{b}+\pi i b(c_p+c_q))\quad (p,q \text{は$\ell$に接している２つのプラケット})
+\end{align}
+と書くことができます。$Z_{\ell}$の表式では、和をとっているダミーの変数は$b_{\ell}$だったものですが、ダミーの変数ですから単に$b$と書いています。
+
+$c:=c_{p}+c_{q} \mod 2$と略記して、$Z_{\ell}$を変形していきます。
+\begin{align}
+  Z_{\ell}&=e^{K}+(-1)^{c}e^{-K}\notag\\
+  &=\begin{cases}
+    2\cosh K & (c=0)\\
+    2\sinh K & (c=1)
+  \end{cases}\notag \\
+  &= 2 \cosh K (\tanh K)^{c} \label{Zell0}
+\end{align}
+という形に書けます。ここで
+\begin{align}
+  \tanh K =: e^{-2\Kt}\label{defKt}
+\end{align}
+の式で$\Kt$を定義します。すると
+\begin{align}
+  \sinh 2K \sinh 2\Kt =1,\label{dualrelation}\\
+  Z_{\ell}=\sqrt{2\sinh 2K} e^{\Kt(-1)^{c}}\label{Zell}
+\end{align}
+という式が成り立ちます。これらを順に導出していきます。
+
+まず、\eqref{dualrelation}を導出します。\eqref{defKt}の両辺の逆数をとったものから、\eqref{defKt}を引き算します。すると
+\begin{align}
+  (\text{右辺})&=e^{2\Kt}-e^{-2\Kt}=2\sinh 2\Kt,\\
+  (\text{左辺})&=\coth K -\tanh K
+  =\frac{\cosh^2 K -\sinh^2 K}{\cosh K \sinh K}
+  =\frac{2}{\sinh 2K}
+\end{align}
+と計算できるので、\eqref{dualrelation}が成り立つことが分かります。
+
+次に、\eqref{Zell}を導出します。\eqref{Zell0}に\eqref{defKt}を代入し、$(-1)^c=1-2c$に注目して変形します。
+\begin{align}
+  Z_{\ell}=&
+  2\cosh K e^{\Kt(-2c)}=
+  2\cosh K e^{-\Kt}e^{\Kt(-1)^c}\notag\\&=
+  2\cosh K \sqrt{\tanh K}e^{\Kt(-1)^c}=
+  \sqrt{4\cosh^2 K\tanh K}e^{\Kt(-1)^c}=
+  \sqrt{2\sinh 2K}e^{\Kt(-1)^c}
+\end{align}
+と変形できるので\eqref{Zell}が成り立つことが分かります。
+
 \section{Ising模型の演算子}
 \section{KW欠陥}
 \section{対称性の構造}

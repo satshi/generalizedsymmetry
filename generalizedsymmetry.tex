@@ -103,6 +103,9 @@
 \newcommand{\link}[1]{\expval{#1}}
 \newcommand{\plaq}[1]{\expval{#1}}
 
+\newcommand{\Ising}{\mbox{Ising}}
+\newcommand{\gIsing}{\mbox{Ising$/\Zb_2$}}
+
 \newcommand{\Tcal}{\mathcal{T}}
 
 \title{一般化対称性について}
@@ -989,8 +992,29 @@ $c:=c_{p}+c_{q} \mod 2$と略記して、$Z_{\ell}$を変形していきます�
 このKramers-Wannier双対性の証明を見てみると、次の重要な事実が分かります。\kyou{Kramers-Wannier双対性の左辺のゲージ化したIsing模型の格子と右辺のIsing模型の格子は互いに双対関係にあります。}この事実は、後にKramers-Wannier双対性を表すトポロジカル欠陥を考える際に非常に重要な役割を果たします。また、今回見たように、トーラス上で正方格子で考えた場合には、双対の格子は同型になってしまうので分かりにくいですが、一般の格子でのKramers-Wannier双対性の両辺は格子は互いに双対の（一般に異なる）格子になります。
 
 \subsection{Ising模型の相構造}
+このKramers-Wannier双対性を踏まえて、Ising模型の相構造について考えてみます。
+
+統計力学の授業などで、Ising模型には相転移があることを聞いたことがあると思います。$K$が大きいところ（低温）では、spin flipの対称性が自発的に破れた相になっています。場の量子論の見方で言えば、ここでは真空が縮退しています。一方で$K$が小さいところ（高温）では対称性が回復していて、場の理論の見方では真空は唯一です。この間には相転移が少なくとも一回はあります。
+
+Kramers-Wanner双対性を用いると、この相転移点を求めることができます。まず大事なことは\Ising と\gIsing は、熱力学的な量、例えば自由エネルギー密度は同じです。これを$f(K)$と書くことにします。Kramers-Wanner双対性から$f(K)=f(\Kt)$が導かれます。また、相転移点では$f(K)$が非解析的になっています。$K=K_c$で相転移があるとすると、$f(K)=f(\Kt)$ですから、$K=\Kt_c$でも非解析的、つまり相転移があることになります。\kyou{ここから、相転移が一回だけであることを仮定すると、自己双対の値$K_c=\Kt_c$となること、つまり\eqref{dualrelation0}から$\sinh 2K_c=1$、したがって$K_c=\frac12 \log  (1+\sqrt{2})$となることが分かります。}
+
+自己双対の点$K=K_c$では、\eqref{KWduality}の式は
+\begin{align}
+  \Zgauged(K_c)=\ZIsing(K)
+\end{align}
+となります。つまり、この点では\Ising と\gIsing は同じ理論ということになります。後に見るように、この性質から、この点では非可逆対称性があります。
 
 
+\begin{figure}
+  \centering
+  \includegraphics{isingphasestructure.pdf}
+  \caption{}
+  \label{fig:isingphasestructure}
+\end{figure}
+
+もう少し相構造について見てみましょう。図\ref{fig:isingphasestructure}に\Ising と \gIsing の相構造とその関係を示しました。\Ising では$K$が大きいところでは対称性の自発的破れがあり、真空の縮退がありました。Kramers-Wannier双対性から、\gIsing では$K$が小さいところで自発的対称性の破れがあり、真空の縮退があります。\gIsing では、双対$\Zb_2$対称性がありますから、$K$が小さいところでこの対称性が自発的に破れています。一方、\Ising で$K$が小さいところでは対称性が保たれている自明な相になっています。Kramers-Wannier双対性を用いると\gIsing で$K$が大きいところで自明相になっています。
+
+図\ref{fig:isingphasestructure}では、ゲージ化の操作を縦の青い矢印で表しています。例えば$K$が小さいところでは、\Ising は自明相にあり、真空は唯一ですが、これをゲージ化するとゲージ場の自由度を加えることになって、このために真空が縮退します。２つの状態は空間的な円のWilsonループの期待値で区別されます。一方、\Ising で$K$が大きいところでは、真空は二重に縮退しています。これをゲージ化すると、２つの真空のうち、ゲージ不変な方だけが生き残るので、唯一の真空をもつ自明な相になります。
 
 \section{Ising模型の演算子}
 \section{KW欠陥}

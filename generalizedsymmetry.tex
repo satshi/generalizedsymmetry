@@ -237,7 +237,7 @@ $\Vh$に関しても同様です。
 \end{align}
 という意味です。
 
-\chapter{対称性とトポロジカル欠陥}
+\chapter{対称性とトポロジカル欠陥}\label{sec:symmetrydefect}
 
 この章の目標は、前章で紹介した対称性の③の見方「対称性とは余次元1のトポロジカル欠陥で群構造を持つもの」ということを納得してもらうことです。まず、欠陥という概念を導入します。そして対称性がトポロジカル欠陥であることを様々な観点から説明します。一旦それを納得してもらえば、対称性の一般化はすんなりと納得してもらえると思います。
 
@@ -1105,6 +1105,55 @@ $a,b$の和を取ってしまった後で無秩序スピンがどうなるか見
 無秩序相ではスピンは相関が消えます。ですから、$\mu$演算子が刺さっている点から離れたところではエネルギーに影響はありません。ただし、$\mu$が刺さっていることで、その点の近くでエネルギーが変わりますから、その分$0$でない値が出ます。したがって、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$でない定数になります。
 
 \section{KW欠陥}
+これまで準備してきたことを踏まえて、ここでは非可逆対称性の一つの例であるKramers-Wannier (KW)欠陥について紹介します。いろいろな見方があるのですが、ここでは連続理論や高次元への拡張が容易な\kyou{半空間ゲージ化(half-space gauging)}による構成について説明します。
+
+まず、大まかなアイデアについて説明します。一般化対称性とは、何かの方法で作ったトポロジカル欠陥です。最初の方で紹介した対称性の一つの見方①場の変換で作用を不変にするもの、というものがあるとトポロジカル欠陥が作れることを\ref{sec:symmetrydefect}で説明しました。これを絵で表すと
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+    \fill [yellow!80] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(0.5,0.5);
+    \node (A) at (1.5,1.5)[above]{変換};
+    \node (D) at (0,0){$D$};
+  \end{tikzpicture}
+  =
+  \begin{tikzpicture}[baseline=0cm]
+    \draw [red,thick] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(1,1);
+    \node (A) at (1.5,1.5)[above]{トポロジカル欠陥};
+  \end{tikzpicture}  
+  \label{halfspacetransformation}
+\end{align}
+となります。
+これを一般化し、ある領域$D$内で変換だけでなく離散対称性のトポロジカルなゲージ化を含む様々な操作を行うことを考えます。この操作でバルクでは元の理論に戻る場合を考えます。$K=K_c$の場合に$\ZIsing=\Zgauged$でしたから、Ising模型の場合はゲージ化を含む操作で元に戻る、というのが例です。バルクでは元に戻りますから、一般に境界で欠陥ができます。*うまい境界条件*でゲージ化を行うと、この欠陥がトポロジカルになる場合があります。絵で書くと
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+    \fill [blue!10] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(0.5,0.5);
+    \node (A) at (1.5,1.5)[above]{\underline{ゲージ化}、変換、補助場の導入、積分、…};
+    \node (D) at (0,0){$D$};
+  \end{tikzpicture}
+  \Rightarrow
+  \begin{tikzpicture}[baseline=0cm]
+    \draw [green!70!black,thick] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(1,1);
+    \node (A) at (1.5,1.5)[above]{トポロジカル欠陥};
+  \end{tikzpicture}  
+  \label{halfspacegauging}
+\end{align}
+となります。
+
+ここでいくつかの注意をします。
+\begin{itemize}
+  \item \eqref{halfspacetransformation}と違って、\eqref{halfspacegauging}は``$=$''の関係でないことに注意してください。これは、あくまで（一般に非可逆な）トポロジカル欠陥を見つける方法であって、Ward-Takahashi恒等式を見つけるには、さらに解析が必要です。
+  \item 離散対称性のトポロジカルなゲージ化であったからといって、すぐに境界に現れる欠陥がトポロジカルになるとは言えません。ゲージ化の際のゲージ場の境界条件の取り方は非常に重要です。
+\end{itemize}
+
+ここでは、$K=K_c$でのIsing模型を例にとって、この半空間ゲージ化の方法でトポロジカル欠陥を導出します。まず、格子上で領域$D$をどう設定するかについて説明します。これはゲージ場の境界条件と絡んで、重要な部分です。次に半空間ゲージ化の手続きを説明し、バルクがちゃんと元に戻ること、言い換えると現れるトポロジカル欠陥がちゃんと余次元１の欠陥になっていることを説明します。その後に、この欠陥がトポロジカルであることを説明します。
+
+\subsection{領域の取り方}
+\subsection{半空間ゲージ化}
+\subsection{トポロジカル性}
+
 \section{対称性の構造}
 \section{応用}
 

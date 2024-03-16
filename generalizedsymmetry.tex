@@ -889,7 +889,7 @@ $N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の
 \end{align}
 の関係にあります。トーラスの場合には、たまたま$\chi=0$なので、先ほどは考える必要がありませんでした。２回やって元にもどるという関係にしたいときには、次のような局所相殺項を入れてゲージ化を定義する必要があります。
 \begin{align}
-  Z_{\Tcal/G,\text{new}}=\sqrt{N}^{\chi}Z_{\Tcal/G, \text{いままでの}}.
+  Z_{\Tcal/G,\text{new}}=\sqrt{N}^{\chi}Z_{\Tcal/G, \text{いままでの}}.\label{Eulercounterterm}
 \end{align}
 こうすると、一般の閉じたRiemann面で
 \begin{align}
@@ -1177,9 +1177,67 @@ $D$は$\Lambdah$のサイト、リンク、プラケットの集合で、次の�
 \end{itemize}
 端的に言うなら、$D$は$\Lambdah$の見方で境界が全部含まれるような領域ということになります。
 
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw[step=1, blue] (-1.5,-1.5) grid (3.5,3.5); 
+    \foreach \x/\y in {0/0, 0/1, 1/0}{
+        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[blue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+\end{tikzpicture}
+\caption{領域$D$の取り方の例。$\Lambdah$の格子を青線で表しています。青丸で表したサイト、太い青線で表したリンク、青く塗っているプラケットが$D$の元です。}
+\end{figure}
+
 逆に$\Lambda$の見方では、境界が全部含まれない領域ということになります。後で$D$の中だけでゲージ化するわけですが、このときに境界にある$\Lambda$のリンクにはゲージ場を置かず、また境界にある$\Lambda$のサイトにはゲージ変換を置きません。このような境界条件を\cite{Choi:2021kmx}ではDirichlet境界条件と呼んでいます。後に見るように、この境界条件で半空間ゲージ化をした場合には、境界に残る欠陥がトポロジカルになります。別の境界条件でゲージ化した場合には、トポロジカルになることは保証されません。
 
 \subsection{半空間ゲージ化}
+ここでは、先に述べた条件を満たす$D$に対して、$D$の中だけでspin flipの対称性をゲージ化する手続きを説明します。しばらくは、言葉の使い方としてサイト、リンク、プラケットなどはすべて$\Lambdah$のものとします。
+
+まず、ゲージ化する前からすべてのプラケット$i$に自由度$a_i=0,1$がのっていて相互作用があるIsing模型を考えていたことを思い出してください。
+
+$D$の要素に関して、次のような変形をします。
+\begin{enumerate}
+  \item $D$の中の各リンク \tikz[baseline=0.3cm]{\draw[blue, line width = 1.3mm](0,0)--(0,1)} $\ell$ に対して、ゲージ場$b_{\ell}=0,1$を置きます。そしてこのリンクの相互作用を$\exp(K(-1)^{a_i+a_j+b_{\ell}})$とします。ただし、$i,j$はリンクを挟んでいる２つのプラケットです。分配関数の計算では、和$\sum_{b_{\ell}=0,1}$をとります。
+  \item $D$の中の各プラケット \tikz[baseline=0.3cm]{\fill[blue!40](0,0) rectangle (1,1);} $i$ に対してゲージ変換を置きます。ゲージ変換のパラメータを$\lambda_i=0,1$とし、このプラケットに置かれている$a_i$とこのプラケットに接しているリンク$\ell$に置かれているゲージ場は
+  \begin{align}
+    a_i\to a_i+\lambda_i,\quad b_{\ell}\to b_{\ell}+\lambda_i    
+  \end{align}
+  と変換します。$D$の取り方から、$i$のまわりの４つのリンクはすべて$D$の要素であるので、$b$の自由度が置かれていることに注意してください。
+
+  分配関数を考えるときには、ゲージ体積で割る必要があるので、$D$の要素であるプラケット$i$に対して因子$\frac12$を割り当てます。
+  \item $D$の中の各サイト \tikz{\fill[blue] (0,0) circle (1.8mm)} $p$には、ゲージ場$b$がflatでありなさいという拘束条件を置きます。このサイトにつながる４つのリンクのラベルを$1,2,3,4$として
+  \begin{align}
+    \begin{tikzpicture}[baseline=0]
+      \fill[blue] (0,0) circle (1.8mm);
+      \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
+      \draw[blue, line width = 1.3mm](0,0)--(\x,\y);
+      }
+      \node (A) at (0,0.7)[right]{$1$};
+      \node (B) at (0,-0.7)[right]{$3$};
+      \node (C) at (0.7,0)[above]{$2$};
+      \node (D) at (-0.7,0)[above]{$4$};
+  \end{tikzpicture}\quad \Rightarrow\quad \deltamod{b_1+b_2+b_3+b_4,0}
+  =\sum_{c_p=0,1}\frac12 (-1)^{c_p(b_1+b_2+b_3+b_4)}
+  \end{align}
+  という因子を割り当てます。$D$の中のサイト$p$につながっている４つのリンクは、必ずしもすべてが$D$の元であるとな限らないので、$b$が割り当てられていない場合もあります。このような場合は、$b$が割り当てられていないリンクの$b$は$0$として拘束条件をかします。
+  \item \eqref{Eulercounterterm}のあたりで述べたEuler相殺項を考えます。これは多面体に関するEulerの公式を適用すると$D$の要素に対して上で述べた因子の他に
+  \begin{align}
+    \tikz{\fill[blue] (0,0) circle (1.8mm)}\qquad&\Rightarrow \qquad \sqrt{2}\notag\\
+    \tikz[baseline=0.3cm]{\draw[blue, line width = 1.3mm](0,0)--(0,1)} \qquad &\Rightarrow \qquad \frac{1}{\sqrt{2}},\notag\\
+    \tikz[baseline=0.3cm]{\fill[blue!40](0,0) rectangle (1,1);} \quad&\Rightarrow \qquad \sqrt{2}
+  \end{align}
+  という因子を割り当てれば良いことが分かります。
+\end{enumerate}
+
 \subsection{トポロジカル性}
 
 \section{対称性の構造}

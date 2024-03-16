@@ -94,4 +94,15 @@
     }
 \end{tikzpicture}
 
+\begin{tikzpicture}
+    \fill[blue] (0,0) circle (1.8mm);
+    \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
+    \draw[blue, line width = 1.3mm](0,0)--(\x,\y);
+    }
+    \node (A) at (0,0.7)[right]{$1$};
+    \node (B) at (0,-0.7)[right]{$3$};
+    \node (C) at (0.7,0)[above]{$2$};
+    \node (D) at (-0.7,0)[above]{$4$};
+\end{tikzpicture}
+
 \end{document}  

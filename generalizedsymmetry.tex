@@ -1158,7 +1158,16 @@ $a,b$の和を取ってしまった後で無秩序スピンがどうなるか見
 \end{align}
 です。ここで、$i,j$は$\Lambda$のサイトで$a_i$は$\Lambda$のサイトに乗っている自由度です。このようにIsing模型でスピンの自由度がサイトにのっている格子をアクティブ格子(active lattice)と呼ぶことにします。
 
-さて、$\Lambda$の双対格子である$\Lambdah$を考えましょう。これは$\Lambda$のプラケットの中心が$\Lambdah$のサイトになるようにとった格子です。今の場合の$\Lambdah$のようにプラケットにスピンの自由度がのっているような格子を非アクティブ格子(innactive lattice)と呼ぶことにします。\ref{sec:KWproof}項で見たとおり、\eqref{2DIsing}を全体でゲージ化すると、$\Lambdah$のサイトにスピンの自由度がのったIsing模型と等価になります。今$K=K_c$を考えているので$K$は変わらないことに注意してください。標語的に言うなら、Kramers-Wannier双対性はアクティブ格子と非アクティブ格子を入れ替えます。
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw[step=0.8, thick] (-1.9,-1.9) grid (2.3,2.3);
+    \draw[step=0.8, blue, thick, yshift = 0.4cm, xshift = 0.4cm] (-2.3,-2.3) grid (1.9,1.9);            
+  \end{tikzpicture}
+  \caption{格子$\Lambda$（黒）とその双対格子$\Lambdah$（青）。}\label{fig:lattices}
+\end{figure}
+
+さて、$\Lambda$の双対格子である$\Lambdah$（図\ref{fig:lattices}参照）を考えましょう。これは$\Lambda$のプラケットの中心が$\Lambdah$のサイトになるようにとった格子です。今の場合の$\Lambdah$のようにプラケットにスピンの自由度がのっているような格子を非アクティブ格子(innactive lattice)と呼ぶことにします。\ref{sec:KWproof}項で見たとおり、\eqref{2DIsing}を全体でゲージ化すると、$\Lambdah$のサイトにスピンの自由度がのったIsing模型と等価になります。今$K=K_c$を考えているので$K$は変わらないことに注意してください。標語的に言うなら、Kramers-Wannier双対性はアクティブ格子と非アクティブ格子を入れ替えます。
 
 半空間ゲージ化をするときの領域を考えるのに$\Lambdah$の言葉で言うと便利です。
 $D$は$\Lambdah$のサイト、リンク、プラケットの集合で、次のような条件を満たすものとします。

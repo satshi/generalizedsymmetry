@@ -23,7 +23,7 @@
 %\usepackage[T1]{fontenc}
 
 \usepackage{tikz}
-
+\usetikzlibrary{decorations,decorations.pathreplacing}
 \usepackage{graphicx}
 \graphicspath{{fig/}}
 
@@ -75,6 +75,15 @@
 
 \newcommand{\Tcal}{\mathcal{T}}
 
+\newcommand{\underrem}[2]{
+    {\color{red} \underbrace{\color{black} {#1}}_{\text{#2}}
+    }
+}
+
+\newcommand{\overrem}[2]{
+    {\color{red} \overbrace{\color{black} {#1}}^{\text{#2}}
+    }
+}
 
 \begin{document}
 
@@ -104,5 +113,26 @@
     \node (C) at (0.7,0)[above]{$2$};
     \node (D) at (-0.7,0)[above]{$4$};
 \end{tikzpicture}
+
+
+\begin{align}
+    Z_{D}=&\underrem{\sum_{\{a\}}}{全体にある自由度の和}
+    \overrem{\sum_{\{b\}}\sum_{\{c\}}}{D内のみの自由度の和}
+    \underrem{\prod_{\text{プラケット }\in D}\sqrt{2}
+    \prod_{\text{リンク } \in D}\frac{1}{\sqrt{2}}
+    \prod_{\text{サイト} \in D}\sqrt{2}}{Euler相殺項}
+    \notag\\
+    &\times
+    \underrem{\prod_{\text{プラケット }\in D} \frac{1}{2}}{ゲージ体積}
+    \underrem{
+    \prod_{\text{サイト} \in D}\frac{1}{2}}{拘束を補助場で表したときの$1/2$}
+    \notag\\
+    &\times
+    \prod_{\text{リンク } \notin D}\exp(K(-1)^{a_i+a_j})
+    \prod_{\text{リンク } \in D}\exp(K(-1)^{a_i+a_j+b_{ij}})
+    \notag\\
+    &\times
+    \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}
+  \end{align}
 
 \end{document}  

@@ -72,6 +72,16 @@
   boxrule=0.5mm
 }
 
+\newcommand{\underrem}[2]{
+    {\color{red} \underbrace{\color{black} {#1}}_{\text{#2}}
+    }
+}
+
+\newcommand{\overrem}[2]{
+    {\color{red} \overbrace{\color{black} {#1}}^{\text{#2}}
+    }
+}
+
 \newcommand{\qed}{■}
 \newcommand{\kyou}[1]{{\sffamily \bfseries #1}}
 
@@ -1238,6 +1248,28 @@ $D$の要素に関して、次のような変形をします。
   という因子を割り当てれば良いことが分かります。
 \end{enumerate}
 
+これらをまとめて、$D$で半空間ゲージ化を行った分配関数$Z_{D}$を書いてみます。
+\begin{align}
+  Z_{D}=&\underrem{\sum_{\{a\}}}{全体にある自由度の和}
+  \overrem{\sum_{\{b\}}\sum_{\{c\}}}{D内のみの自由度の和}
+  \underrem{\prod_{\text{プラケット }\in D}\sqrt{2}
+  \prod_{\text{リンク } \in D}\frac{1}{\sqrt{2}}
+  \prod_{\text{サイト} \in D}\sqrt{2}}{Euler相殺項}
+  \notag\\
+  &\times
+  \underrem{\prod_{\text{プラケット }\in D} \frac{1}{2}}{ゲージ体積}
+  \underrem{
+  \prod_{\text{サイト} \in D}\frac{1}{2}}{拘束を補助場で表したときの$1/2$}
+  \notag\\
+  &\times
+  \prod_{\text{リンク } \notin D}\exp(K(-1)^{a_i+a_j})
+  \prod_{\text{リンク } \in D}\exp(K(-1)^{a_i+a_j+b_{ij}})
+  \notag\\
+  &\times
+  \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}
+\end{align}
+
+\subsection{境界に局在すること}
 
 \subsection{トポロジカル性}
 

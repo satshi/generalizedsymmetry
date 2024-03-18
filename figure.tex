@@ -79,10 +79,30 @@
 \begin{document}
 
 \begin{tikzpicture}
-    \draw[step=0.8, thick] (-2,-2) grid (2.2,2.2);
-    \begin{scope}[yshift = 0.4cm, xshift = 0.4cm]
-        \draw[step=0.8, blue, thick] (-2.2,-2.2) grid (2,2);            
-    \end{scope}
+    \draw[step=1, blue] (-1.5,-1.5) grid (3.5,3.5); 
+    \foreach \x/\y in {0/0, 0/1, 1/0}{
+        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[blue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \fill[blue] (0,0) circle (1.8mm);
+    \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
+    \draw[blue, line width = 1.3mm](0,0)--(\x,\y);
+    }
+    \node (A) at (0,0.7)[right]{$1$};
+    \node (B) at (0,-0.7)[right]{$3$};
+    \node (C) at (0.7,0)[above]{$2$};
+    \node (D) at (-0.7,0)[above]{$4$};
 \end{tikzpicture}
 
 \end{document}  

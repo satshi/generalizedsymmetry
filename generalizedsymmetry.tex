@@ -1266,10 +1266,64 @@ $D$の要素に関して、次のような変形をします。
   \prod_{\text{リンク } \in D}\exp(K(-1)^{a_i+a_j+b_{ij}})
   \notag\\
   &\times
-  \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}
+  \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}.
+  \label{halfspacegauging0}
 \end{align}
+これから、この分配関数に関して
+\begin{itemize}
+  \item これが、$D$の境界に局在する余次元$1$の欠陥であること。
+  \item この欠陥がトポロジカルであること。
+\end{itemize}
+の２項目について詳しく見ていきます。
 
 \subsection{境界に局在すること}
+まず、境界に局在する欠陥であることを説明します。これには、\ref{sec:KWproof}項でやったのと同様に、$b$について先に和を取ることで理解できます。
+
+まず、ゲージ固定として$D$内のプラケット$i$に関して$a_i=0$というゲージをとります。このゲージ固定により、\eqref{halfspacegauging0}の中のゲージ体積での割り算はすべて相殺します。
+
+次に$b$の和をとることを考えます。$D$内のリンクには２種類あって、リンクの両側のプラケットが両方$D$内にある場合と、片方だけが$D$内にある場合です。前者の場合には、\ref{sec:KWproof}でやったのと全く同じ計算になります。次のように、考えているリンクの変数を$b$、リンクの両端のサイトの自由度を$c_1,c_2$とします。プラケットにある$a$の自由度はすでにゲージ固定で$0$にしていることに注意してください。
+\begin{align}
+  \begin{tikzpicture}
+    \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
+    \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
+    \fill[blue!40](0,0) rectangle (1,1);
+    \fill[blue!40](0,-1) rectangle (1,0);
+    \fill[blue] (C1) circle (1.8mm);
+    \fill[blue] (C2) circle (1.8mm);
+    \draw[blue, line width = 1.3mm] (C1)--(C2);
+    \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
+    \draw[->] (B)--(0.5,0.1);
+\end{tikzpicture}
+\end{align}
+この$b$を含む部分の和は\ref{sec:KWproof}項と同様に計算して
+\begin{align}
+  \sum_{b=0,1}e^{K(-1)^{b}}(-1)^{b(c_1+c_2)}
+  =\sqrt{2}e^{K(-1)^{c_1+c_2}}
+  \label{sumbtemp}
+\end{align}
+となります。この計算では、今は$K=K_c$の場合を考えているので$\Kt=K,\ \sinh 2K=1$であることに注意してください。\eqref{sumbtemp}の右辺の$\sqrt{2}$は、\eqref{halfspacetransformation}のEuler相殺項のリンクのところとちょうど相殺します。\eqref{sumbtemp}の右辺の残りの部分は、Ising模型のBoltzmannウェイトです。つまり、$D$内のバルクでは$\Lambdah$をアクティブ格子とする、$K=K_c$のIsing模型になっています。
+
+次に、リンクの両側のプラケットのうち、片方のみ$D$の内部にある場合を考えます。$D$の外にあるプラケットにはゲージ対称性は無いので$a$の自由度が残っていることに注意します。次のように自由度の名前をつけます。
+\begin{align}
+  \begin{tikzpicture}
+    \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
+    \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
+    \fill[blue!40](0,-1) rectangle (1,0);
+    \fill[blue] (C1) circle (1.8mm);
+    \fill[blue] (C2) circle (1.8mm);
+    \draw[blue, line width = 1.3mm] (C1)--(C2);
+    \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
+    \draw[->] (B)--(0.5,0.1);
+    \node (A) at (0.5, 0.7){$a$};
+\end{tikzpicture}
+\label{boundary}
+\end{align}
+この部分の$b$の和は、先程と同様に
+\begin{align}
+  \sum_{b=0,1}e^{K(-1)^{b}}(-1)^{b(c_1+c_2)}
+  =\sqrt{2}e^{K(-1)^{c_1+c_2}}(-1)^{ac_1}(-1)^{ac_2}
+\end{align}
+となります。先ほどと同様に、右辺の$\sqrt{2}$はEuler相殺項のリンクの部分とキャンセルし、次の因子はIsing模型のBoltzmannウェイトになります。それ以外に、$D$の境界上で$(-1)^{ac_1}(-1)^{ac_2}$という因子が残ります。これが本質的に欠陥に与えられるウェイトです。これをまとめて表すために、アクティブサイト（Ising模型の自由度が割り振られているアクティブ格子のサイト）を \tikz{\fill[black] (0.5,0.5) circle (1mm);} で表すことにします。$D$の外では、$\Lambda$のサイトがアクティブで、その自由度は$a$、$D$の中では、$\Lambdah$のサイトがアクティブで、その自由度を$c$という記号で表してきました。境界では、それらのサイトが隣り合っています。
 
 \subsection{トポロジカル性}
 

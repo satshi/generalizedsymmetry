@@ -155,4 +155,58 @@
     \node (C2) at (1.5, -0.5)[below right]{$c_2$};
     \node (A) at (1, 0)[above]{$a$};
 \end{tikzpicture}
+
+
+\begin{tikzpicture}
+    \foreach \x/\y in {0/0, 0/1, 1/0}{
+        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[blue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+    \draw[<-,thick] (0.5,1.5)--(2,2) node[right] {ゲージを選ぶ};
+    \draw[<-,thick] (0.5,2.1)--(2,3) node[right] {$b=0$にする};
+    \draw[->,red, line width=2mm](3,2.2)--(3,2.8);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \foreach \x/\y in {0/0, 1/0}{
+        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[blue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+    \draw[<-,thick] (1.1,1.5)--(2,2) node[right] {$b=0$のみ};
+    \draw[<-,thick] (1.1,2.1)--(2,3) node[right] {拘束条件};
+    \draw[<-,red, line width=2mm](3,2.2)--(3,2.8);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \foreach \x/\y in {0/0, 1/0}{
+        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 2/0, 2/1}{
+        \fill[blue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 2/0}{
+    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+\end{tikzpicture}
+
+
 \end{document}  

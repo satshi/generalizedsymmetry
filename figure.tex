@@ -146,5 +146,13 @@
     &\times
     \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}
   \end{align}
-
+  \begin{tikzpicture}
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0, 2/1, 0.5/-0.5, 1.5/-0.5, 0.5/-1.5, 1.5/-1.5}{
+        \fill[black] (\x,\y) circle (1.2mm);
+    }
+    \draw[green!70!black, ultra thick](-0.5,-0.35)--(0,-0.15)--(0.5,-0.35)--(1,-0.15)--(1.5,-0.35)--(2,-0.15)--(2.5,-0.35);
+    \node (C1) at (0.5, -0.5)[below left]{$c_1$};
+    \node (C2) at (1.5, -0.5)[below right]{$c_2$};
+    \node (A) at (1, 0)[above]{$a$};
+\end{tikzpicture}
 \end{document}  

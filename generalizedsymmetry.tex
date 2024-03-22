@@ -43,6 +43,8 @@
 % \DeclareFontShape{JT2}{hgt}{b}{n}{<->ssub*hgt/bx/n}{}
 % \DeclareFontShape{JT2}{hgt}{m}{it}{<->ssub*hgt/m/n}{}
 
+\newcommand{\preface}[1]{\section*{#1}}
+
 \newenvironment{myquote}{\begin{tcolorbox}[
   colback = blue!5, after = \noindent] }{\end{tcolorbox}}
 \newenvironment{important}{\begin{tcolorbox}[
@@ -126,7 +128,7 @@
 \maketitle
 \tableofcontents
 
-\section*{まえがき}
+\preface{まえがき}
 
 このノートは2023年10月に東京大学駒場で行った集中講義のノートです。集中講義の機会をくださり、有益な議論をしてくださった東京大学駒場素粒子論研究室の皆様、集中講義の参加者の皆様に感謝いたします。
 

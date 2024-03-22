@@ -128,6 +128,29 @@
  }\ 
 }
 
+\newcommand{\idline}{
+  \quad \tikz[baseline=0.3cm]{
+    \draw[thick,dotted](0,1)--(0,0);
+   }\quad   
+}
+
+\newcommand{\etaline}{
+  \quad \tikz[baseline=0.3cm]{
+    \draw[thick,red](0,1)--(0,0);
+   }\quad   
+}
+
+\newcommand{\KWline}{
+  \quad \tikz[baseline=0.3cm]{
+    \draw[thick,darkgreen](0,1)--(0,0);
+   }\quad 
+}
+
+%%%%%   色の定義
+
+\colorlet{darkgreen}{green!70!black}
+\colorlet{plaqblue}{blue!15}
+\colorlet{linkblue}{blue!50}
 
 \title{一般化対称性について}
 \author{山口 哲}
@@ -1202,16 +1225,16 @@ $D$は$\Lambdah$のサイト、リンク、プラケットの集合で、次の�
   \begin{tikzpicture}
     \draw[step=1, blue] (-1.5,-1.5) grid (3.5,3.5); 
     \foreach \x/\y in {0/0, 0/1, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
+        \fill[linkblue] (\x,\y) circle (1.8mm);
     }
     \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
     }
 \end{tikzpicture}
 \caption{領域$D$の取り方の例。$\Lambdah$の格子を青線で表しています。青丸で表したサイト、太い青線で表したリンク、青く塗っているプラケットが$D$の元です。}
@@ -1226,20 +1249,20 @@ $D$は$\Lambdah$のサイト、リンク、プラケットの集合で、次の�
 
 $D$の要素に関して、次のような変形をします。
 \begin{enumerate}
-  \item $D$の中の各リンク \tikz[baseline=0.3cm]{\draw[blue, line width = 1.3mm](0,0)--(0,1)} $\ell$ に対して、ゲージ場$b_{\ell}=0,1$を置きます。そしてこのリンクの相互作用を$\exp(K(-1)^{a_i+a_j+b_{\ell}})$とします。ただし、$i,j$はリンクを挟んでいる２つのプラケットです。分配関数の計算では、和$\sum_{b_{\ell}=0,1}$をとります。
-  \item $D$の中の各プラケット \tikz[baseline=0.3cm]{\fill[blue!40](0,0) rectangle (1,1);} $i$ に対してゲージ変換を置きます。ゲージ変換のパラメータを$\lambda_i=0,1$とし、このプラケットに置かれている$a_i$とこのプラケットに接しているリンク$\ell$に置かれているゲージ場は
+  \item $D$の中の各リンク \tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)} $\ell$ に対して、ゲージ場$b_{\ell}=0,1$を置きます。そしてこのリンクの相互作用を$\exp(K(-1)^{a_i+a_j+b_{\ell}})$とします。ただし、$i,j$はリンクを挟んでいる２つのプラケットです。分配関数の計算では、和$\sum_{b_{\ell}=0,1}$をとります。
+  \item $D$の中の各プラケット \tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} $i$ に対してゲージ変換を置きます。ゲージ変換のパラメータを$\lambda_i=0,1$とし、このプラケットに置かれている$a_i$とこのプラケットに接しているリンク$\ell$に置かれているゲージ場は
   \begin{align}
     a_i\to a_i+\lambda_i,\quad b_{\ell}\to b_{\ell}+\lambda_i    
   \end{align}
   と変換します。$D$の取り方から、$i$のまわりの４つのリンクはすべて$D$の要素であるので、$b$の自由度が置かれていることに注意してください。
 
   分配関数を考えるときには、ゲージ体積で割る必要があるので、$D$の要素であるプラケット$i$に対して因子$\frac12$を割り当てます。
-  \item $D$の中の各サイト \tikz{\fill[blue] (0,0) circle (1.8mm)} $p$には、ゲージ場$b$がflatでありなさいという拘束条件を置きます。このサイトにつながる４つのリンクのラベルを$1,2,3,4$として
+  \item $D$の中の各サイト \tikz{\fill[linkblue] (0,0) circle (1.8mm)} $p$には、ゲージ場$b$がflatでありなさいという拘束条件を置きます。このサイトにつながる４つのリンクのラベルを$1,2,3,4$として
   \begin{align}
     \begin{tikzpicture}[baseline=0]
-      \fill[blue] (0,0) circle (1.8mm);
+      \fill[linkblue] (0,0) circle (1.8mm);
       \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
-      \draw[blue, line width = 1.3mm](0,0)--(\x,\y);
+      \draw[linkblue, line width = 1.3mm](0,0)--(\x,\y);
       }
       \node (A) at (0,0.7)[right]{$1$};
       \node (B) at (0,-0.7)[right]{$3$};
@@ -1251,9 +1274,9 @@ $D$の要素に関して、次のような変形をします。
   という因子を割り当てます。$D$の中のサイト$p$につながっている４つのリンクは、必ずしもすべてが$D$の元であるとな限らないので、$b$が割り当てられていない場合もあります。このような場合は、$b$が割り当てられていないリンクの$b$は$0$として拘束条件をかします。
   \item \eqref{Eulercounterterm}のあたりで述べたEuler相殺項を考えます。これは多面体に関するEulerの公式を適用すると$D$の要素に対して上で述べた因子の他に
   \begin{align}
-    \tikz{\fill[blue] (0,0) circle (1.8mm)}\qquad&\Rightarrow \qquad \sqrt{2}\notag\\
-    \tikz[baseline=0.3cm]{\draw[blue, line width = 1.3mm](0,0)--(0,1)} \qquad &\Rightarrow \qquad \frac{1}{\sqrt{2}},\notag\\
-    \tikz[baseline=0.3cm]{\fill[blue!40](0,0) rectangle (1,1);} \quad&\Rightarrow \qquad \sqrt{2}
+    \tikz{\fill[linkblue] (0,0) circle (1.8mm)}\qquad&\Rightarrow \qquad \sqrt{2}\notag\\
+    \tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)} \qquad &\Rightarrow \qquad \frac{1}{\sqrt{2}},\notag\\
+    \tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} \quad&\Rightarrow \qquad \sqrt{2}
   \end{align}
   という因子を割り当てれば良いことが分かります。
 \end{enumerate}
@@ -1296,11 +1319,11 @@ $D$の要素に関して、次のような変形をします。
   \begin{tikzpicture}
     \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
     \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
-    \fill[blue!40](0,0) rectangle (1,1);
-    \fill[blue!40](0,-1) rectangle (1,0);
-    \fill[blue] (C1) circle (1.8mm);
-    \fill[blue] (C2) circle (1.8mm);
-    \draw[blue, line width = 1.3mm] (C1)--(C2);
+    \fill[plaqblue](0,0) rectangle (1,1);
+    \fill[plaqblue](0,-1) rectangle (1,0);
+    \fill[linkblue] (C1) circle (1.8mm);
+    \fill[linkblue] (C2) circle (1.8mm);
+    \draw[linkblue, line width = 1.3mm] (C1)--(C2);
     \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
     \draw[->] (B)--(0.5,0.1);
 \end{tikzpicture}
@@ -1318,10 +1341,10 @@ $D$の要素に関して、次のような変形をします。
   \begin{tikzpicture}
     \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
     \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
-    \fill[blue!40](0,-1) rectangle (1,0);
-    \fill[blue] (C1) circle (1.8mm);
-    \fill[blue] (C2) circle (1.8mm);
-    \draw[blue, line width = 1.3mm] (C1)--(C2);
+    \fill[plaqblue](0,-1) rectangle (1,0);
+    \fill[linkblue] (C1) circle (1.8mm);
+    \fill[linkblue] (C2) circle (1.8mm);
+    \draw[linkblue, line width = 1.3mm] (C1)--(C2);
     \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
     \draw[->] (B)--(0.5,0.1);
     \node (A) at (0.5, 0.7){$a$};
@@ -1370,7 +1393,7 @@ $D$の要素に関して、次のような変形をします。
 \subsection{トポロジカル性}
 次にKW欠陥がトポロジカルであることを示します。
 
-このために$D$を選んで、その要素のサイト、リンク、プラケットをそれぞれ\tikz{\fill[blue] (0,0) circle (1.8mm)}、\tikz[baseline=0.3cm]{\draw[blue, line width = 1.3mm](0,0)--(0,1)}、\tikz[baseline=0.3cm]{\fill[blue!40](0,0) rectangle (1,1);} で表します。これまでやってきたように、$D$で半空間ゲージ化をやった上で、他にも任意の演算子を挿入し、すべての自由度に関して和をとったものに関して成り立つ恒等式（演算子恒等式）を絵で表すことにします。
+このために$D$を選んで、その要素のサイト、リンク、プラケットをそれぞれ\tikz{\fill[linkblue] (0,0) circle (1.8mm)}、\tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)}、\tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} で表します。これまでやってきたように、$D$で半空間ゲージ化をやった上で、他にも任意の演算子を挿入し、すべての自由度に関して和をとったものに関して成り立つ恒等式（演算子恒等式）を絵で表すことにします。
 
 次の（ア）、（イ）の演算子恒等式が成り立ちます。
 \begin{enumerate}
@@ -1378,16 +1401,16 @@ $D$の要素に関して、次のような変形をします。
   \begin{align}
     \begin{tikzpicture}[baseline=1cm]
       \foreach \x/\y in {0/0, 0/1, 1/0}{
-          \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-          \fill[blue] (\x,\y) circle (1.8mm);
+          \fill[linkblue] (\x,\y) circle (1.8mm);
       }
       \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
       }
       \draw[<-,thick] (0.5,1.5)--(2,2) node[right] {ゲージを選ぶ};
       \draw[<-,thick] (0.5,2.1)--(2,3) node[right] {$b=0$にする};
@@ -1398,16 +1421,16 @@ $D$の要素に関して、次のような変形をします。
   \qquad
   \begin{tikzpicture}[baseline=1cm]
     \foreach \x/\y in {0/0, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
+        \fill[linkblue] (\x,\y) circle (1.8mm);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
     }
   \end{tikzpicture}
   \end{align}
@@ -1420,16 +1443,16 @@ $D$の要素に関して、次のような変形をします。
   \begin{align}
     \begin{tikzpicture}[baseline=1cm]
       \foreach \x/\y in {0/0, 1/0}{
-          \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-          \fill[blue] (\x,\y) circle (1.8mm);
+          \fill[linkblue] (\x,\y) circle (1.8mm);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
       }
       \draw[<-,thick] (1.1,1.5)--(2,2) node[right] {$b=0$のみ};
       \draw[<-,thick] (1.1,2.1)--(2,3) node[right] {拘束条件};
@@ -1440,16 +1463,16 @@ $D$の要素に関して、次のような変形をします。
     \qquad
     \begin{tikzpicture}[baseline=1cm]
       \foreach \x/\y in {0/0, 1/0}{
-          \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 2/0, 2/1}{
-          \fill[blue] (\x,\y) circle (1.8mm);
+          \fill[linkblue] (\x,\y) circle (1.8mm);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
       }
       \foreach \x/\y in {0/0, 0/1, 1/0, 2/0}{
-      \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
       }
   \end{tikzpicture}
   \end{align}
@@ -1462,26 +1485,26 @@ $D$の要素に関して、次のような変形をします。
 \begin{align}
   \begin{tikzpicture}[baseline=1cm]
     \foreach \x/\y in {0/0, 0/1, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
+        \fill[linkblue] (\x,\y) circle (1.8mm);
     }
     \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
     }
     \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
     }
 \end{tikzpicture}
 \quad
 =
 \qquad
-\tikz{\fill[blue] (0,0) circle (1.8mm)}
+\tikz{\fill[linkblue] (0,0) circle (1.8mm)}
 \qquad
 =\sqrt{2}.\label{qdimKW0}
 \end{align}
-最初の等号は、（ア）、（イ）を繰り返すことで得られます。次の等号は、\tikz{\fill[blue] (0,0) circle (1.8mm)} に割り当てられたEuler相殺項です。拘束条件の方は自動的に満たされます。
+最初の等号は、（ア）、（イ）を繰り返すことで得られます。次の等号は、\tikz{\fill[linkblue] (0,0) circle (1.8mm)} に割り当てられたEuler相殺項です。拘束条件の方は自動的に満たされます。
 
 対称性欠陥の場合、\ref{sec:symmetrydefect}章で見たように、可縮な円周の期待値は1であることが分かりますから\footnote{厳密にはアノマリーがあるような対称性の場合、１にならないこともあります。しかし、その場合でも絶対値は１になります。}可縮な円周の期待値が$\sqrt{2}$であるKW欠陥は対称性欠陥ではないということになります。このことから\kyou{KW欠陥は非可逆対称性の欠陥の例であることが分かります。}
 
@@ -1497,6 +1520,8 @@ $D$の要素に関して、次のような変形をします。
   \item F記号：有限群の対称性の場合には、アノマリーの構造になります。
 \end{itemize}
 これらについて、有限群の場合とIsing模型の対称性（\kyou{Ising圏}と呼ぶことにします）を例にして説明します。
+
+大事なことは、例えばIsing模型でIsing圏の対称性の構造が分かったとします。このとき、Ising圏の対称性の構造のみを用いて導かれた帰結は、\kyou{Ising圏の対称性を持つすべての理論に適用可能}だということです。これは通常の対称性と同様です。
 
 \subsection{足し算}
 
@@ -1516,7 +1541,8 @@ $D$の要素に関して、次のような変形をします。
 
 上の作り方からは引き算は考えられないことに注意してください。非負の整数以外の複素数倍も局所的にすることはできません。\eqref{qdimKW0}で可縮な円周のKW欠陥の期待値を考えましたが、これに勝手に$1/\sqrt{2}$をかけて期待値を$1$にすることは、局所性を破ります。したがって、$\sqrt{2}$には意味があります。
 
-少し言葉について説明します。他の対象の足し算で書けない対象を\kyou{単純対象}(simple object)と言います。単純対象が有限個しかない場合、このフュージョン圏は\kyou{有限生成}(finitely generated)であると言います。定義から有限生成のフュージョン圏の対象はいくつかの単純対象の和で書けます。有限群の対称性の場合、単純対象は群の元です。Ising圏の単純対象は自明対象$1$、spin flip $\eta$、KW欠陥$\Ncal$の３つです。
+少し言葉について説明します。他の対象の足し算で書けない対象を\kyou{単純対象}(simple object)と言います。単純対象が有限個しかない場合、このフュージョン圏は\kyou{有限生成}(finitely generated)であると言います。定義から有限生成のフュージョン圏の対象はいくつかの単純対象の和で書けます。有限群の対称性の場合、単純対象は群の元です。Ising圏の単純対象は自明対象$1$、spin flip $\eta$、KW欠陥$\Ncal$の３つです。それぞれ\idline, \etaline, \KWline で表すことにします。
+
 
 以降、２次元では有限生成のフュージョン圏のみ考えます。
 
@@ -1526,13 +1552,40 @@ $D$の要素に関して、次のような変形をします。
 \begin{align}
   \simpleline{a} \simpleline{b} = \sum_{c:\text{単純対象}}N_{ab}{}^{c} \simpleline{c}
 \end{align}
-のように表すことができます。ここで、$N_{ab}{}^{c}$はフュージョン係数(fusion coefficient)と呼ばれる非負の整数です。
+のように表すことができます。ここで、$N_{ab}{}^{c}$はフュージョン係数(fusion coefficient)と呼ばれる非負の整数です。この式を単に
+\begin{align}
+  a\times b = \sum_{c}N_{ab}{}^{c} c
+\end{align}
+とも表すことにします。
 
 例えば、有限群の対称性の場合、単純対象は群の元で、フュージョン則は$a,b$を群の元として
 \begin{align}
   \simpleline{a} \simpleline{b}=\simpleline{ab}
 \end{align}
 となります。
+
+Ising圏のフュージョン則について説明します。まず$1$は自明な欠陥ですから、他の元とフュージョンをとっても、その元を変化させません。また$1,\eta$は$\Zb_2$の群をなしますから
+\begin{align}
+  \eta\times \eta = 1
+\end{align}
+になります。あるいは絵で
+\begin{align}
+  \etaline \etaline = \idline
+\end{align}
+と書きます。KW欠陥を含むフュージョン則には非可逆対称性であることが効いています。それは２種類あります。一つは
+\begin{align}
+  \Ncal \times \eta = \eta \times \Ncal = \Ncal,\qquad \text{（絵では）}\quad \KWline \etaline = \etaline \KWline = \KWline
+  \label{Netafusion}
+\end{align}
+です。もう一つは
+\begin{align}
+  \Ncal \times \Ncal = 1 + \eta, \qquad
+  \text{（絵では）}\quad \KWline \KWline = \idline + \etaline
+  \label{NNfusion}
+\end{align}
+です。これらは非自明ですので導出を説明します。
+
+
 
 \subsection{F記号}
 

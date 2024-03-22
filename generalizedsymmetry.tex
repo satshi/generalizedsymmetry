@@ -122,6 +122,13 @@
 \newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Lambdah}{\widehat{\Lambda}}
 
+\newcommand{\simpleline}[1]{
+ \ \tikz[baseline=0.3cm]{
+  \draw[thick](0,1)--(0,0) node[below]{$#1$};
+ }\ 
+}
+
+
 \title{一般化対称性について}
 \author{山口 哲}
 \date{\today}
@@ -1515,7 +1522,17 @@ $D$の要素に関して、次のような変形をします。
 
 \subsection{フュージョン則}
 
-２次元空間内で、２つのトポロジカル欠陥を間になにも挟まずにおいたもの
+２次元空間内で、２つの１次元のトポロジカル欠陥を間になにも挟まずに並べておいたものはおいたものは、また１次元のトポロジカル欠陥になります。このような操作は\kyou{フュージョン}(fusion)と呼ばれ、このルールは\kyou{フュージョン則}(fusion rule)とよばれます。有限生成のフュージョン圏の場合には、単純対象２つのフージョンがどうなるかを決めれば良いことになります。任意の対象は、いくつかの単純対象の和で書かれますから、フュージョン則は
+\begin{align}
+  \simpleline{a} \simpleline{b} = \sum_{c:\text{単純対象}}N_{ab}{}^{c} \simpleline{c}
+\end{align}
+のように表すことができます。ここで、$N_{ab}{}^{c}$はフュージョン係数(fusion coefficient)と呼ばれる非負の整数です。
+
+例えば、有限群の対称性の場合、単純対象は群の元で、フュージョン則は$a,b$を群の元として
+\begin{align}
+  \simpleline{a} \simpleline{b}=\simpleline{ab}
+\end{align}
+となります。
 
 \subsection{F記号}
 

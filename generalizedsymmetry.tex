@@ -1390,7 +1390,7 @@ $D$の要素に関して、次のような変形をします。
 
 ここまでで、半空間ゲージ化を行うと、その境界に余次元1の欠陥が現れることが分かりました。この欠陥を\kyou{KW欠陥}と呼ぶことにします。
 
-\subsection{トポロジカル性}
+\subsection{トポロジカル性}\label{sec:KWtopologicalness}
 次にKW欠陥がトポロジカルであることを示します。
 
 このために$D$を選んで、その要素のサイト、リンク、プラケットをそれぞれ\tikz{\fill[linkblue] (0,0) circle (1.8mm)}、\tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)}、\tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} で表します。これまでやってきたように、$D$で半空間ゲージ化をやった上で、他にも任意の演算子を挿入し、すべての自由度に関して和をとったものに関して成り立つ恒等式（演算子恒等式）を絵で表すことにします。
@@ -1583,12 +1583,243 @@ Ising圏のフュージョン則について説明します。まず$1$は自明
   \text{（絵では）}\quad \KWline \KWline = \idline + \etaline
   \label{NNfusion}
 \end{align}
-です。これらは非自明ですので導出を説明します。
+です。これらは非自明ですので導出を半空間ゲージ化の立場から説明します。
 
+まず、$\Ncal \times \eta$からです。$\eta$はゲージ化されたIsingの見方からは、$b$のWilsonループ（横切るリンクの$(-1)^b$を挿入する欠陥）になります。このことを強調するために、少し色を変えて、下に$W$の文字を書いて表すことにします。各サイトに関しての拘束があるので、変形することができることに注意すると
+\begin{align}
+  \KWline \etaline =\quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](1.5,2)--(1.5,-2) node[below]{$W$};
+\end{tikzpicture}
+\quad=\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](-0.5,2)--(-0.5,-2) node[below]{$W$};
+\end{tikzpicture}
+\end{align}
+という恒等式を得ます。右辺では、$W$の横切るリンクには$b$の自由度は割り当てられていません。言い換えると$W=1$に置き換えることができます。したがって
+\begin{align}
+  \KWline \etaline =
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+=\KWline
+\end{align}
+というfusion ruleが得られます。
 
+同じ関係を別の見方で導出してみましょう。ゲージ化されていないIsing模型の見方では、$\eta$は$\Lambdah$のリンクをつないでいってできるループ上で定義されていて、そのリンク上で背景ゲージ場$B=1$を入れるという欠陥です。これを強調するために、先ほどとは少し色を変えて、下に$B$をつけて書くことにします。これがトポロジカルであることを踏まえると
+\begin{align}
+  \etaline\KWline =\quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!blue, ultra thick](-1,2)--(-1,-2) node[below]{$B$};
+\end{tikzpicture}
+\quad=\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!blue, ultra thick](0,2)--(0,-2) node[below]{$B$};
+\end{tikzpicture}
+\end{align}
+という恒等式を得ます。ここで、右辺では、背景ゲージ場$B$がある場所は動的なゲージ場$b$がある場所に重なっていることに注目します。このことから、動的なゲージ場の再定義$b'=b+B$によって、背景ゲージ場を吸収し、消してしまうことができます。したがって
+\begin{align}
+  \etaline \KWline =
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+=\KWline
+\end{align}
+というfusion ruleが得られます。
+
+次に\eqref{NNfusion}の導出を説明します。\eqref{NNfusion}の左辺は２つの$\Ncal$の間で半空間ゲージ化したと思うことができます。さらに\ref{sec:KWtopologicalness}項の（ア）、（イ）の恒等式が成り立つことも考慮すると
+\begin{align}
+  \KWline \KWline = \quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+\quad
+=
+\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+\end{align}
+という関係式を得ます。右辺に注目します。それぞれのサイトでの拘束条件を考えると、すべてのリンクに割り当てられた$b$の値は同じでなければなりません。ですから、$b$についての和はすべて$b=0$とすべて$b=1$になります。これらはそれぞれ、自明な欠陥と$\eta$欠陥と同じになります。また、$D$に含まれるサイトの数とリンクの数は同じですから、Euler相殺項は消えます。したがって
+\begin{align}
+  \KWline \KWline
+=
+\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+= \idline + \etaline
+\end{align}
+というフュージョン則を得ます。
+
+Ising圏のフュージョン則をまとめておきます。
+\begin{emphasize}
+  $1,\eta,\Ncal$の３種類の単純対象があり、それらの間に次のフュージョン則がある。
+  \begin{align}
+    &1\times a = a\times 1 = a,\ \text{for } \forall a,\\
+    &\eta \times \eta =1,\\
+    &\Ncal \times \eta =\eta \times \Ncal =\Ncal,\\
+    &\Ncal \times \Ncal = 1 + \eta.
+  \end{align}
+\end{emphasize}
 
 \subsection{F記号}
-
+フュージョン圏の中で、もう一つ重要な構造はF記号(F symbol)です。
 
 \section{応用}
 

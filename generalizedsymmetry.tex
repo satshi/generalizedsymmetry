@@ -2000,6 +2000,115 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
 \end{itemize}
 離散群を$G$、また、$\Cb^{\times}:=\Cb \setminus \{0\}$とし、掛け算でアーベル群とみなします。\eqref{groupcocycle}を満たす$\Acal: G\times G \times G\to \Cb^{\times}$全体の集合を\eqref{groupcoboundary}でつながるものを同一視した集合を$H^3(BG,\Cb^{\times})$と書いて、3次の群コホモロジーと呼びます。言い換えると２次元の離散群$G$の対称性のアノマリーは$H^3(BG,\Cb^{\times})$で分類できます\footnote{実は、いつでも局所相殺項で$|\Acal(a,b,c)|=1$とすることができるので、$\Acal: G\times G \times G\to \U(1)$に限って考えて良いです。したがって、2次元のアノマリーを分類するものは$H^3(BG,\U(1))$と書いてもよく、多くの文献ではこちらが書かれています。}。
 
+別の例として、Ising圏のF記号について説明します。前と同様にIsing圏の単純対象の$1$、spin flip $\eta$、KW欠陥$\Ncal$をそれぞれ\idline, \etaline, \KWline で表すことにします。これらは反対向きにしても同じものなので、ここからは向きを気にしないで絵を書くことにします。また、自明な欠陥はしばしば書くのを省略します。
+
+ジャンクションのうち、自明な欠陥を含むものは、他の２つの線が同じものの場合に１種類存在します。自明な欠陥を含まないものは、
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick](0,0)--(-0.5,-0.5);
+      \draw[darkgreen,thick](0,0)--(0.5,-0.5);
+      \draw[red,thick](0,0)--(0,0.7);
+  \end{tikzpicture}        
+\end{align}
+とその足を入れ替えたものになります。
+
+まず、\idline と \etaline は、先ほど述べたアノマリーの無い$\Zb_2$の交差関係式を満たします。新しいのは\KWline を含む交差関係式です。足の入れ替えなどを除くと、非自明なのは次の３種類です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick](D)--(B);
+      \draw[red,thick](A)--(-0.2,0.2);
+      \draw[red,thick](C)--(0.2,-0.2);
+  \end{tikzpicture} 
+  \quad=\quad - \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick](D)--(B);
+      \draw[red,thick](A)--(0.2,-0.2);
+      \draw[red,thick](C)--(-0.2,0.2);
+  \end{tikzpicture} \quad ,
+\end{align}
+
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+  \end{tikzpicture}
+  \quad
+  +
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+      \draw[red,thick] (0.3,0)--(-0.3,0);
+  \end{tikzpicture}
+  \quad
+  \Bigg),
+\end{align}
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+      \draw[red,thick] (0,0.3)--(0,-0.3);
+  \end{tikzpicture}
+  \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+  \end{tikzpicture}
+  \quad
+  -
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+      \draw[red,thick] (0.3,0)--(-0.3,0);
+  \end{tikzpicture}
+  \quad
+  \Bigg)
+\end{align}
+これらについて、半空間ゲージ化の描像から説明していきます。
+
+
 \section{応用}
 
 

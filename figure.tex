@@ -180,5 +180,98 @@
     \end{tikzpicture}
 \end{align}
 
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick](D)--(B);
+        \draw[red,thick](A)--(-0.2,0.2);
+        \draw[red,thick](C)--(0.2,-0.2);
+    \end{tikzpicture} 
+    \quad=\quad - \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick](D)--(B);
+        \draw[red,thick](A)--(0.2,-0.2);
+        \draw[red,thick](C)--(-0.2,0.2);
+    \end{tikzpicture} \quad ,
+\end{align}
+
+
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+        \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+    \end{tikzpicture}
+    \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+        \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+    \end{tikzpicture}
+    \quad
+    +
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+        \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+        \draw[red,thick] (0.3,0)--(-0.3,0);
+    \end{tikzpicture}
+    \quad
+    \Bigg),
+\end{align}
+
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+        \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+        \draw[red,thick] (0,0.3)--(0,-0.3);
+    \end{tikzpicture}
+    \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+        \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+    \end{tikzpicture}
+    \quad
+    -
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+        \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+        \draw[red,thick] (0.3,0)--(-0.3,0);
+    \end{tikzpicture}
+    \quad
+    \Bigg)
+\end{align}
 
 \end{document}  

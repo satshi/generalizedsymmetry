@@ -121,6 +121,7 @@
 
 \newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Lambdah}{\widehat{\Lambda}}
+\newcommand{\Acal}{\mathcal{A}}
 
 \newcommand{\simpleline}[1]{
  \ \tikz[baseline=0.3cm]{
@@ -506,7 +507,7 @@ $G$は群ですから、演算子への作用も表現になっています。�
   と表せる。    
 \end{emphasize}
 
-\subsection{背景ゲージ場}
+\subsection{背景ゲージ場}\label{sec:backgroundgaugefield}
 対称性を表すトポロジカル欠陥の便利な見方の一つは、背景ゲージ場を考えることです。結論から言うと、flatな背景ゲージ場の背景が対称性のトポロジカル欠陥の配位と同一視できます。それをこれから説明していきます。
 
 簡単のため、連続対称性でアノマリーが無い場合を考えます。前節と同じ設定で、大域的対称性の背景ゲージ場$A$を入れた作用を$S(\phi,A)$とします。$A=0$のときに元の作用に戻るとします。つまり$S(\phi,A=0)=S(\phi)$とします。この背景ゲージ場の元での分配関数は
@@ -1821,9 +1822,183 @@ Ising圏のフュージョン則をまとめておきます。
 \subsection{F記号}
 フュージョン圏の中で、もう一つ重要な構造はF記号(F symbol)です。F記号は文脈によって結合子(associator)や交差関係式(crossing relation)などとも呼ばれることがあります。ここでは、F記号を演算子恒等式として説明します\footnote{数学の文脈では、対象に対して$\Cb$ベクトル空間が割り当てられ、結合子はそれらの間の線形写像として定義されます。この講義では、これらのベクトル空間の基底を選んで、線形写像を行列で表したときの行列成分をF記号と呼んでいます。}。
 
-F記号について説明するために、まず接合(junction)について説明します。$a,b,c,\dots$を単純対象として、$N_{ab}{}^{c}\ne 0$のときに次のような三叉路の欠陥でトポロジカルなものが$N_{ab}{}^{c}\ne 0$種類存在します。
+F記号について説明するために、まずジャンクション(junction)について説明します。$a,b,c,\dots$を単純対象として、$N_{ab}{}^{c}\ne 0$のときに次のような三叉路の欠陥でトポロジカルなものが$N_{ab}{}^{c}\ne 0$種類存在して、トポロジカルになります。
+\begin{align}
+  \begin{tikzpicture}
+    \draw[very thick](0,0)--(0,1.5) node[above]{$c$};
+    \draw[very thick](0,0)--(-1,-1) node[below]{$a$};
+    \draw[very thick](0,0)--(1,-1) node[below]{$b$};
+  \end{tikzpicture}    
+\end{align}
+例えば、群の対称性の場合には、
+\begin{align}
+  \begin{tikzpicture}
+    \draw[very thick](0,0)--(0,1.5) node[above]{$ab$};
+    \draw[very thick](0,0)--(-1,-1) node[below]{$a$};
+    \draw[very thick](0,0)--(1,-1) node[below]{$b$};
+  \end{tikzpicture}    
+\end{align}
+というものが存在して、トポロジカルです。この群の対称性のジャンクションは\ref{sec:backgroundgaugefield}項でも出てきました。このジャンクションが、どのように系の自由度に結合子ているか等は理論の「対称性」だけで決まることではなく、理論の詳細によることです。
 
+一方で、このジャンクションの組み換えに関する次の演算子関係式は、系の詳細によらず、対称性だけで決まります。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$d$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+  \end{tikzpicture}
+  \quad = \quad
+  \sum_{f}
+  (F_{abc}^e)_{df}
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$f$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+  \end{tikzpicture}
+  \label{crossingrelation}
+\end{align}
+ここで、$a,b,c,d,e,f$は単純対象のラベルです。$(F_{abc}^e)_{df}$は複素数で\kyou{F記号}(F-symbol)と呼ばれます。また、関係式\eqref{crossingrelation}は\kyou{交差関係式}(crossing relation)と呼ばれます。
 
+F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}(pentagon identity)を満たす必要があります。これについて簡単に説明します。まず、\eqref{crossingrelation}を何回も適用して得られる、次のような恒等式を考えます（ラベル等、すべて省略します）。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  F
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \label{temppentagon1}
+\end{align}
+一方、左辺に関して、\eqref{crossingrelation}を別の方法で何回も適用して
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  F
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.4, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](0.51, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FFF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \label{temppentagon2}
+\end{align}
+という関係式も得ます。\eqref{temppentagon1}の右辺と\eqref{temppentagon2}の右辺は等しくなければなりませんから
+\begin{align}
+  FF = FFF
+\end{align}
+という形の関係式が成り立ちます。これを５角形関係式と呼んでいます。
+
+少し例を述べます。有限群の対称性でアノマリーが無い場合、非自明な（$0=0$でない）交差関係式は
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$ab$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$bc$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+\end{align}
+となります。\ref{sec:backgroundgaugefield}項の議論を思い出してもらうと、この恒等式はゲージ不変性の一部でした。この恒等式から、ジャンクションを含むトポロジカル欠陥の配位を考えたとき、分配関数は、そのネットワークの取り方によらないということができます。すべてのトポロジカル欠陥の配位について和を取ることがゲージ化でしたから、この関係式を満たせばゲージ化できることになります。
+
+アノマリーについても少し触れておきます。有限群の対称性の交差関係式は、アノマリーがある場合も含めて
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$ab$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+  \quad = \quad
+  \Acal(a,b,c)\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$bc$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+\end{align}
+と書けます。ただし、$\Acal(a,b,c)$は$0$でない複素数で、アノマリーを表します。これに関して、次のようなことに注意する必要があります。
+\begin{itemize}
+  \item $\Acal(a,b,c)$は5角形関係式を満たす必要があります。
+  \begin{align}
+    \Acal(ab,c,d)
+    \Acal(a,b,cd)
+    =
+    \Acal(a,b,c)
+    \Acal(a,bc,d)
+    \Acal(b,c,d)
+    \label{groupcocycle}
+  \end{align}
+  これは教科書にのっているアノマリーの説明のWess-Zumino無矛盾条件におおよそ対応します。
+  \item ジャンクションに$0$でない複素数$C(a,b)$をかけて再定義することができます。
+  \begin{align}
+    \Acal'(a,b,c)=C(a,b)C(ab,c)C(a,bc)^{-1}C(b,c)^{-1}\Acal(a,b,c)
+    \label{groupcoboundary}
+  \end{align}
+  こうすると$\Acal(a,b,c)$は変化しますが、この操作で結びついているアノマリーは同じアノマリーとみなします。例えば、この操作で$\Acal(a,b,c)=1$とできたとすると、アノマリーは無いことになります。これは教科書にのっているアノマリーの説明の局所相殺項を足すことにおおよそ対応します。なお$\Acal$が5角形恒等式\eqref{groupcocycle}を満たすなら、$\Acal'$も満たすことに注意してください。
+\end{itemize}
+離散群を$G$、また、$\Cb^{\times}:=\Cb \setminus \{0\}$とし、掛け算でアーベル群とみなします。\eqref{groupcocycle}を満たす$\Acal: G\times G \times G\to \Cb^{\times}$全体の集合を\eqref{groupcoboundary}でつながるものを同一視した集合を$H^3(BG,\Cb^{\times})$と書いて、3次の群コホモロジーと呼びます。言い換えると２次元の離散群$G$の対称性のアノマリーは$H^3(BG,\Cb^{\times})$で分類できます\footnote{実は、いつでも局所相殺項で$|\Acal(a,b,c)|=1$とすることができるので、$\Acal: G\times G \times G\to \U(1)$に限って考えて良いです。したがって、2次元のアノマリーを分類するものは$H^3(BG,\U(1))$と書いてもよく、多くの文献ではこちらが書かれています。}。
 
 \section{応用}
 

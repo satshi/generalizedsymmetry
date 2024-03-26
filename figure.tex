@@ -92,236 +92,93 @@
 
 \begin{document}
 
-\begin{tikzpicture}
-    \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
-    \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
-    \fill[blue!40](0,0) rectangle (1,1);
-    \fill[blue!40](0,-1) rectangle (1,0);
-    \fill[blue] (C1) circle (1.8mm);
-    \fill[blue] (C2) circle (1.8mm);
-    \draw[blue, line width = 1.3mm] (C1)--(C2);
-    \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
-    \draw[->] (B)--(0.5,0.1);
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \draw[step=1, blue] (-1.5,-1.5) grid (3.5,3.5); 
-    \foreach \x/\y in {0/0, 0/1, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
-    }
-    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
-    }
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \fill[blue] (0,0) circle (1.8mm);
-    \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
-    \draw[blue, line width = 1.3mm](0,0)--(\x,\y);
-    }
-    \node (A) at (0,0.7)[right]{$1$};
-    \node (B) at (0,-0.7)[right]{$3$};
-    \node (C) at (0.7,0)[above]{$2$};
-    \node (D) at (-0.7,0)[above]{$4$};
-\end{tikzpicture}
-
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0,0)--(0.5,0.5) node [left]{$d$};
+        \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+        \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+        \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+        \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+    \end{tikzpicture}
+    \quad = \quad
+    \sum_{f}
+    (F_{abc}^e)_{df}
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](1,0)--(0.5,0.5) node [right]{$f$};
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+        \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+        \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+        \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+    \end{tikzpicture}            
+\end{align}
 
 \begin{align}
-    Z_{D}=&\underrem{\sum_{\{a\}}}{全体にある自由度の和}
-    \overrem{\sum_{\{b\}}\sum_{\{c\}}}{D内のみの自由度の和}
-    \underrem{\prod_{\text{プラケット }\in D}\sqrt{2}
-    \prod_{\text{リンク } \in D}\frac{1}{\sqrt{2}}
-    \prod_{\text{サイト} \in D}\sqrt{2}}{Euler相殺項}
-    \notag\\
-    &\times
-    \underrem{\prod_{\text{プラケット }\in D} \frac{1}{2}}{ゲージ体積}
-    \underrem{
-    \prod_{\text{サイト} \in D}\frac{1}{2}}{拘束を補助場で表したときの$1/2$}
-    \notag\\
-    &\times
-    \prod_{\text{リンク } \notin D}\exp(K(-1)^{a_i+a_j})
-    \prod_{\text{リンク } \in D}\exp(K(-1)^{a_i+a_j+b_{ij}})
-    \notag\\
-    &\times
-    \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}
-  \end{align}
-  \begin{tikzpicture}
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0, 2/1, 0.5/-0.5, 1.5/-0.5, 0.5/-1.5, 1.5/-1.5}{
-        \fill[black] (\x,\y) circle (1.2mm);
-    }
-    \draw[green!70!black, ultra thick](-0.5,-0.35)--(0,-0.15)--(0.5,-0.35)--(1,-0.15)--(1.5,-0.35)--(2,-0.15)--(2.5,-0.35);
-    \node (C1) at (0.5, -0.5)[below left]{$c_1$};
-    \node (C2) at (1.5, -0.5)[below right]{$c_2$};
-    \node (A) at (1, 0)[above]{$a$};
-\end{tikzpicture}
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+        \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+    \quad = \quad
+    F
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+        \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+    \quad = \quad
+    FF\quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+        \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+\end{align}
 
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+        \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+    \quad = \quad
+    F
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](0.4, -0.1)--(0.2,-0.5);
+        \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+    \quad = \quad
+    FF\quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+        \draw[very thick](0.51, -0.1)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+    \quad = \quad
+    FFF\quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+        \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+        \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+        \draw[very thick](0.5,0.5)--(1.5,-0.5);
+        \draw[very thick](0.5,0.5)--(0.5,1);
+    \end{tikzpicture}
+\end{align}
 
-\begin{tikzpicture}
-    \foreach \x/\y in {0/0, 0/1, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
-    }
-    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
-    }
-    \draw[<-,thick] (0.5,1.5)--(2,2) node[right] {ゲージを選ぶ};
-    \draw[<-,thick] (0.5,2.1)--(2,3) node[right] {$b=0$にする};
-    \draw[->,red, line width=2mm](3,2.2)--(3,2.8);
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \foreach \x/\y in {0/0, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
-    }
-    \draw[<-,thick] (1.1,1.5)--(2,2) node[right] {$b=0$のみ};
-    \draw[<-,thick] (1.1,2.1)--(2,3) node[right] {拘束条件};
-    \draw[<-,red, line width=2mm](3,2.2)--(3,2.8);
-\end{tikzpicture}
-
-\begin{tikzpicture}
-    \foreach \x/\y in {0/0, 1/0}{
-        \fill[blue!40](\x,\y) rectangle (\x+1,\y+1);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 2/0, 2/1}{
-        \fill[blue] (\x,\y) circle (1.8mm);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-    }
-    \foreach \x/\y in {0/0, 0/1, 1/0, 2/0}{
-    \draw[blue, line width = 1.3mm](\x,\y)--(\x,\y+1);
-    }
-\end{tikzpicture}
-
-
-\begin{tikzpicture}
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \fill[linkblue] (\x,\y) circle (1.8mm);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
-        }
-    }
-\end{tikzpicture}
-
-\begin{tikzpicture}[baseline=0cm]
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \fill[linkblue] (\x,\y) circle (1.8mm);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
-        }
-    }
-    \draw[red!50!yellow, ultra thick](1.5,2)--(1.5,-2) node[below]{$W$};
-\end{tikzpicture}
-=
-\begin{tikzpicture}[baseline=0cm]
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \fill[linkblue] (\x,\y) circle (1.8mm);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
-        }
-    }
-    \draw[red!50!yellow, ultra thick](-0.5,2)--(-0.5,-2) node[below]{$W$};
-\end{tikzpicture}
-
-
-\begin{tikzpicture}[baseline=0cm]
-    \foreach \x in {0,1}{
-        \foreach \y in {-2,-1,...,1}{
-        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-1,0,1}{
-            \fill[linkblue] (\x,\y) circle (1.8mm);
-        }
-    }
-    \foreach \x in {0,1}{
-        \foreach \y in {-1,0,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
-        }
-    }
-    \foreach \x in {0,1,2}{
-        \foreach \y in {-2,-1,...,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
-        }
-    }
-\end{tikzpicture}
-\quad
-=
-\quad
-\begin{tikzpicture}[baseline=0cm]
-    \foreach \x in {0}{
-        \foreach \y in {-1,0,1}{
-            \fill[linkblue] (\x,\y) circle (1.8mm);
-        }
-    }
-    \foreach \x in {0}{
-        \foreach \y in {-2,-1,...,1}{
-            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
-        }
-    }
-\end{tikzpicture}
 
 \end{document}  

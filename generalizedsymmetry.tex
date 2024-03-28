@@ -2108,6 +2108,225 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
 \end{align}
 これらについて、半空間ゲージ化の描像から説明していきます。
 
+まずは、半空間ゲージ化の立場からジャンクションがどのように記述できるかと、それがトポロジカルであることを見ます。１つめのジャンクションの見方は、$\eta$をゲージ化していない方において、背景ゲージ場として記述する方法です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (-1,0)--(0,0);
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}        
+\end{align}
+これを強調するために、背景ゲージ場の色を変えて、$B$というラベルをつけて表しています。この線の上でのみ、背景ゲージ場の値$B=1$にしています。端がありますが、これは$D$の中に続いていたとしても動的なゲージ場に吸収してしまうことができるために、ここで止めることができます。ただし、終わっているサイトでの拘束条件は、背景ゲージ場も含めてflatであるというものにしていることに注意します。トポロジカルであることは、次の恒等式で説明できます。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,-1)--(0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}    
+  \quad \notag \\= \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,-1)--(-1,-1)--(-1,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}    
+\end{align}
+１つめの等号は、背景ゲージ場を動的なゲージ場に吸収できることから、$D$に含まれるリンクで伸ばしても変わらないことを用いました。２つめの等号は、ゲージ変換で、これは$\eta$の欠陥がトポロジカルであることと同じ議論です。このようにしてジャンクションの位置を連続的に変えることができること、つまりトポロジカルであることが示せました。
+
+次に、もう一つ別の方向から$\eta$を見てみます。$D$の中では、$\eta$はWilsonラインで表されます。これを強調するために、少し色を変えて、$W$というラベルを付けて表します。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (1,0)--(0,0);
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow,, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}        
+\end{align}
+左端は突き出ていて、$\Lambdah$のプラケットの中心で終わっています。これについて少しコメントします。まず、端があるのでゲージ不変かどうかが気になります。これは$D$の外側のプラケットにはゲージ変換が割り当てられていないので、端が$D$の外にあるかぎり、ゲージ不変になります。このジャンクションがトポロジカルであることは、次のように示せます。
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+\end{align}
+1つめの等号は、ゲージ場の無いところでの変形ですので、Wilsonラインの値は変わりません。２つめの等号は、サイトでの拘束条件から成り立ちます。こうしてジャンクションがトポロジカルであることが分かりました。
+
 
 \section{応用}
 

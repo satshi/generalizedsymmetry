@@ -202,6 +202,28 @@
     \end{tikzpicture} \quad ,
 \end{align}
 
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+        \draw[red,thick] (A)--(0,-0.3)--(B);
+    \end{tikzpicture}
+    \quad=
+    \quad
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(-0.3,0)--(0.3,0)--(C);
+        \draw[red,thick] (A)--(-0.3,0);
+        \draw[red,thick] (B)--(0.3,0);
+    \end{tikzpicture}
+    \quad
+\end{align}
 
 \begin{align}
     \begin{tikzpicture}[baseline=0]
@@ -490,4 +512,207 @@
     \end{tikzpicture}
 \end{align}
 
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \draw[darkgreen,thick] (0,1)--(0,-1);
+        \draw[red,thick] (-1,0)--(0,0);
+        \draw[red,thick] (1,-0.3)--(0,-0.3);
+    \end{tikzpicture}
+    \quad
+    &=\quad
+    \begin{tikzpicture}[baseline=0cm]
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+            }
+        }
+        \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+        \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+    \end{tikzpicture}
+    \notag\\
+    &=\quad - \quad
+    \begin{tikzpicture}[baseline=0cm]
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+            }
+        }
+        \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+        \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+    \end{tikzpicture}
+    \notag\\
+    &=\quad - \quad
+    \begin{tikzpicture}[baseline=0cm]
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-1,0,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+            }
+        }
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+            }
+        }
+        \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+        \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+    \end{tikzpicture}
+    \notag \\
+    &=\quad -\quad
+    \begin{tikzpicture}[baseline=0]
+        \draw[darkgreen,thick] (0,1)--(0,-1);
+        \draw[red,thick] (-1,0)--(0,0);
+        \draw[red,thick] (1,-0.3)--(0,0.3);
+    \end{tikzpicture}
+\end{align}
+
+
+\begin{align}
+    \begin{tikzpicture}[baseline=0]
+        \coordinate(A) at (-1,-1);
+        \coordinate(B) at (1,-1);
+        \coordinate(C) at (1,1);
+        \coordinate(D) at (-1,1);
+        \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+        \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+    \end{tikzpicture}
+    \quad=\quad 
+    \begin{tikzpicture}[baseline=0.5cm]
+        \foreach \x in {0,1,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,0) rectangle (\x+1,1);
+            }
+        }
+        \foreach \x in {1,2}{
+            \foreach \y in {0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x/\y in {0/0,1/0,2/0,0/1,1/1,2/1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+        \foreach \x in {1,2}{
+            \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+        }
+    \end{tikzpicture}
+    \quad=\quad 
+    \begin{tikzpicture}[baseline=0.5cm]
+        \foreach \x in {0,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,0) rectangle (\x+1,1);
+            }
+        }
+        \foreach \x in {1,2}{
+            \foreach \y in {0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+        \foreach \x in {1,2}{
+            \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+        }
+    \end{tikzpicture}   
+\end{align}
+
+\begin{align}
+    \begin{tikzpicture}[baseline=0.5cm]
+        \foreach \x in {0,2}{
+            \foreach \y in {-2,-1,...,1}{
+            \fill[plaqblue](\x,0) rectangle (\x+1,1);
+            }
+        }
+        \foreach \x in {1,2}{
+            \foreach \y in {0,1}{
+                \fill[linkblue] (\x,\y) circle (1.8mm);
+            }
+        }
+        \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+                \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+        \foreach \x in {1,2}{
+            \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+        }
+    \end{tikzpicture}
+    \quad = \frac{1}{\sqrt{2}}\left(
+        \begin{tikzpicture}[baseline=0.5cm]
+            \foreach \x in {0,2}{
+                \foreach \y in {-2,-1,...,1}{
+                \fill[plaqblue](\x,0) rectangle (\x+1,1);
+                }
+            }
+            \foreach \x in {1,2}{
+                \foreach \y in {0,1}{
+                    \fill[linkblue] (\x,\y) circle (1.8mm);
+                }
+            }
+            \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+            }
+            \foreach \x in {1,2}{
+                \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+            }
+        \end{tikzpicture}
+        \quad + \quad
+        \begin{tikzpicture}[baseline=0.5cm]
+            \foreach \x in {0,2}{
+                \foreach \y in {-2,-1,...,1}{
+                \fill[plaqblue](\x,0) rectangle (\x+1,1);
+                }
+            }
+            \foreach \x in {1,2}{
+                \foreach \y in {0,1}{
+                    \fill[linkblue] (\x,\y) circle (1.8mm);
+                }
+            }
+            \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+            }
+            \foreach \x in {1,2}{
+                \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+            }
+            \draw[red!50!blue, ultra thick](1,0)--(2,0);
+        \end{tikzpicture}        
+    \right)
+\end{align}
 \end{document}  

@@ -2014,7 +2014,7 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
 \end{align}
 とその足を入れ替えたものになります。
 
-まず、\idline と \etaline は、先ほど述べたアノマリーの無い$\Zb_2$の交差関係式を満たします。新しいのは\KWline を含む交差関係式です。足の入れ替えなどを除くと、非自明なのは次の３種類です。
+まず、\idline と \etaline は、先ほど述べたアノマリーの無い$\Zb_2$の交差関係式を満たします。新しいのは\KWline を含む交差関係式です。足の入れ替えなどを除くと、非自明なのは次の４種類です。
 \begin{align}
   \begin{tikzpicture}[baseline=0]
       \coordinate(A) at (-1,-1);
@@ -2035,8 +2035,32 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
       \draw[red,thick](A)--(0.2,-0.2);
       \draw[red,thick](C)--(-0.2,0.2);
   \end{tikzpicture} \quad ,
+  \label{crossing1}
 \end{align}
 
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[red,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(0.3,0)--(C);
+      \draw[red,thick] (A)--(-0.3,0);
+      \draw[red,thick] (B)--(0.3,0);
+  \end{tikzpicture}
+  \quad,
+  \label{crossing2}
+\end{align}
 
 \begin{align}
   \begin{tikzpicture}[baseline=0]
@@ -2070,7 +2094,7 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
       \draw[red,thick] (0.3,0)--(-0.3,0);
   \end{tikzpicture}
   \quad
-  \Bigg),
+  \Bigg),\label{crossing3}
 \end{align}
 
 \begin{align}
@@ -2106,7 +2130,8 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
       \draw[red,thick] (0.3,0)--(-0.3,0);
   \end{tikzpicture}
   \quad
-  \Bigg)
+  \Bigg)\quad .
+  \label{crossing4}
 \end{align}
 これらについて、半空間ゲージ化の描像から説明していきます。
 
@@ -2214,7 +2239,8 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
           }
       }
       \draw[red!50!blue, ultra thick](0,-1)--(-1,-1)--(-1,0)--(-2,0) node[left]{$B$};
-  \end{tikzpicture}    
+  \end{tikzpicture}
+  \label{topologicaljunctionB}
 \end{align}
 １つめの等号は、背景ゲージ場を動的なゲージ場に吸収できることから、$D$に含まれるリンクで伸ばしても変わらないことを用いました。２つめの等号は、ゲージ変換で、これは$\eta$の欠陥がトポロジカルであることと同じ議論です。このようにしてジャンクションの位置を連続的に変えることができること、つまりトポロジカルであることが示せました。
 
@@ -2326,8 +2352,279 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
       }
       \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
   \end{tikzpicture}
+  \label{topologicaljunctionW}
 \end{align}
 1つめの等号は、ゲージ場の無いところでの変形ですので、Wilsonラインの値は変わりません。２つめの等号は、サイトでの拘束条件から成り立ちます。こうしてジャンクションがトポロジカルであることが分かりました。
+
+準備が整ったので、まず関係式\eqref{crossing1}の導出をします。
+まず、
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (-1,0)--(0,0);
+      \draw[red,thick] (1,-0.3)--(0,-0.3);
+  \end{tikzpicture}
+  \quad
+  &=\quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+\end{align}
+のように半空間ゲージ化の立場から実現できます。
+この右辺を式\eqref{topologicaljunctionW}と同様の変形をすると、次のようになります。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \quad &=\quad - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \notag\\
+  &=\quad - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  .
+\end{align}
+ここで、1つめの等号は、左辺に比べてWilsonラインが背景ゲージ場$B=1$の線を一回余分に横切っているので$(-1)$がかかります。次の等号は式\eqref{topologicaljunctionW}と同様にサイトでの拘束条件から従います。最後の形は、簡略化して書くと
+\begin{align}
+  - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+    \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+\end{tikzpicture}
+\quad=\quad -\quad
+\begin{tikzpicture}[baseline=0,scale=0.8]
+    \draw[darkgreen,thick] (0,1)--(0,-1);
+    \draw[red,thick] (-1,0)--(0,0);
+    \draw[red,thick] (1,-0.3)--(0,0.3);
+\end{tikzpicture}
+\end{align}
+となります。最初と最後を見ると\eqref{crossing1}になっています。
+逆に$B$の線の方を\eqref{topologicaljunctionB}と同様に変形しても導出できます。こちらは練習問題に残しておきます。
+
+次に関係式\eqref{crossing3}を導出してみます。左辺を半空間ゲージ化の見方で表すと
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=\quad 
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,1/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+  \end{tikzpicture}
+  \quad=\quad 
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+      \node(L) at (1.5,0)[below]{$\ell$};
+  \end{tikzpicture}   
+\end{align}
+となります。２つめの等号は\ref{sec:KWtopologicalness}項の（ア）の恒等式を用いました。この右辺のリンク$\ell$に関する因子や和を陽に書き下してみます。これは、リンク変数$b_{\ell}=0,1$の和と、Euler相殺項の$\frac{1}{\sqrt{2}}$です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+  \end{tikzpicture}
+  \quad = \frac{1}{\sqrt{2}}\left(
+      \begin{tikzpicture}[baseline=0.5cm]
+          \foreach \x in {0,2}{
+              \foreach \y in {-2,-1,...,1}{
+              \fill[plaqblue](\x,0) rectangle (\x+1,1);
+              }
+          }
+          \foreach \x in {1,2}{
+              \foreach \y in {0,1}{
+                  \fill[linkblue] (\x,\y) circle (1.8mm);
+              }
+          }
+          \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                  \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+          \foreach \x in {1,2}{
+              \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+          }
+      \end{tikzpicture}
+      \quad + \quad
+      \begin{tikzpicture}[baseline=0.5cm]
+          \foreach \x in {0,2}{
+              \foreach \y in {-2,-1,...,1}{
+              \fill[plaqblue](\x,0) rectangle (\x+1,1);
+              }
+          }
+          \foreach \x in {1,2}{
+              \foreach \y in {0,1}{
+                  \fill[linkblue] (\x,\y) circle (1.8mm);
+              }
+          }
+          \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                  \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+          \foreach \x in {1,2}{
+              \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+          }
+          \draw[red!50!blue, ultra thick](1,0)--(2,0);
+      \end{tikzpicture}        
+  \right).
+\end{align}
+この式の右辺は\eqref{crossing3}の右辺になります。したがって、\eqref{crossing3}が導出できました。
+
+他の関係式\eqref{crossing2,crossing4}も同様に導出できます。これらは練習問題に残しておきます。
+
+\subsection{他のWard-Takahashi恒等式}
+前項までは、トポロジカル欠陥のみの変形に関するWard-Takahashi恒等式を導出しました。ここでは、その他の演算子が絡むWard-Takahashi恒等式をいくつか見ていきます。
 
 
 \section{応用}

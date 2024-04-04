@@ -122,6 +122,7 @@
 \newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Lambdah}{\widehat{\Lambda}}
 \newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Nh}{\widehat{\mathcal{N}}}
 
 \newcommand{\simpleline}[1]{
  \ \tikz[baseline=0.3cm]{
@@ -152,6 +153,30 @@
 \colorlet{darkgreen}{green!70!black}
 \colorlet{plaqblue}{blue!15}
 \colorlet{linkblue}{blue!50}
+
+%%%%% tikz で x の node を定義
+\makeatletter
+\pgfdeclareshape{xshape}{
+    % 保存されたアンカー
+    \savedanchor\centerpoint{
+        \pgf@x=0pt
+        \pgf@y=0pt
+    }
+    % アンカーポイントの定義
+    \anchor{center}{\centerpoint}
+    \anchor{text}{\pgfpointorigin}
+
+    % 図形の背景パスを描画
+    \backgroundpath{
+        % 中心からの対角線
+        \pgfsetlinewidth{1.5pt}
+        \pgfpathmoveto{\pgfpoint{-0.1cm}{-0.1cm}}
+        \pgfpathlineto{\pgfpoint{0.1cm}{0.1cm}}
+        \pgfpathmoveto{\pgfpoint{-0.1cm}{0.1cm}}
+        \pgfpathlineto{\pgfpoint{0.1cm}{-0.1cm}}
+    }
+}
+\makeatother
 
 \title{一般化対称性について}
 \author{山口 哲}
@@ -2621,13 +2646,227 @@ F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}
 \end{align}
 この式の右辺は\eqref{crossing3}の右辺になります。したがって、\eqref{crossing3}が導出できました。
 
-他の関係式\eqref{crossing2,crossing4}も同様に導出できます。これらは練習問題に残しておきます。
+他の関係式\eqref{crossing2}, \eqref{crossing4}も同様に導出できます。これらは練習問題に残しておきます。
 
 \subsection{他のWard-Takahashi恒等式}
 前項までは、トポロジカル欠陥のみの変形に関するWard-Takahashi恒等式を導出しました。ここでは、その他の演算子が絡むWard-Takahashi恒等式をいくつか見ていきます。
 
+まず、KW欠陥とスピン演算子に関して、次の恒等式が成り立ちます。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad = 0
+\end{align}
+これは、まずフュージョン則\eqref{Netafusion}を用い、次にspin flipに関するWard-Takahashi恒等式を用いることで示される、次の恒等式が成り立つことから分かります。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+      \draw[red,thick](0,0) circle [radius=0.7cm];
+  \end{tikzpicture}
+  \quad = -\quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad .
+\end{align}
+
+
+次に、KW欠陥がスピン演算子を横切るときに関する次の恒等式が成り立つこのを説明します
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,-1)--(0,1);
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\mu$};
+      \draw[darkgreen,thick](2,-1)--(2,1);
+      \draw[red,thick](1,0)--(2,0);
+  \end{tikzpicture}
+  \quad .
+  \label{spin-disorder-flip}
+\end{align}
+この式の左辺を半空間ゲージ化の見方で次のように表せます。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,-1)--(0,1);
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad .
+\end{align}
+ここで右辺の×の位置にスピン演算子が入っています。このサイトでは、入ってくる４つのリンクの$b$の和が（$0$ではなく）$1$という拘束条件がかされているというのが、スピン演算子でした。これを次のように変形します。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \fill[linkblue] (1,0) circle (1.8mm);
+      \draw[linkblue, line width = 1.3mm](1,0)--(2,0);
+      \node (l) at (1.5,0)[below]{$\ell$};
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](1,0)--(2,0);
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+\end{align}
+最初の等号は\ref{sec:KWtopologicalness}項の（ア）、（イ）の変形を次々に適用して得られます。次に×のサイトでの拘束条件を考えるとこれにつながっているリンク$\ell$の$b_{\ell}$は、$1$しか取りません。つまり、これはspin flipの欠陥が入っているのと同じです。Euler相殺項も考慮して、２つめの等号が得られます。右辺は、\eqref{spin-disorder-flip}の右辺と同じです。
+
+最後に以前に導いた次の恒等式をもう一度書いておきます。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+     \draw[darkgreen, thick](0,0) circle [radius=0.6];   
+  \end{tikzpicture}
+  \quad = \sqrt{2}.
+\end{align}
+この量はKW欠陥の\kyou{量子次元}(quantum dimension)と呼ばれます。これは、交差関係式\eqref{crossing3}, \eqref{crossing4}を用いることでも導出できます。
 
 \section{応用}
+さて、ここまで非可逆対称性の例として$K=K_c$のIsing模型にあるIsing圏について見てきました。繰り返しになりますが、対称性の良いところは、対称性があるということだけから、理論の詳細を知ることなしに情報が得られるということです。ここでは、Ising圏の対称性がある理論に関して成り立つ次の定理を示します\cite{Chang:2018iay}。
+
+\begin{proposition}[定理]
+  Ising圏の対称性を持つ理論は$0$温度で「自明にギャップあり相」ではない。
+\end{proposition}
+
+ここで\kyou{自明なギャップあり相}(trivially gapped phase)とは、ギャップがあって、任意の空間のトポロジーでこの場の理論を考えたときに真空（基底状態）が唯一であることです。２次元の場合は空間が$S^1$の場合を考えれば十分です。
+
+\begin{figure}
+  \centering
+  \includegraphics{defectontorus.pdf}
+  \caption{トーラスにKW欠陥が入った系。左辺と右辺、上辺と下辺がそれぞれ同一視されている。KW欠陥を緑色で表している。}
+  \label{fig:defectontorus}
+\end{figure}
+
+定理を証明します。背理法を用います。ギャップありで真空が唯一であると仮定します。必要なら宇宙定数を付け加えて、真空のエネルギーを$0$とします。ギャップに比べて十分大きいトーラスを考えて、図\ref{fig:defectontorus}のようにKW欠陥が入った分配関数を考えます。まず図のAの方向をEuclid化時間と考えて、演算子形式で考えます。このときKW欠陥はHilbert空間に作用する演算子となるので、この演算子を$\Nh$と書きます。真空を$\ket{0}$で表します。温度はギャップに比べて十分小さいので、分配関数に寄与するのは真空のみです。したがって分配関数は
+\begin{align}
+  Z=\Tr \Nh e^{-\beta \Hh}=\ev{\Nh}{0}=\sqrt{2}\label{tempproofnontrivial}
+\end{align}
+となります。ここで
+\begin{align}
+  \Nh\ket{0}=\sqrt{2}\ket{0}
+\end{align}
+を用いました。これは、図\ref{fig:KWonvacuum}のように考えると理解できます。
+
+\begin{figure}
+  \centering
+  \includegraphics{KWonvacuum.pdf}
+  \caption{真空にKW欠陥の演算子がどう作用するかを表した図。半球のトポロジーを持ち、十分大きなEuclid化時空での経路積分を考えている。上の線は境界で状態を表しているが、十分大きいので、真空のみがのこる。左辺では、真空にKW欠陥が作用した状態になっている。ギャップありで真空が唯一なので、真空の定数倍になる。トポロジカルなので変形していって、下の方に持ってくることで量子次元で置き換えることができるので、この定数は$\sqrt{2}$であることが分かる。}
+  \label{fig:KWonvacuum}
+\end{figure}
+
+次に同じ分配関数をBの方をEuclid時間と思って演算子形式で考えます。今度は空間内の１点にトポロジカル欠陥があるような系の十分低い温度での分配関数になります。この系のHamiltonianを$H_B$、エネルギー$0$の状態のHilbert空間を$V$とすると
+\begin{align}
+  Z=\Tr e^{-\beta H_B}=\dim V
+\end{align}
+となります。つまり$Z$は非負の整数になりますから、これは\eqref{tempproofnontrivial}に矛盾します。\qed
+
+Ising圏の場合、$\Zb_2$の対称性を含むので、もしかしたら、この$\Zb_2$の対称性が本質的な役割を果たしていて縮退していると考える方もおられるかもしれません。ですので、別の非可逆対称性で、群の対称性は一切含んでいないものを紹介します。これはFibonacci圏と呼ばれるもので、その単純対象は$1,F$の２種類のみです。フュージョン則は
+\begin{align}
+  F\times F =1 + F
+\end{align}
+となります。Fibonacci圏の対称性があるとき、上と同じ議論をしてみると、$\widehat{F}^2=1+\widehat{F}$の関係が成り立ちますから、$\widehat{F}$の固有値は$\frac{1\pm \sqrt{5}}{2}$となり、やはり非負の整数ではないので、自明にギャップあり相でないことが分かります。これは、従来の対称性が全く無いのに真空の縮退があるという結果を表していて、非可逆対称性が本質的に重要な役割を果たしています。具体例の一つはZamolodchikov \cite{Zamolodchikov:1990xc}によって調べられたもので、tricritical Ising CFTをrelevant 変形したものです。これにはFibonacci圏の対称性は残っていますが、ギャップがある系です。\cite{Zamolodchikov:1990xc}では可積分性を用いて理論を解くことにより、真空が縮退していることが分かったのですが、\cite{Chang:2018iay}では、非可逆対称性の議論だけで、真空が縮退しなければならないことが説明できました。
 
 
 \chapter{高次形式対称性}

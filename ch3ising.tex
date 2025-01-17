@@ -1,0 +1,2207 @@
+\documentclass[generalized_symmetry.tex]{subfiles}
+\setcounter{chapter}{2}
+\begin{document}
+
+\chapter{２次元Ising模型}
+
+この章では、２次元Ising模型を題材にして次の２つのことを説明したいと思います。
+\begin{itemize}
+  \item ２次元Ising模型のspin flipの$\Zb_2$対称性をゲージ化することについて説明します。離散対称性のゲージ化とは何か、そして有限アーベル群をゲージ化したときに必ず現れる大域的対称性「双対対称性」とその性質について説明します。
+  \item 非可逆対称性の例とてKramers-Wannier双対性を説明します。
+\end{itemize}
+
+\section{２次元Ising模型と\texorpdfstring{\Ztwo}{Z2}ゲージ化}
+\subsection{２次元Ising模型}
+まず、Ising模型の作用を書きます。これは前章で導入したものと同じものです。２次元正方格子を周期境界条件で考えます。
+各サイトに自由度$a_i=0,1$を置きます。$K$を正の定数として分配関数は
+\begin{align}
+  \ZIsing(K) =\sum_{\{a\}} \exp (K\sum_{\link{ij}}(-1)^{a_i+a_j})\label{ZIsing}
+\end{align}
+とします。
+
+この系にはspin flipの大域的対称性があります。
+\begin{align}
+  a_i\to a_i+1 \mod{2}.
+\end{align}
+
+\subsection{ゲージ化}\label{sec:gauging}
+Spin flipの$\Zb_2$の対称性をゲージ化するすることを考えます。
+
+ゲージ場は各リンク$\link{ij}$に$\Zb_2$に値を持つ自由度$b_{ij}=0,1$として導入します。前節では背景ゲージ場として同じものが現れましたが、ここでは動的な自由度として導入します。
+
+ゲージ変換はパラメータを各サイトに割り振られた$\Zb_2$の元$\lambda_i=0,1$として、
+\begin{align}
+  b'_{ij}&=b_{ij}+\lambda_i+\lambda_j,\notag\\
+  a'_{i}&=a_{i}+\lambda_i
+\end{align}
+とします。
+
+\eqref{ZIsing}を変形して、トポロジカルにゲージ化された理論の分配関数を$V$をサイトの数として
+\begin{align}
+  \Zgauged(K) = \frac{1}{2^V}\sum_{\{a\},\{b\}} \exp(K\sum_{\link{ij}} (-1)^{a_i+a_j+b_{ij}})\prod_{\text{すべてのプラケット}\plaq{ijkl}}\deltamod{b_{ij}+b_{jk}+b_{kl}+b_{li},0}
+  \label{gaugedIsing}
+\end{align}
+と定義します。この分配関数について少し説明します。
+
+まず、先頭についている$\frac{1}{2^V}$の分母$2^V$は、「ゲージ体積」です。ゲージ対称性でつながるような配位は物理的に同じ配位とみなすので、分配関数はその冗長性で割っておく必要があります。
+
+最後についている$\deltamod{}$のところについて説明します。まず、この記号は$b$を整数として
+\begin{align}
+  \deltamod{b,0}=
+  \begin{cases}
+    1, & b=0\mod{2}\\
+    0, & b=1\mod{2}
+  \end{cases}
+  \label{deltamod2}
+\end{align}
+と定義します。つまり全てのプラケットについて４辺の$b$の和が偶数の配位、つまりflatな配位のみ足し合わせるということにしています。このような拘束条件をつけたゲージ化を「トポロジカルなゲージ化」と呼ぶことにします。格子の場合には、離散対称性をゲージ化する場合に必ずこのようにしなければならないということではありません。ゲージ場の作用として別のものを選んで、flatに限らないゲージ場の配位をすべて足し合わせるようなゲージ化も可能です。ここでは後のためにトポロジカルなゲージ化を考えようということです。この講義に出てくる離散対称性のゲージ化は８割くらいがこのトポロジカルなゲージ化です。この講義でも後でトポロジカルではないゲージ理論を考えます。論文に出てくる離散対称性のゲージ理論は９割以上がトポロジカルなゲージ化です。
+
+トポロジカルなゲージ化は非常に特殊なことをやっているように見えますが、実はWilsonのプラケット作用で弱結合極限を考えたものとみなすことができます。
+\begin{align}
+  \deltamod{b,0}=\lim_{g\to 0} \exp(\frac{1}{g^2}((-1)^{b}-1))
+\end{align}
+という恒等式が成り立ちます。この式の右辺のexpの中で$b$としてプラケットのリンク変数を全部足したものを代入したものがWilsonのプラケット作用のプラケットの重みでしたから、式\eqref{gaugedIsing}の左辺の$\deltamod{}$の積の項はWilsonのプラケット作用で弱結合極限をとったものとみなすことができます。
+
+\subsection{ゲージ固定}
+前章でflatな背景ゲージ場の配位は対称性欠陥の配位と同等であることを見ました。今、トポロジカルなゲージ化では、それぞれのゲージ場の配位はflatなので、対称性欠陥の配位と思うことができます。つまり、ゲージ化とは、すべての対称性欠陥の配位について足し合わせることです。これを\eqref{gaugedIsing}の分配関数で実際に見てみたいと思います。
+
+\eqref{gaugedIsing}では、ゲージ変換でつながっている、物理的には同等な配位を何回も足しています。これを次のようにしてゲージ変換でつながっている対称性は１回だけ足すように変形します。こうすると、ゲージ場に関する和の項の数は非常に少なくなりますが、代わりに欠陥がある特別なリンクが出てきて、格子の並進対称性が明白では無くなります。\footnote{もちろん理論として格子の並進対称性は存在します。並進変換するとゲージ固定条件がこわれますが、ゲージ変換をすることでゲージ固定条件を再び満たすようにできます。これらの変換を組み合わせたものがゲージ固定した後の並進対称性です。}
+
+\begin{figure}
+  \centering
+  \includegraphics{gaugefix.pdf}
+  \caption{ゲージ固定に用いるリンクの列。}
+  \label{fig:gaugefix}
+\end{figure}
+
+
+\newcommand{\torusoo}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusio}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7); 
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusoi}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0.7,0)--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+}
+
+\newcommand{\torusii}{
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7); 
+    \draw[thick,red] (0.7,0)--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+}
+
+
+まず、図\ref{fig:gaugefix}のように縦方向のリンクの横方向の列$L_1$と横方向のリンクの縦方向の列$L_2$を選びます。任意のflatな$b$の配位において、ゲージ変換で$L_1,L_2$以外のリンクの$b$をすべて$0$にできます。
+\begin{align}
+  b_{\ell}=0,\ \ell \ne L_1, L_2.
+\end{align}
+こういうふうにゲージ固定した上で、$L_1$の中にあるリンクについて考えましょう。flatであることと、接している横方向のリンクの$b$が、$L_2$と交わるところ以外で$0$であることから、となり同士の$b$の値は等しくなります。ですから$L_1$に属するすべてのリンクの$b$の値は等しくなります。同様の考察を$L_2$に関しても行うことができます。まとめると、ゲージ固定した後のゲージ場の配位は次の４種類になります。
+\begin{align}
+  \ell_1\in L_1,\ \ell_2 \in L_2,\quad (b_{\ell_1},b_{\ell_2})=(0,0),(1,0),(0,1),(1,1)
+\end{align}
+この４つの配位はゲージ不変であるWilsonループの値が異なりますから、ゲージ変換では繋がらない配位です。また、$b_{\ell_1}=1$の場合には$L_1$のところに\ref{sec:egspinflip}項で考えたspin flipの欠陥が入っている配位です。$b_{\ell_1}=0$の場合には$L_1$には欠陥は入っていないと言うこともできますし、自明な欠陥が入っていると言っても良いです。$L_2$の方も同様で、自明な欠陥が入っている場合と、spin flipの欠陥が入っている場合があります。$(b_{\ell_1},b_{\ell_2})=(0,0),(1,0),(0,1),(1,1)$場合の欠陥が入ったIsing模型の分配関数を、それぞれspin flip欠陥を赤線で描いた絵を用いて$\torusoo,
+\torusio,\torusoi,\torusii$で表すことにします。
+
+次に全体にかかる定数の規格化を求めるために、このゲージ固定をした後で残っているゲージ対称性について考えましょう。残っているゲージ対称性、つまりゲージ固定条件を変えないゲージ変換のパラメーターは次の２種類だけです。
+\begin{align}
+  \lambda_i=0\ (\text{すべての}i),\quad \lambda_i=1\ (\text{すべての}i).
+\end{align}
+言い換えると、ゲージ体積のうち$2$以外は、このゲージ固定から出てくる冗長性と相殺しています。
+
+これらを合わせると、\eqref{gaugedIsing}の分配関数は
+\begin{align}
+  \Zgauged=\frac{1}{2}\left(
+    \torusoo + \torusio + \torusoi + \torusii
+  \right)
+\end{align}
+となります。
+
+\section{双対対称性}\label{sec:dualsymmetry}
+この節では、Ising模型を離れて、一般的な２次元の場の理論での有限アーベル群の大域的対称性とそのゲージ化について考えます。
+
+$G$を有限アーベル群、$\Tcal$を２次元の場の理論で大域的$G$対称性があり、$G$はゲージ化可能であるものとします。言い換えると$\Tcal$の$G$対称性には't Hooftアノマリーは無いものとします。$\Tcal$の$G$対称性をゲージ化した理論を$\Tcal/G$と表すことにします。
+
+このとき、次のような命題が成り立ちます。
+\begin{proposition}[命題]
+  \begin{enumerate}
+    \item[(1)] $\Tcal/G$には$\Gh$（Pontryagin 双対）の大域的対称性があります。この$\Gh$対称性にはアノマリーはありません。
+    \item[(2)] $\Tcal/G/\Gh \cong \Tcal.$
+  \end{enumerate}      
+\end{proposition}
+Pontryagin双対$\Gh$について説明します。$\Gh$は集合として
+\begin{align}
+  \Gh=\{G\text{の既約表現}\}/\text{(同値)}
+\end{align}
+です。アーベル群の既約表現ですから、すべて１次元表現です。群の掛け算は表現のテンソル積$\otimes$で定義します。テンソル積はまた１次元表現になるので、既約表現です。単位元は自明な表現、逆元は双対表現になって$\Gh$は群をなします。別の言い方をすると、$\Gh$は$G$対称性のあり得る電荷の集合です。電荷には足し算の概念があって、それで群になります。
+
+この命題について説明していきます。まず、(1)について説明します。前章で説明したとおり、対称性とは余次元1のトポロジカル欠陥で群構造を持つ「対称性欠陥」で表されるのでした。今の場合、\kyou{Wilsonループが対称性欠陥になります。}ゲージ理論においてWilsonループはゲージ群$G$の表現でラベルされる次元１の欠陥です。今は全体の次元が２ですからWilsonループの余次元は１になります。また、今はトポロジカルなゲージ化を考えているので、場の強さは$0$であり、Wilsonループは連続的に変形しても値を変えない、つまりトポロジカルになります。さらに、Wilsonループのフュージョンは表現のテンソル積になります。上で見たように、有限アーベル群の既約表現全体$\Gh$はまたテンソル積でアーベル群になります。こうして、Wilsonループが対称性を表す対称性欠陥であり、対称性の群は$\Gh$ことが分かります。
+
+次に(2)について説明します。簡単のためにトーラスの分配関数を考えます。まず、理論$\Tcal$の分配関数を
+\begin{align}
+  Z_{\Tcal}=
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \draw (0,0) rectangle (1,1);   
+    \end{tikzpicture}
+    \ 
+\end{align}
+$N:=|G|$として、$\Tcal/G$の分配関数は、すべての対称性欠陥の配位を足し上げることで得られるので
+\begin{align}
+  Z_{\Tcal/G}=\frac{1}{N}
+  \sum_{a,b\in G}
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \draw (0,0) rectangle (1,1);   
+      \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+      \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \end{tikzpicture}
+    \ 
+    =:
+    \ 
+    \begin{tikzpicture}[baseline=0.4cm]
+      \filldraw[fill=yellow,draw=black] (0,0) rectangle (1,1);
+      % \draw[thick,red] (0,0.7)--(1,0.7); 
+      % \draw[thick,red] (0.7,0)--(0.7,1); 
+    \end{tikzpicture}
+    \ 
+  \label{T/G}
+\end{align}
+となります。これを右辺のように黄色い四角で表すことにします。ここから$\Tcal/G/\Gh$の分配関数を考えます。これもWilsonループの配位について足し合わせて
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N}\sum_{\ah, \bh \in \Gh}\begin{tikzpicture}[baseline=0.4cm]
+    \filldraw[fill=yellow,draw=black] (0,0) rectangle (1,1);
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+\end{align}
+ここで、$\Gh$対称性の対称性欠陥であるWilsonループを青い線で表しました。これに\eqref{T/G}を代入して
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N^2}\sum_{a,b\in G}\sum_{\ah, \bh \in \Gh}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+  \ 
+  \label{T/G/Gh}
+\end{align}
+右辺の和の中について考えてみます。これは理論$\Tcal$の中で赤線で表される対称性欠陥、言い換えると背景ゲージ場の下での分配関数に、青線で表されるWilsonループをかけたものです。$\ah$表現での$G$の要素$a$の指標（表現行列のトレース。１次元表現なので$1\times 1$の行列そのもの）を$\chi_{\ah}(a)$とすると
+\begin{align}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+    \draw[thick,blue] (0,0.3)--(1,0.3) node[right]{$\ah$}; 
+    \draw[thick,blue] (0.3,0) node[below]{$\bh$}--(0.3,1); 
+  \end{tikzpicture}
+  \ 
+  = \chi_{\bh}(a)\chi_{\ah}(b)
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1);
+  \end{tikzpicture}
+  \ 
+\end{align}
+となります。ところで指標は
+\begin{align}
+  \sum_{\ah \in G}\chi_{\ah}(a)=N\delta_{a,0}
+\end{align}
+という関係式を満たします。これらを用いると\eqref{T/G/Gh}は
+\begin{align}
+  Z_{\Tcal/G/\Gh}
+  =\frac{1}{N^2}\sum_{a,b\in G}\sum_{\ah, \bh \in \Gh}
+  \chi_{\bh}(a)\chi_{\ah}(b)
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+  =\sum_{a,b\in G}\delta_{a,0}\delta_{b,0}
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+    \draw[thick,red] (0,0.7)--(1,0.7) node[right]{$a$}; 
+    \draw[thick,red] (0.7,0) node[below]{$b$}--(0.7,1); 
+  \end{tikzpicture}
+  \ 
+  =
+  \ 
+  \begin{tikzpicture}[baseline=0.4cm]
+    \draw (0,0) rectangle (1,1);   
+  \end{tikzpicture}
+  \ 
+  =Z_{\Tcal}
+\end{align}
+となります。
+
+先ほどはトーラスの分配関数を考えましたが、一般の閉じたRiemann面を考えるときには計量に関する相殺項に関して少し注意が必要です。まず、特に計量に関する相殺項を入れなかったとすると、その分配関数は
+\begin{align}
+  Z_{\Tcal/G/\Gh}=\frac{1}{N^{\chi}}Z_{\Tcal}
+\end{align}
+となります。ここで$\chi$はRiemann面Euler数で、種数$g$や面、辺、頂点の数（それぞれ$F,E,V$）と
+\begin{align}
+  \chi=2-2g=F-E+V
+\end{align}
+の関係にあります。トーラスの場合には、たまたま$\chi=0$なので、先ほどは考える必要がありませんでした。２回やって元にもどるという関係にしたいときには、次のような局所相殺項を入れてゲージ化を定義する必要があります。
+\begin{align}
+  Z_{\Tcal/G,\text{new}}=\sqrt{N}^{\chi}Z_{\Tcal/G, \text{いままでの}}.\label{Eulercounterterm}
+\end{align}
+こうすると、一般の閉じたRiemann面で
+\begin{align}
+  Z_{\Tcal/G/\Gh,\text{new}}=Z_{\Tcal,\text{new}}
+\end{align}
+となります。このEuler相殺項については、Kramers-Wannier双対性を表す非可逆なトポロジカル欠陥を考えるときにも必要になります。この講義では、今後ゲージ化の際には、この相殺項を入れたものを考えることにします。
+
+この節では、アーベル群によるゲージ化のみを考えました。では、（有限の）非アーベル群によるゲージ化を考えるとどうなるでしょうか。トポロジカルなゲージ化を考えるので、場の強さが$0$なのは変わりません。したがってWilsonループが余次元１のトポロジカル欠陥になるのも同じです。フュージョンは表現のテンソル積になるのも同じです。違いは非アーベル群の場合には、次元が２以上の既約表現があり、テンソル積の意味で逆が無い場合があるということです。つまり、有限非アーベル群をゲージ化した際の双対対称性（よく$\mathrm{Rep}(G)$と書かれます）は、トポロジカル欠陥で群構造がない「非可逆対称性」になっています。おそらくこれが非可逆対称性の一番簡単な例です。この例も含め２次元の非可逆対称性については\cite{Bhardwaj:2017xup}に詳しく説明されています。この講義では$\mathrm{Rep}(G)$はこれ以上説明しません。もう一つの代表的な非可逆対称性の例で高次元にも類似物があるKramers-Wannier双対性について詳しく説明します。
+
+\section{Kramers-Wannier 双対性}
+この節では、２次元Ising模型のKramers-Wanner双対性を紹介します。Kramers-Wanner双対性はよく統計力学の教科書でも紹介されていますが、ここでは後のためにより精密な双対性について述べます。後に、このKramers-Wanner双対性に対応する非可逆対称性について述べます。
+
+また、Kramers-Wannier双対性とIsing模型の相構造について述べます。
+
+\subsection{Kramers-Wannier双対性と、その証明}\label{sec:KWproof}
+
+\begin{proposition}[Kramers-Wanner双対性]
+次の恒等式が厳密に成り立ちます。
+\begin{align}
+  \frac{1}{(\sinh 2K)^{V/2}} \Zgauged(K)
+  =
+  \frac{1}{(\sinh 2\Kt)^{V/2}} \ZIsing(\Kt).
+  \label{KWduality}
+\end{align}
+ここで$K$と$\Kt$は
+\begin{align}
+  \sinh 2K \sinh 2\Kt =1
+  \label{dualrelation0}
+\end{align}
+の関係で結びついています。
+\end{proposition}
+分配関数の前についている$\sinh$が入った因子は計量のみによく局所的な項として作用に組み込むことができますから、パラメーターが$K$のゲージ化したIsing模型とパラメーターが$\Kt$のIsing模型は同じ理論であるというのが、この命題です。
+
+この命題を証明します。
+
+まず、\eqref{gaugedIsing}を補助的な変数を用いて書き換えます。\eqref{deltamod2}は
+\begin{align}
+  \deltamod{b,0}=\frac{1}{2}\sum_{c=0,1}e^{\pi i cb}
+\end{align}
+という恒等式を満たすことに注目します。すると各プラケット$p$に$c_{p}=0,1$の補助的な自由度を置いて\eqref{gaugedIsing}は
+\begin{align}
+  \Zgauged(K) = \frac{1}{2^{2V}}\sum_{\{a\},\{b\},\{c\}} \exp(K\sum_{\link{ij}} (-1)^{a_i+a_j+b_{ij}}+\pi i\sum_{\substack{\text{プラケット}\\ p=\plaq{ijkl}}} c_{p}(b_{ij}+b_{jk}+b_{kl}+b_{li}))
+  \label{gaugedIsing2}
+\end{align}
+と書くことができます。ここで、プラケットの数は頂点の数と同じであることを用いました。
+
+\eqref{gaugedIsing2}で、ゲージ対称性を用いて、すべてのサイト$i$で$a_i=0$となるようにゲージ固定します。この固定によって$2^V$個のすべてのゲージ体積を相殺します。その後に$\{b\}$の和を評価します。各リンク$\ell$に対して２つのプラケットが接していることに注目して
+\begin{align}
+  \Zgauged(K)&=\frac{1}{2^{V}}\sum_{\{c\}}\prod_{\text{リンク}\ell}Z_{\ell},\\
+  Z_{\ell}&=\sum_{b=0,1}\exp(K(-1)^{b}+\pi i b(c_p+c_q))\label{KWaux1}\\
+  &\qquad (p,q \text{は$\ell$に接している２つのプラケット})\notag
+\end{align}
+と書くことができます。$Z_{\ell}$の表式では、和をとっているダミーの変数は$b_{\ell}$だったものですが、ダミーの変数ですから単に$b$と書いています。
+
+$c:=c_{p}+c_{q} \mod 2$と略記して、$Z_{\ell}$を変形していきます。
+\begin{align}
+  Z_{\ell}&=e^{K}+(-1)^{c}e^{-K}\notag\\
+  &=\begin{cases}
+    2\cosh K & (c=0)\\
+    2\sinh K & (c=1)
+  \end{cases}\notag \\
+  &= 2 \cosh K (\tanh K)^{c} \label{Zell0}
+\end{align}
+という形に書けます。ここで
+\begin{align}
+  \tanh K =: e^{-2\Kt}\label{defKt}
+\end{align}
+の式で$\Kt$を定義します。すると
+\begin{align}
+  \sinh 2K \sinh 2\Kt =1,\label{dualrelation}\\
+  Z_{\ell}=\sqrt{2\sinh 2K} e^{\Kt(-1)^{c}}\label{Zell}
+\end{align}
+という式が成り立ちます。これらを順に導出していきます。
+
+まず、\eqref{dualrelation}を導出します。\eqref{defKt}の両辺の逆数をとったものから、\eqref{defKt}を引き算します。すると
+\begin{align}
+  (\text{右辺})&=e^{2\Kt}-e^{-2\Kt}=2\sinh 2\Kt,\\
+  (\text{左辺})&=\coth K -\tanh K
+  =\frac{\cosh^2 K -\sinh^2 K}{\cosh K \sinh K}
+  =\frac{2}{\sinh 2K}
+\end{align}
+と計算できるので、\eqref{dualrelation}が成り立つことが分かります。
+
+次に、\eqref{Zell}を導出します。\eqref{Zell0}に\eqref{defKt}を代入し、$(-1)^c=1-2c$に注目して変形します。
+\begin{align}
+  Z_{\ell}=&
+  2\cosh K e^{\Kt(-2c)}=
+  2\cosh K e^{-\Kt}e^{\Kt(-1)^c}\notag\\&=
+  2\cosh K \sqrt{\tanh K}e^{\Kt(-1)^c}=
+  \sqrt{2\sinh 2K}e^{\Kt(-1)^c}
+\end{align}
+と変形できるので\eqref{Zell}が成り立つことが分かります。
+
+\eqref{Zell}を\eqref{KWaux1}に代入して変形します。元の格子に双対な格子を導入すると$\ell$に双対なリンクは双対格子のサイト$p,q$をつなぐ双対格子のリンク$\link{pq}$になります。これを踏まえて式変形すると
+\begin{align}
+ \Zgauged(K)&=\frac{1}{2^V}\sum_{\{c\}}\prod_{\link{pq}}\sqrt{2\sinh 2K}e^{\Kt(-1)^{c_p+c_q}}
+ =(\sinh 2K)^{V}\sum_{\{c\}}\exp\left(\sum_{\link{pq}}\Kt(-1)^{c_p+c_q}\right)\notag\\
+ &=(\sinh 2K)^{V} \ZIsing(\Kt)
+\end{align}
+という式を得ます。ここで\eqref{dualrelation}を用いると\eqref{KWduality}を得ます。また\eqref{dualrelation0}は、\eqref{dualrelation}です。\qed
+
+このKramers-Wannier双対性の証明を見てみると、次の重要な事実が分かります。\kyou{Kramers-Wannier双対性の左辺のゲージ化したIsing模型の格子と右辺のIsing模型の格子は互いに双対関係にあります。}この事実は、後にKramers-Wannier双対性を表すトポロジカル欠陥を考える際に非常に重要な役割を果たします。また、今回見たように、トーラス上で正方格子で考えた場合には、双対の格子は同型になってしまうので分かりにくいですが、一般の格子でのKramers-Wannier双対性の両辺は格子は互いに双対の（一般に異なる）格子になります。
+
+\subsection{Ising模型の相構造}
+このKramers-Wannier双対性を踏まえて、Ising模型の相構造について考えてみます。
+
+統計力学の授業などで、Ising模型には相転移があることを聞いたことがあると思います。$K$が大きいところ（低温）では、spin flipの対称性が自発的に破れた相になっています。場の量子論の見方で言えば、ここでは真空が縮退しています。一方で$K$が小さいところ（高温）では対称性が回復していて、場の理論の見方では真空は唯一です。この間には相転移が少なくとも一回はあります。
+
+Kramers-Wanner双対性を用いると、この相転移点を求めることができます。まず大事なことは\Ising と\gIsing は、熱力学的な量、例えば自由エネルギー密度は同じです。これを$f(K)$と書くことにします。Kramers-Wanner双対性から$f(K)=f(\Kt)$が導かれます。また、相転移点では$f(K)$が非解析的になっています。$K=K_c$で相転移があるとすると、$f(K)=f(\Kt)$ですから、$K=\Kt_c$でも非解析的、つまり相転移があることになります。\kyou{ここから、相転移が一回だけであることを仮定すると、自己双対の値$K_c=\Kt_c$となること、つまり\eqref{dualrelation0}から$\sinh 2K_c=1$、したがって$K_c=\frac12 \log  (1+\sqrt{2})$となることが分かります。}
+
+自己双対の点$K=K_c$では、\eqref{KWduality}の式は
+\begin{align}
+  \Zgauged(K_c)=\ZIsing(K)
+\end{align}
+となります。つまり、この点では\Ising と\gIsing は同じ理論ということになります。後に見るように、この性質から、この点では非可逆対称性があります。
+
+
+\begin{figure}
+  \centering
+  \includegraphics{isingphasestructure.pdf}
+  \caption{}
+  \label{fig:isingphasestructure}
+\end{figure}
+
+もう少し相構造について見てみましょう。図\ref{fig:isingphasestructure}に\Ising と \gIsing の相構造とその関係を示しました。\Ising では$K$が大きいところでは対称性の自発的破れがあり、真空の縮退がありました。Kramers-Wannier双対性から、\gIsing では$K$が小さいところで自発的対称性の破れがあり、真空の縮退があります。\gIsing では、双対$\Zb_2$対称性がありますから、$K$が小さいところでこの対称性が自発的に破れています。一方、\Ising で$K$が小さいところでは対称性が保たれている自明な相になっています。Kramers-Wannier双対性を用いると\gIsing で$K$が大きいところで自明相になっています。
+
+図\ref{fig:isingphasestructure}では、ゲージ化の操作を縦の青い矢印で表しています。例えば$K$が小さいところでは、\Ising は自明相にあり、真空は唯一ですが、これをゲージ化するとゲージ場の自由度を加えることになって、このために真空が縮退します。２つの状態は空間的な円のWilsonループの期待値で区別されます。一方、\Ising で$K$が大きいところでは、真空は二重に縮退しています。これをゲージ化すると、２つの真空のうち、ゲージ不変な方だけが生き残るので、唯一の真空をもつ自明な相になります。
+
+\section{Ising模型の演算子}
+ここでは、前節のKramers-Wannier双対性の議論を踏まえたうえで、Ising模型の様々な演算子（欠陥）についてまとめておきます。
+
+まず、その動機について説明します。一つは後にKramers-Wannier双対性で演算子がどのように移り合うかを説明するためです。
+
+もう一つの動機は、Lagrangianに出てくる場の複合演算子として書けない演算子の例を与えることです。\footnote{この講義では、「演算子」と「欠陥」はほぼ同じ意味で用いていますが、主に欠陥の方を用いています。これは、欠陥の方がLagrangianに出てくる場の複合演算子として書けないかもしれないことが強調されると感じたからです。}
+一般に場の理論の（局所）演算子には次のようなものがあります。
+\begin{enumerate}
+  \item Lagrangianに現れる場。
+  \item Lagrangianに現れる場の微分やそれらの関数。複合演算子とも呼ばれる。
+  \item その他。
+\end{enumerate}
+1. は場の理論の教科書などで最初に出てきますし、みなさん馴染みがあると思います。2. もカレントやエネルギー運動量テンソルなどをはじめとして、場の理論では重要な演算子です。3. は要するにLagrangianに現れる場の微分や複合演算子として書けない演算子です。まず、1. 2. 3. の違いは記述の違いであって、物理の違いで無いことに注意してください。物理では3. の演算子も重要になる場面は多数あります。ただ、3. の演算子は分かりにくく、教科書等にあまり出てこないため、馴染みが無い方が多いかもしれません。\kyou{Ising模型の演算子は、Lagrangianに現れる場の微分や複合演算子として書けない例を与えます。}
+
+
+さて、演算子について説明していきます。ここでは、式\eqref{gaugedIsing2}に含まれる自由度で書ける様々な演算子について考えます。特に、次の３種類について考えます。
+\begin{itemize}
+  \item $c_p$から作るスピン演算子 (spin operator)$\sigma_{p}=(-1)^{c_p}$
+  \item $b_{\ell}$から作るWilsonループ (Wilson loop) 演算子$\eta(C)=(-1)^{\sum_{k}b_{\ell_k}}$。ただし、$C$はリンク$\ell_1,\ell_2,\dots$から作られる閉じたループである。
+  \item $a_i$から作るスピン演算子。$\mu_{i}\sim (-1)^{a_i}$
+\end{itemize}
+これらの演算子を作用\eqref{gaugedIsing2}の中だけで考えるなら、特に問題になることはありません。その演算子の相関関数は通常どおり計算できます。これから考えたいのは上の演算子を、$a,b$の和をとってしまって後だったり、$c$の和をとってしまったりした後で考えることです。注意してほしいのは、このように、ある和を先にとってしまったとしても、これらの演算子が無くなるわけではありません。作用に出てくる場の関数として書けなくなるだけです。
+
+これらの演算子について順に見ていきます。
+
+\subsection{スピン演算子}
+まず、スピン演算子$\sigma_{p}=(-1)^{c_p}$について説明します。これは、これだけでゲージ不変なので純粋な局所演算子(genuine local operator)です。これは、$a,b$を積分してしまって通常のIsing模型の記述にした後も、そのスピン演算子として、相転移の秩序変数となる重要な演算子です。
+
+一方で、$c$を先に和をとってしまって、\gIsing \eqref{gaugedIsing}の記述にした場合はどうでしょうか。$c$はもはやLagrangianの中に現れる場ではないので、$\sigma_p$ は\kyou{Lagrangianに出てくる場で書けない演算子}になります。では、どう書けるかを考えてみましょう。$\sigma_p=(-1)^{c_p}$を挿入してから$c$について和をとると、\eqref{gaugedIsing}の拘束を表す$\deltamod{}$の因子の中で$\sigma_p$を挿入したプラケット$p$のところだけが、
+\begin{align}
+  \deltamod{\sum_{\link{ij} \in p}b_{ij}+1,0}
+\end{align}
+となります。つまり、演算子を挿入したところでは、拘束条件がプラケットでの$b$の和を（$0$ではなく）$1$にする、というものになります。
+
+\subsection{対称性欠陥}
+
+次に$b$から作るWilsonループ$\eta$について詳しく見てみます。\ref{sec:dualsymmetry}節で見たように、この$\eta$はトポロジカルで、対称性欠陥になっています。
+
+$\eta$が、スピン演算子$\sigma$を反転するspin flipの演算子になっていることを、詳しく見てみましょう。プラケット$p$に演算子$\sigma_{p}=(-1)^{c_p}$を挿入し、それを囲む経路$C$をとって$\eta(C)$を挿入します。$\eta(C)$はトポロジカルなので、値を変えずに$p$のプラケットまで縮めることができます。作用\eqref{gaugedIsing2}を見ると、この$\eta$の挿入は、和を取っている変数の変換$c_p'=c_p+1$で吸収することができます。このとき$\sigma_{p}=(-1)^{c_p}=-(-1)^{c'_p}$となります。したがって、次のようなWard-Takahashi恒等式が成り立ちます。
+\begin{align}
+  \includegraphics{wtz2.pdf}.
+\end{align}
+これは、$\eta$がスピン演算子$\sigma$を反転するspin flipの対称性欠陥であることを示しています。
+
+$a,b$の和をとってしてしまった後で$\eta$がどのように表現されるか考えましょう。$\eta(C)$を挿入した後で\ref{sec:KWproof}項と同様に$a,b$の和をとります。すると、$C$に含まれるリンクの相互作用には$(-1)$が余分にかかることになります。つまり
+\begin{align}
+  \expval{\eta(C)\cdots}
+  =\frac{1}{\ZIsing}\sum_{\{c\}}\exp\left(\sum_{\text{すべてのリンク}\link{pq}} \Kt(-1)^{c_p+c_q+\delta_{\expval{pq}}(C)}\right)\cdots
+\end{align}
+となります。ここで$\delta_{\ell}(C)$はリンク$\ell$が$C$と交わっていれば$1$、そうでなければ$0$という記号です。つまり、$C$と交わっているリンクは、相互作用が反強磁性に置き換わっています。これは\ref{sec:egspinflip}項で見たspin flipの対称性欠陥そのものです。
+
+\subsection{無秩序スピン}
+次に無秩序スピンについて詳しく考えてみます。これは、式\eqref{gaugedIsing}の表式でサイト$i$に置かれた演算子$(-1)^{a_i}$です。まず重要なことは$(-1)^{a_i}$そのものはゲージ不変でないので、統計力学での良い演算子ではありません。これが入った相関関数を考えると、いつでも$0$になってしまいます。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{disorder.pdf}
+  \caption{赤い線が$\eta$線演算子で両端の$\mu_i,\mu_j$が無秩序スピン演算子である。この形でゲージ不変になっている。}
+  \label{fig:disorder}
+\end{figure}
+
+これをゲージ不変にするために$\eta$線演算子（$b$ Wilson ライン）をくっつけて
+$\mu_i=(-1)^{a_i+b_{\ell_1}+b_{\ell_2}+\dots}$を考えます（図\ref{fig:disorder}参照）。ただし、$\ell_1,\ell_2,\dots$は$i$に端をもつ経路です。この演算子を（$(-1)^{c_p}$を秩序演算子としてのスピン演算子と言うのに対応して）無秩序演算子(disorder operator)とか無秩序スピン(disorder spin)と呼びます。\footnote{多くの教科書や論文では、秩序演算子、無秩序演算子の区別は記述によるものです。つまり、Lagrangianに出てくる場で書かれているものが秩序演算子、Lagrangianに出てくる場では書かれていないものが無秩序演算子です。これらは互いに非局所的ですが、どちらが純正な局所演算子かは、気にしていないことが多いです。この講義では、記述にかかわらず、純正局所演算子の方を（秩序）スピン演算子、純正ではなく、トポロジカル欠陥がくっついているものを無秩序スピン演算子と呼ぶことにします。}次のようなことに注意する必要があります。
+\begin{itemize}
+  \item $\mu_i$は位置$i$だけでなく、くっつくWilsonライン$\eta$の経路によっています。ただし、$\eta$はトポロジカルなので、経路の連続変形にはよっていません。一般に、このような演算子を非純正局所演算子(non-genuine local operator)と呼ぶことがあります。反対の言葉は純正局所演算子(genuine local operator)で、スピン演算子$\sigma_{p}$はその例です\footnote{この``genuine local operator''という用語は文献\cite{Kapustin:2014gua}から使われ始めました。}。
+  \item 端のあるWilsonラインは必ず反対側の端があります。したがって$\mu_i$は必ずペアで現れなければなりません。
+\end{itemize}
+
+$a,b$の和を取ってしまった後で無秩序スピンがどうなるか見てみましょう。スピン演算子がサイトにあるような格子で考えると、$\mu$はプラケットの中心に配置され、対称性欠陥の端として表されます。別の言い方をすると、プラケット一周してきたときに（周期境界条件ではなく）半周期境界条件を課すという言い方もできます。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{disorder2.pdf}
+  \caption{$a,b$の和をとってしまった後での無秩序演算子の様子。赤で表した経路は対称性欠陥$\eta$を表しています。つまり、赤の線と交わっているリンクは反強磁性になっています。$\mu$演算子は$\eta$の端のプラケットに配置されています。}
+  \label{fig:disorder2}
+\end{figure}
+
+無秩序スピンの名前の由来は次のようなものです。$\sigma$スピン演算子（秩序スピン演算子）の言葉で秩序相（spin flip対称性が自発的に破れている）にあるときは、$\mu_i$の期待値が$0$になります。正確に言うなら、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$になります。これは次のようにして理解することができます。
+秩序相で$K$が大きい極限を考えてみます。このとき、すべてのスピンはそろおうとします。しかし、$\mu$が入っている点のまわりではどこかで反強磁性になっているので、すべてのスピンがそろうことができません。なるべくエネルギーを低くするためには、となりあうスピンが反対の部分（対称性欠陥直上では同じ部分）が最小になるのが、エネルギーが最も低い配位になります。したがって、ある定数$m>0$があって
+\begin{align}
+  \expval{\mu_{i}\mu_{j}}\sim e^{-m L},\quad (L\text{は$i,j$の間の距離。})
+\end{align}
+となります。なので$L\to \infty$で２点関数は$0$になります。
+
+一方、無秩序相にあるときは、$\mu$が期待値を持つ、正確には$\mu$を刺す２点を遠くに離す極限で２点関数が$0$でない定数になります。これは次のように理解できます。
+無秩序相ではスピンは相関が消えます。ですから、$\mu$演算子が刺さっている点から離れたところではエネルギーに影響はありません。ただし、$\mu$が刺さっていることで、その点の近くでエネルギーが変わりますから、その分$0$でない値が出ます。したがって、$\mu$を挿す２点を遠くに離す極限で２点関数が$0$でない定数になります。
+
+\section{KW欠陥}
+これまで準備してきたことを踏まえて、ここでは非可逆対称性の一つの例であるKramers-Wannier (KW)欠陥について紹介します。いろいろな見方があるのですが、ここでは連続理論や高次元への拡張が容易な\kyou{半空間ゲージ化(half-space gauging)}による構成について説明します。
+
+まず、大まかなアイデアについて説明します。一般化対称性とは、何かの方法で作ったトポロジカル欠陥です。最初の方で紹介した対称性の一つの見方①場の変換で作用を不変にするもの、というものがあるとトポロジカル欠陥が作れることを\ref{sec:symmetrydefect}で説明しました。これを絵で表すと
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+    \fill [yellow!80] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(0.5,0.5);
+    \node (A) at (1.5,1.5)[above]{変換};
+    \node (D) at (0,0){$D$};
+  \end{tikzpicture}
+  =
+  \begin{tikzpicture}[baseline=0cm]
+    \draw [red,thick] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(1,1);
+    \node (A) at (1.5,1.5)[above]{トポロジカル欠陥};
+  \end{tikzpicture}  
+  \label{halfspacetransformation}
+\end{align}
+となります。
+これを一般化し、ある領域$D$内で変換だけでなく離散対称性のトポロジカルなゲージ化を含む様々な操作を行うことを考えます。この操作でバルクでは元の理論に戻る場合を考えます。$K=K_c$の場合に$\ZIsing=\Zgauged$でしたから、Ising模型の場合はゲージ化を含む操作で元に戻る、というのが例です。バルクでは元に戻りますから、一般に境界で欠陥ができます。``うまい境界条件''
+
+
+でゲージ化を行うと、この欠陥がトポロジカルになる場合があります。絵で書くと
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+    \fill [blue!10] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(0.5,0.5);
+    \node (A) at (1.5,1.5)[above]{\underline{ゲージ化}、変換、補助場の導入、積分、…};
+    \node (D) at (0,0){$D$};
+  \end{tikzpicture}
+  \Rightarrow
+  \begin{tikzpicture}[baseline=0cm]
+    \draw [green!70!black,thick] (0,0) circle [x radius=1.5cm, y radius=1cm, rotate=30];
+    \draw[->](1.5,1.5)--(1,1);
+    \node (A) at (1.5,1.5)[above]{トポロジカル欠陥};
+  \end{tikzpicture}  
+  \label{halfspacegauging}
+\end{align}
+となります。
+
+ここでいくつかの注意をします。
+\begin{itemize}
+  \item \eqref{halfspacetransformation}と違って、\eqref{halfspacegauging}は``$=$''の関係でないことに注意してください。これは、あくまで（一般に非可逆な）トポロジカル欠陥を見つける方法であって、Ward-Takahashi恒等式を見つけるには、さらに解析が必要です。
+  \item 離散対称性のトポロジカルなゲージ化であったからといって、すぐに境界に現れる欠陥がトポロジカルになるとは言えません。ゲージ化の際のゲージ場の境界条件の取り方は非常に重要です。
+\end{itemize}
+
+ここでは、$K=K_c$でのIsing模型を例にとって、この半空間ゲージ化の方法でトポロジカル欠陥を導出します。まず、格子上で領域$D$をどう設定するかについて説明します。これはゲージ場の境界条件と絡んで、重要な部分です。次に半空間ゲージ化の手続きを説明し、バルクがちゃんと元に戻ること、言い換えると現れるトポロジカル欠陥がちゃんと余次元１の欠陥になっていることを説明します。その後に、この欠陥がトポロジカルであることを説明します。
+
+\subsection{領域の取り方}
+領域の取り方について詳しく説明します。$\Lambda$を周期境界条件を課した格子とします。この上で$K=K_c$のIsing模型を考えます。分配関数は
+\begin{align}
+  \ZIsing = \sum_{\{a\}}\exp( K \sum_{\text{リンク}\link{ij}} (-1)^{a_i+a_j})\label{2DIsing}
+\end{align}
+です。ここで、$i,j$は$\Lambda$のサイトで$a_i$は$\Lambda$のサイトに乗っている自由度です。このようにIsing模型でスピンの自由度がサイトにのっている格子をアクティブ格子(active lattice)と呼ぶことにします。
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw[step=0.8, thick] (-1.9,-1.9) grid (2.3,2.3);
+    \draw[step=0.8, blue, thick, yshift = 0.4cm, xshift = 0.4cm] (-2.3,-2.3) grid (1.9,1.9);            
+  \end{tikzpicture}
+  \caption{格子$\Lambda$（黒）とその双対格子$\Lambdah$（青）。}\label{fig:lattices}
+\end{figure}
+
+さて、$\Lambda$の双対格子である$\Lambdah$（図\ref{fig:lattices}参照）を考えましょう。これは$\Lambda$のプラケットの中心が$\Lambdah$のサイトになるようにとった格子です。今の場合の$\Lambdah$のようにプラケットにスピンの自由度がのっているような格子を非アクティブ格子(innactive lattice)と呼ぶことにします。\ref{sec:KWproof}項で見たとおり、\eqref{2DIsing}を全体でゲージ化すると、$\Lambdah$のサイトにスピンの自由度がのったIsing模型と等価になります。今$K=K_c$を考えているので$K$は変わらないことに注意してください。標語的に言うなら、Kramers-Wannier双対性はアクティブ格子と非アクティブ格子を入れ替えます。
+
+半空間ゲージ化をするときの領域を考えるのに$\Lambdah$の言葉で言うと便利です。
+$D$は$\Lambdah$のサイト、リンク、プラケットの集合で、次のような条件を満たすものとします。
+\begin{itemize}
+  \item プラケット$p\in D$なら、$p$を作る4つのリンクの集合$\del p$は、$\del p \subset D$
+  \item リンク$\ell \in D$なら、$\ell$の両端のサイト$i,j$は$i,j\in D$となります。
+\end{itemize}
+端的に言うなら、$D$は$\Lambdah$の見方で境界が全部含まれるような領域ということになります。
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw[step=1, blue] (-1.5,-1.5) grid (3.5,3.5); 
+    \foreach \x/\y in {0/0, 0/1, 1/0}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[linkblue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+\end{tikzpicture}
+\caption{領域$D$の取り方の例。$\Lambdah$の格子を青線で表しています。青丸で表したサイト、太い青線で表したリンク、青く塗っているプラケットが$D$の元です。}
+\end{figure}
+
+逆に$\Lambda$の見方では、境界が全部含まれない領域ということになります。後で$D$の中だけでゲージ化するわけですが、このときに境界にある$\Lambda$のリンクにはゲージ場を置かず、また境界にある$\Lambda$のサイトにはゲージ変換を置きません。このような境界条件を\cite{Choi:2021kmx}ではDirichlet境界条件と呼んでいます。後に見るように、この境界条件で半空間ゲージ化をした場合には、境界に残る欠陥がトポロジカルになります。別の境界条件でゲージ化した場合には、トポロジカルになることは保証されません。
+
+\subsection{半空間ゲージ化}\label{sec:halfspacegauging}
+ここでは、先に述べた条件を満たす$D$に対して、$D$の中だけでspin flipの対称性をゲージ化する手続きを説明します。しばらくは、言葉の使い方としてサイト、リンク、プラケットなどはすべて$\Lambdah$のものとします。
+
+まず、ゲージ化する前からすべてのプラケット$i$に自由度$a_i=0,1$がのっていて相互作用があるIsing模型を考えていたことを思い出してください。
+
+$D$の要素に関して、次のような変形をします。
+\begin{enumerate}
+  \item $D$の中の各リンク \tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)} $\ell$ に対して、ゲージ場$b_{\ell}=0,1$を置きます。そしてこのリンクの相互作用を$\exp(K(-1)^{a_i+a_j+b_{\ell}})$とします。ただし、$i,j$はリンクを挟んでいる２つのプラケットです。分配関数の計算では、和$\sum_{b_{\ell}=0,1}$をとります。
+  \item $D$の中の各プラケット \tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} $i$ に対してゲージ変換を置きます。ゲージ変換のパラメータを$\lambda_i=0,1$とし、このプラケットに置かれている$a_i$とこのプラケットに接しているリンク$\ell$に置かれているゲージ場は
+  \begin{align}
+    a_i\to a_i+\lambda_i,\quad b_{\ell}\to b_{\ell}+\lambda_i    
+  \end{align}
+  と変換します。$D$の取り方から、$i$のまわりの４つのリンクはすべて$D$の要素であるので、$b$の自由度が置かれていることに注意してください。
+
+  分配関数を考えるときには、ゲージ体積で割る必要があるので、$D$の要素であるプラケット$i$に対して因子$\frac12$を割り当てます。
+  \item $D$の中の各サイト \tikz{\fill[linkblue] (0,0) circle (1.8mm)} $p$には、ゲージ場$b$がflatでありなさいという拘束条件を置きます。このサイトにつながる４つのリンクのラベルを$1,2,3,4$として
+  \begin{align}
+    \begin{tikzpicture}[baseline=0]
+      \fill[linkblue] (0,0) circle (1.8mm);
+      \foreach \x/\y in {1/0, 0/1, -1/0, 0/-1}{
+      \draw[linkblue, line width = 1.3mm](0,0)--(\x,\y);
+      }
+      \node (A) at (0,0.7)[right]{$1$};
+      \node (B) at (0,-0.7)[right]{$3$};
+      \node (C) at (0.7,0)[above]{$2$};
+      \node (D) at (-0.7,0)[above]{$4$};
+  \end{tikzpicture}\quad \Rightarrow\quad \deltamod{b_1+b_2+b_3+b_4,0}
+  =\sum_{c_p=0,1}\frac12 (-1)^{c_p(b_1+b_2+b_3+b_4)}
+  \end{align}
+  という因子を割り当てます。$D$の中のサイト$p$につながっている４つのリンクは、必ずしもすべてが$D$の元であるとな限らないので、$b$が割り当てられていない場合もあります。このような場合は、$b$が割り当てられていないリンクの$b$は$0$として拘束条件をかします。
+  \item \eqref{Eulercounterterm}のあたりで述べたEuler相殺項を考えます。これは多面体に関するEulerの公式を適用すると$D$の要素に対して上で述べた因子の他に
+  \begin{align}
+    \tikz{\fill[linkblue] (0,0) circle (1.8mm)}\qquad&\Rightarrow \qquad \sqrt{2}\notag\\
+    \tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)} \qquad &\Rightarrow \qquad \frac{1}{\sqrt{2}},\notag\\
+    \tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} \quad&\Rightarrow \qquad \sqrt{2}
+  \end{align}
+  という因子を割り当てれば良いことが分かります。
+\end{enumerate}
+
+これらをまとめて、$D$で半空間ゲージ化を行った分配関数$Z_{D}$を書いてみます。
+\begin{align}
+  Z_{D}=&\underrem{\sum_{\{a\}}}{全体にある自由度の和}
+  \overrem{\sum_{\{b\}}\sum_{\{c\}}}{D内のみの自由度の和}
+  \underrem{\prod_{\text{プラケット }\in D}\sqrt{2}
+  \prod_{\text{リンク } \in D}\frac{1}{\sqrt{2}}
+  \prod_{\text{サイト} \in D}\sqrt{2}}{Euler相殺項}
+  \notag\\
+  &\times
+  \underrem{\prod_{\text{プラケット }\in D} \frac{1}{2}}{ゲージ体積}
+  \underrem{
+  \prod_{\text{サイト} \in D}\frac{1}{2}}{拘束を補助場で表したときの$1/2$}
+  \notag\\
+  &\times
+  \prod_{\text{リンク } \notin D}\exp(K(-1)^{a_i+a_j})
+  \prod_{\text{リンク } \in D}\exp(K(-1)^{a_i+a_j+b_{ij}})
+  \notag\\
+  &\times
+  \prod_{\text{サイト } p\in D} (-1)^{c_p\sum_{\ell \in p}b_{\ell}}.
+  \label{halfspacegauging0}
+\end{align}
+これから、この分配関数に関して
+\begin{itemize}
+  \item これが、$D$の境界に局在する余次元$1$の欠陥であること。
+  \item この欠陥がトポロジカルであること。
+\end{itemize}
+の２項目について詳しく見ていきます。
+
+\subsection{境界に局在すること}
+まず、境界に局在する欠陥であることを説明します。これには、\ref{sec:KWproof}項でやったのと同様に、$b$について先に和を取ることで理解できます。
+
+まず、ゲージ固定として$D$内のプラケット$i$に関して$a_i=0$というゲージをとります。このゲージ固定により、\eqref{halfspacegauging0}の中のゲージ体積での割り算はすべて相殺します。
+
+次に$b$の和をとることを考えます。$D$内のリンクには２種類あって、リンクの両側のプラケットが両方$D$内にある場合と、片方だけが$D$内にある場合です。前者の場合には、\ref{sec:KWproof}でやったのと全く同じ計算になります。次のように、考えているリンクの変数を$b$、リンクの両端のサイトの自由度を$c_1,c_2$とします。プラケットにある$a$の自由度はすでにゲージ固定で$0$にしていることに注意してください。
+\begin{align}
+  \begin{tikzpicture}
+    \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
+    \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
+    \fill[plaqblue](0,0) rectangle (1,1);
+    \fill[plaqblue](0,-1) rectangle (1,0);
+    \fill[linkblue] (C1) circle (1.8mm);
+    \fill[linkblue] (C2) circle (1.8mm);
+    \draw[linkblue, line width = 1.3mm] (C1)--(C2);
+    \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
+    \draw[->] (B)--(0.5,0.1);
+\end{tikzpicture}
+\end{align}
+この$b$を含む部分の和は\ref{sec:KWproof}項と同様に計算して
+\begin{align}
+  \sum_{b=0,1}e^{K(-1)^{b}}(-1)^{b(c_1+c_2)}
+  =\sqrt{2}e^{K(-1)^{c_1+c_2}}
+  \label{sumbtemp}
+\end{align}
+となります。この計算では、今は$K=K_c$の場合を考えているので$\Kt=K,\ \sinh 2K=1$であることに注意してください。\eqref{sumbtemp}の右辺の$\sqrt{2}$は、\eqref{halfspacetransformation}のEuler相殺項のリンクのところとちょうど相殺します。\eqref{sumbtemp}の右辺の残りの部分は、Ising模型のBoltzmannウェイトです。つまり、$D$内のバルクでは$\Lambdah$をアクティブ格子とする、$K=K_c$のIsing模型になっています。
+
+次に、リンクの両側のプラケットのうち、片方のみ$D$の内部にある場合を考えます。$D$の外にあるプラケットにはゲージ対称性は無いので$a$の自由度が残っていることに注意します。次のように自由度の名前をつけます。
+\begin{align}
+  \begin{tikzpicture}
+    \coordinate (C1) at (0,0) node [above left] at (C1) {$c_1$};
+    \coordinate (C2) at (1,0) node [above right] at (C2) {$c_2$};
+    \fill[plaqblue](0,-1) rectangle (1,0);
+    \fill[linkblue] (C1) circle (1.8mm);
+    \fill[linkblue] (C2) circle (1.8mm);
+    \draw[linkblue, line width = 1.3mm] (C1)--(C2);
+    \coordinate (B) at (1.5,0.8) node [right] at (B){$b$};
+    \draw[->] (B)--(0.5,0.1);
+    \node (A) at (0.5, 0.7){$a$};
+\end{tikzpicture}
+\label{boundary}
+\end{align}
+この部分の$b$の和は、先程と同様に
+\begin{align}
+  \sum_{b=0,1}e^{K(-1)^{b}}(-1)^{b(c_1+c_2)}
+  =\sqrt{2}e^{K(-1)^{c_1+c_2}}(-1)^{ac_1}(-1)^{ac_2}\label{Dboundary}
+\end{align}
+となります。先ほどと同様に、右辺の$\sqrt{2}$はEuler相殺項のリンクの部分とキャンセルし、次の因子はIsing模型のBoltzmannウェイトになります。それ以外に、$D$の境界上で$(-1)^{ac_1}(-1)^{ac_2}$という因子が残ります。これが本質的に欠陥に与えられるウェイトです。これをまとめて表すために、アクティブサイト（Ising模型の自由度が割り振られているアクティブ格子のサイト）を \tikz{\fill[black] (0.5,0.5) circle (1mm);} で表すことにします。図\ref{fig:KWdefect}を見てください。$D$の外では、$\Lambda$のサイトがアクティブで、その自由度は$a$、$D$の中では、$\Lambdah$のサイトがアクティブで、その自由度を$c$という記号で表してきました。境界では、それらのサイトが隣り合っています。\eqref{Dboundary}の結果は、このように隣り合っているサイトのペアに次のようなウェイトを割り振ればよいということです。
+\begin{align}
+  \begin{tikzpicture}
+    \foreach \x/\y in {1/0, 0.5/-0.5}{
+        \fill[black] (\x,\y) circle (1.2mm);
+    }
+    \draw[green!70!black, ultra thick](0.5,-0.35)--(1,-0.15);
+    \node (C1) at (0.5, -0.5)[below left]{$c$};
+    \node (A) at (1, 0)[above]{$a$};
+  \end{tikzpicture}
+  =(-1)^{ac}
+\end{align}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0, 2/1, 0.5/-0.5, 1.5/-0.5, 0.5/-1.5, 1.5/-1.5}{
+        \fill[black] (\x,\y) circle (1.2mm);
+    }
+    \draw[green!70!black, ultra thick](-0.5,-0.35)--(0,-0.15)--(0.5,-0.35)--(1,-0.15)--(1.5,-0.35)--(2,-0.15)--(2.5,-0.35);
+    \node (C1) at (0.5, -0.5)[below left]{$c_1$};
+    \node (C2) at (1.5, -0.5)[below right]{$c_2$};
+    \node (A) at (1, 0)[above]{$a$};
+  \end{tikzpicture}
+  \caption{$b$の和を取った後のKW欠陥を説明する図。緑の線を境界として、下が$D$の内側、上が$D$の外側になる。黒い点はIsing模型の自由度が割り当てられたアクティブサイト。アクティブ格子は緑の線を境に互いに双対になっている。}
+  \label{fig:KWdefect}
+\end{figure}
+
+さて、残り考えないといけないのは、$D$内の各サイトに割り振られた$\sqrt{2}$と$D$内の各プラケットに割り振られた$1/\sqrt{2}$です。境界を気にしなければ、サイトとプラケットは対応させることができるので、このウェイトも境界に押し付けることができます。
+
+最後のところは少し誤魔化しています。本当にこのウェイトがちゃんと境界に押し付けられることを示すには、どのように押し付けるかをちゃんと決める必要があります。これの易しいやり方を私は知りません。実際にちゃんとウェイトを決めることができることが、\cite{Aasen:2016dop}で示されています。
+
+ここまでで、半空間ゲージ化を行うと、その境界に余次元1の欠陥が現れることが分かりました。この欠陥を\kyou{KW欠陥}と呼ぶことにします。
+
+\subsection{トポロジカル性}\label{sec:KWtopologicalness}
+次にKW欠陥がトポロジカルであることを示します。
+
+このために$D$を選んで、その要素のサイト、リンク、プラケットをそれぞれ\tikz{\fill[linkblue] (0,0) circle (1.8mm)}、\tikz[baseline=0.3cm]{\draw[linkblue, line width = 1.3mm](0,0)--(0,1)}、\tikz[baseline=0.3cm]{\fill[plaqblue](0,0) rectangle (1,1);} で表します。これまでやってきたように、$D$で半空間ゲージ化をやった上で、他にも任意の演算子を挿入し、すべての自由度に関して和をとったものに関して成り立つ恒等式（演算子恒等式）を絵で表すことにします。
+
+次の（ア）、（イ）の演算子恒等式が成り立ちます。
+\begin{enumerate}
+  \item[（ア）] 境界にあるリンク$\ell$とそれを含むプラケット$p$に関して、$p$のゲージ変換で$b_{\ell}=0$にします。このゲージ固定で$p$に割り振られた$1/$(ゲージ体積)がキャンセルします。またEuler相殺項は$p$と$\ell$で相殺します。結果として、$D$から$p$と$\ell$を除いたもの$D'$で半空間ゲージ化したものと同じになります。
+  \begin{align}
+    \begin{tikzpicture}[baseline=1cm]
+      \foreach \x/\y in {0/0, 0/1, 1/0}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+          \fill[linkblue] (\x,\y) circle (1.8mm);
+      }
+      \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      }
+      \draw[<-,thick] (0.5,1.5)--(2,2) node[right] {ゲージを選ぶ};
+      \draw[<-,thick] (0.5,2.1)--(2,3) node[right] {$b=0$にする};
+      \draw[->,red, line width=2mm](3,2.2)--(3,2.8);
+  \end{tikzpicture}
+  \quad
+  =
+  \qquad
+  \begin{tikzpicture}[baseline=1cm]
+    \foreach \x/\y in {0/0, 1/0}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[linkblue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+  \end{tikzpicture}
+  \end{align}
+  \item[（イ）] 境界にあるサイト$i$とリンク$\ell$で次を満たすものを考える。
+  \begin{enumerate}
+    \item $i$につながる4つのリンクで$D$に属するのは$\ell$のみ。
+    \item $\ell$の両側にあるプラケットは$D$に属さない。
+  \end{enumerate}
+  このとき、サイト$i$の拘束条件から$b_{\ell}=0$のみが寄与します。またEuler相殺項は$i$と$\ell$で相殺します。結果として$D$から$i$と$\ell$を除いた$D'$で半空間ゲージ化したものと同じになります。
+  \begin{align}
+    \begin{tikzpicture}[baseline=1cm]
+      \foreach \x/\y in {0/0, 1/0}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+          \fill[linkblue] (\x,\y) circle (1.8mm);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      }
+      \draw[<-,thick] (1.1,1.5)--(2,2) node[right] {$b=0$のみ};
+      \draw[<-,thick] (1.1,2.1)--(2,3) node[right] {拘束条件};
+      \draw[<-,red, line width=2mm](3,2.2)--(3,2.8);
+  \end{tikzpicture}
+    \quad
+    =
+    \qquad
+    \begin{tikzpicture}[baseline=1cm]
+      \foreach \x/\y in {0/0, 1/0}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 2/0, 2/1}{
+          \fill[linkblue] (\x,\y) circle (1.8mm);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 1/1}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x/\y in {0/0, 0/1, 1/0, 2/0}{
+      \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+      }
+  \end{tikzpicture}
+  \end{align}
+\end{enumerate}
+これはWard-Takahashi恒等式に当たるものの一種です。
+
+この（ア）と（イ）の恒等式を用いると、値を変えることなく$D$の境界のトポロジーを保ったまま、格子１つ分ずつ変形していくことができます。これは、KW欠陥がトポロジカルであることに他なりません。
+
+このWard-Takahashi恒等式の応用例として可縮な円周のトポロジーのKW欠陥の期待値を求めてみましょう。
+\begin{align}
+  \begin{tikzpicture}[baseline=1cm]
+    \foreach \x/\y in {0/0, 0/1, 1/0}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 0/2, 1/2, 2/0, 2/1}{
+        \fill[linkblue] (\x,\y) circle (1.8mm);
+    }
+    \foreach \x/\y in {0/0, 0/1, 0/2, 1/0, 1/1}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+    }
+    \foreach \x/\y in {0/0, 0/1, 1/0, 1/1, 2/0}{
+    \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y+1);
+    }
+\end{tikzpicture}
+\quad
+=
+\qquad
+\tikz{\fill[linkblue] (0,0) circle (1.8mm)}
+\qquad
+=\sqrt{2}.\label{qdimKW0}
+\end{align}
+最初の等号は、（ア）、（イ）を繰り返すことで得られます。次の等号は、\tikz{\fill[linkblue] (0,0) circle (1.8mm)} に割り当てられたEuler相殺項です。拘束条件の方は自動的に満たされます。
+
+対称性欠陥の場合、\ref{sec:symmetrydefect}章で見たように、可縮な円周の期待値は1であることが分かりますから\footnote{厳密にはアノマリーがあるような対称性の場合、１にならないこともあります。しかし、その場合でも絶対値は１になります。}可縮な円周の期待値が$\sqrt{2}$であるKW欠陥は対称性欠陥ではないということになります。このことから\kyou{KW欠陥は非可逆対称性の欠陥の例であることが分かります。}
+
+\section{対称性の構造}
+ここでは、対称性の構造について見ていきます。２次元Ising模型のKW欠陥を含むような非可逆対称性を表すのに便利な数学的構造はフュージョン圏と呼ばれています。フュージョン圏の物理学者向けの分かりやすい解説は\cite{Bhardwaj:2017xup}にあります。
+
+ここでは、数学的な説明というよりは、場の理論の演算子関係式、あるいはWard-Takahashi 恒等式として説明したいと思います。
+また、有限群の対称性もフュージョン圏で表されるので、その場合にどうなるかも説明ます。
+フュージョン圏の主な構造は次の３つです。
+\begin{itemize}
+  \item 足し算：相関関数にした後で足し算をします。
+  \item フュージョン則：有限群の対称性の場合には、掛け算の構造になります。
+  \item F記号：有限群の対称性の場合には、アノマリーの構造になります。
+\end{itemize}
+これらについて、有限群の場合とIsing模型の対称性（\kyou{Ising圏}と呼ぶことにします）を例にして説明します。
+
+大事なことは、例えばIsing模型でIsing圏の対称性の構造が分かったとします。このとき、Ising圏の対称性の構造のみを用いて導かれた帰結は、\kyou{Ising圏の対称性を持つすべての理論に適用可能}だということです。これは通常の対称性と同様です。
+
+\subsection{足し算}
+
+２次元の次元１のトポロジカル欠陥の種類を圏論の言葉を借りて「対象」(object)と呼ぶことにします。対象と、欠陥が入っている幾何学的な線を考えると具体的なトポロジカル欠陥になります。対象を表す記号を$a$と書き、2次元時空内の連結な端のない線を$C$として欠陥を$L_{a}(C)$と書くことにします。例えば、群の対称性欠陥の場合、群の元は対象です。
+
+実は、群の対称性の場合でも、群の元だけが対象というわけではありません。（群の掛け算以外に）群の形式的な足し算を考えることができます。
+\begin{align}
+  L_{a+b}(C):=L_{a}(C)+L_{b}(C)\label{objectplus}
+\end{align}
+と定義します（\ref{sec:remarks}節で説明した演算子関係式の意味です）。
+
+ここで、注意深い人は次の点が心配になるかもしれません。\ref{sec:defect}節の最初で説明したように、そもそも欠陥は局所的でなければなりません。この欠陥$L_{a}(C)+L_{b}(C)$は局所的でしょうか？少なくとも局所性は自明ではありません。また、足し算を考えましたが、引き算や複素数倍はどうでしょうか？
+
+実は足し算は次のように考えると局所的であることが分かります。まず、$C$上に系とは結合していないスカラー場の自由度$n=1,2$を置きます。そして$C$に沿った微分$\del_{t}n$が$\del_{t}n=0$とします。この拘束条件は局所的であることに注意してください。$C$は連結としているので$n$の取りうる値は$C$全体で$1$または$C$全体で$2$です。したがって、この欠陥を挿入した分配関数は、挿入しないものの２倍になります。この欠陥は自明な欠陥を２つ足したものと思うことができます。
+
+一般の欠陥の足し算を考える場合には、次のように考えます。上と同様に$C$上に$n=1,2$を導入して$\del_{t}n=0$の拘束条件を考えます。今度はこの$n$と系を結合させます。$n=1$の部分では、欠陥$L_a$となり、$n=2$の場合はとします。$L_a$も$L_b$も局所的な欠陥で、$n$も局所場ですからこれは局所的な結合です。したがって、こうして作った欠陥は局所的です。この欠陥の対象を$a+b$と定義します。分配関数を考えると\eqref{objectplus}の定義と同じものになります。
+
+上の作り方からは引き算は考えられないことに注意してください。非負の整数以外の複素数倍も局所的にすることはできません。\eqref{qdimKW0}で可縮な円周のKW欠陥の期待値を考えましたが、これに勝手に$1/\sqrt{2}$をかけて期待値を$1$にすることは、局所性を破ります。したがって、$\sqrt{2}$には意味があります。
+
+少し言葉について説明します。他の対象の足し算で書けない対象を\kyou{単純対象}(simple object)と言います。単純対象が有限個しかない場合、このフュージョン圏は\kyou{有限生成}(finitely generated)であると言います。定義から有限生成のフュージョン圏の対象はいくつかの単純対象の和で書けます。有限群の対称性の場合、単純対象は群の元です。Ising圏の単純対象は自明対象$1$、spin flip $\eta$、KW欠陥$\Ncal$の３つです。それぞれ\idline, \etaline, \KWline で表すことにします。
+
+
+以降、２次元では有限生成のフュージョン圏のみ考えます。
+
+\subsection{フュージョン則}
+
+２次元空間内で、２つの１次元のトポロジカル欠陥を間になにも挟まずに並べておいたものはおいたものは、また１次元のトポロジカル欠陥になります。このような操作は\kyou{フュージョン}(fusion)と呼ばれ、このルールは\kyou{フュージョン則}(fusion rule)とよばれます。有限生成のフュージョン圏の場合には、単純対象２つのフージョンがどうなるかを決めれば良いことになります。任意の対象は、いくつかの単純対象の和で書かれますから、フュージョン則は
+\begin{align}
+  \simpleline{a} \simpleline{b} = \sum_{c:\text{単純対象}}N_{ab}{}^{c} \simpleline{c}
+\end{align}
+のように表すことができます。ここで、$N_{ab}{}^{c}$はフュージョン係数(fusion coefficient)と呼ばれる非負の整数です。この式を単に
+\begin{align}
+  a\times b = \sum_{c}N_{ab}{}^{c} c
+\end{align}
+とも表すことにします。
+
+例えば、有限群の対称性の場合、単純対象は群の元で、フュージョン則は$a,b$を群の元として
+\begin{align}
+  \simpleline{a} \simpleline{b}=\simpleline{ab}
+\end{align}
+となります。
+
+Ising圏のフュージョン則について説明します。まず$1$は自明な欠陥ですから、他の元とフュージョンをとっても、その元を変化させません。また$1,\eta$は$\Zb_2$の群をなしますから
+\begin{align}
+  \eta\times \eta = 1
+\end{align}
+になります。あるいは絵で
+\begin{align}
+  \etaline \etaline = \idline
+\end{align}
+と書きます。KW欠陥を含むフュージョン則には非可逆対称性であることが効いています。それは２種類あります。一つは
+\begin{align}
+  \Ncal \times \eta = \eta \times \Ncal = \Ncal,\qquad \text{（絵では）}\quad \KWline \etaline = \etaline \KWline = \KWline
+  \label{Netafusion}
+\end{align}
+です。もう一つは
+\begin{align}
+  \Ncal \times \Ncal = 1 + \eta, \qquad
+  \text{（絵では）}\quad \KWline \KWline = \idline + \etaline
+  \label{NNfusion}
+\end{align}
+です。これらは非自明ですので導出を半空間ゲージ化の立場から説明します。
+
+まず、$\Ncal \times \eta$からです。$\eta$はゲージ化されたIsingの見方からは、$b$のWilsonループ（横切るリンクの$(-1)^b$を挿入する欠陥）になります。このことを強調するために、少し色を変えて、下に$W$の文字を書いて表すことにします。各サイトに関しての拘束があるので、変形することができることに注意すると
+\begin{align}
+  \KWline \etaline =\quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](1.5,2)--(1.5,-2) node[below]{$W$};
+\end{tikzpicture}
+\quad=\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](-0.5,2)--(-0.5,-2) node[below]{$W$};
+\end{tikzpicture}
+\end{align}
+という恒等式を得ます。右辺では、$W$の横切るリンクには$b$の自由度は割り当てられていません。言い換えると$W=1$に置き換えることができます。したがって
+\begin{align}
+  \KWline \etaline =
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+=\KWline
+\end{align}
+というfusion ruleが得られます。
+
+同じ関係を別の見方で導出してみましょう。ゲージ化されていないIsing模型の見方では、$\eta$は$\Lambdah$のリンクをつないでいってできるループ上で定義されていて、そのリンク上で背景ゲージ場$B=1$を入れるという欠陥です。これを強調するために、先ほどとは少し色を変えて、下に$B$をつけて書くことにします。これがトポロジカルであることを踏まえると
+\begin{align}
+  \etaline\KWline =\quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!blue, ultra thick](-1,2)--(-1,-2) node[below]{$B$};
+\end{tikzpicture}
+\quad=\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!blue, ultra thick](0,2)--(0,-2) node[below]{$B$};
+\end{tikzpicture}
+\end{align}
+という恒等式を得ます。ここで、右辺では、背景ゲージ場$B$がある場所は動的なゲージ場$b$がある場所に重なっていることに注目します。このことから、動的なゲージ場の再定義$b'=b+B$によって、背景ゲージ場を吸収し、消してしまうことができます。したがって
+\begin{align}
+  \etaline \KWline =
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+=\KWline
+\end{align}
+というfusion ruleが得られます。
+
+次に\eqref{NNfusion}の導出を説明します。\eqref{NNfusion}の左辺は２つの$\Ncal$の間で半空間ゲージ化したと思うことができます。さらに\ref{sec:KWtopologicalness}項の（ア）、（イ）の恒等式が成り立つことも考慮すると
+\begin{align}
+  \KWline \KWline = \quad
+  \begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0,1}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+\quad
+=
+\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+\end{align}
+という関係式を得ます。右辺に注目します。それぞれのサイトでの拘束条件を考えると、すべてのリンクに割り当てられた$b$の値は同じでなければなりません。ですから、$b$についての和はすべて$b=0$とすべて$b=1$になります。これらはそれぞれ、自明な欠陥と$\eta$欠陥と同じになります。また、$D$に含まれるサイトの数とリンクの数は同じですから、Euler相殺項は消えます。したがって
+\begin{align}
+  \KWline \KWline
+=
+\quad
+\begin{tikzpicture}[baseline=0cm]
+    \foreach \x in {0}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+\end{tikzpicture}
+\quad = \idline + \etaline
+\end{align}
+というフュージョン則を得ます。
+
+Ising圏のフュージョン則をまとめておきます。
+\begin{emphasize}
+  $1,\eta,\Ncal$の３種類の単純対象があり、それらの間に次のフュージョン則がある。
+  \begin{align}
+    &1\times a = a\times 1 = a,\ \text{for } \forall a,\\
+    &\eta \times \eta =1,\\
+    &\Ncal \times \eta =\eta \times \Ncal =\Ncal,\\
+    &\Ncal \times \Ncal = 1 + \eta.
+  \end{align}
+\end{emphasize}
+
+\subsection{F記号}
+フュージョン圏の中で、もう一つ重要な構造はF記号(F symbol)です。F記号は文脈によって結合子(associator)や交差関係式(crossing relation)などとも呼ばれることがあります。ここでは、F記号を演算子恒等式として説明します\footnote{数学の文脈では、対象に対して$\Cb$ベクトル空間が割り当てられ、結合子はそれらの間の線形写像として定義されます。この講義では、これらのベクトル空間の基底を選んで、線形写像を行列で表したときの行列成分をF記号と呼んでいます。}。
+
+F記号について説明するために、まずジャンクション(junction)について説明します。$a,b,c,\dots$を単純対象として、$N_{ab}{}^{c}\ne 0$のときに次のような三叉路の欠陥でトポロジカルなものが$N_{ab}{}^{c}\ne 0$種類存在して、トポロジカルになります。
+\begin{align}
+  \begin{tikzpicture}
+    \draw[very thick](0,0)--(0,1.5) node[above]{$c$};
+    \draw[very thick](0,0)--(-1,-1) node[below]{$a$};
+    \draw[very thick](0,0)--(1,-1) node[below]{$b$};
+  \end{tikzpicture}    
+\end{align}
+例えば、群の対称性の場合には、
+\begin{align}
+  \begin{tikzpicture}
+    \draw[very thick](0,0)--(0,1.5) node[above]{$ab$};
+    \draw[very thick](0,0)--(-1,-1) node[below]{$a$};
+    \draw[very thick](0,0)--(1,-1) node[below]{$b$};
+  \end{tikzpicture}    
+\end{align}
+というものが存在して、トポロジカルです。この群の対称性のジャンクションは\ref{sec:backgroundgaugefield}項でも出てきました。このジャンクションが、どのように系の自由度に結合しているか等は理論の「対称性」だけで決まることではなく、理論の詳細によることです。
+
+一方で、このジャンクションの組み換えに関する次の演算子関係式は、系の詳細によらず、対称性だけで決まります。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$d$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+  \end{tikzpicture}
+  \quad = \quad
+  \sum_{f}
+  (F_{abc}^e)_{df}
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$f$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$e$};
+  \end{tikzpicture}
+  \label{crossingrelation}
+\end{align}
+ここで、$a,b,c,d,e,f$は単純対象のラベルです。$(F_{abc}^e)_{df}$は複素数で\kyou{F記号}(F-symbol)と呼ばれます。また、関係式\eqref{crossingrelation}は\kyou{交差関係式}(crossing relation)と呼ばれます。
+
+F記号は、移動の仕方の無矛盾性から来る\kyou{５角形恒等式}(pentagon identity)を満たす必要があります。これについて簡単に説明します。まず、\eqref{crossingrelation}を何回も適用して得られる、次のような恒等式を考えます（ラベル等、すべて省略します）。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  F
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \label{temppentagon1}
+\end{align}
+一方、左辺に関して、\eqref{crossingrelation}を別の方法で何回も適用して
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](-0.1, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  F
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.4, -0.1)--(0.2,-0.5);
+      \draw[very thick](0.2, 0.2)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](0.51, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \quad = \quad
+  FFF\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5);
+      \draw[very thick](0.8, 0.2)--(0.2,-0.5);
+      \draw[very thick](1.1, -0.1)--(0.7,-0.5);
+      \draw[very thick](0.5,0.5)--(1.5,-0.5);
+      \draw[very thick](0.5,0.5)--(0.5,1);
+  \end{tikzpicture}
+  \label{temppentagon2}
+\end{align}
+という関係式も得ます。\eqref{temppentagon1}の右辺と\eqref{temppentagon2}の右辺は等しくなければなりませんから
+\begin{align}
+  FF = FFF
+\end{align}
+という形の関係式が成り立ちます。これを５角形関係式と呼んでいます。
+
+少し例を述べます。有限群の対称性でアノマリーが無い場合、非自明な（$0=0$でない）交差関係式は
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$ab$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$bc$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+\end{align}
+となります。\ref{sec:backgroundgaugefield}項の議論を思い出してもらうと、この恒等式はゲージ不変性の一部でした。この恒等式から、ジャンクションを含むトポロジカル欠陥の配位を考えたとき、分配関数は、そのネットワークの取り方によらないということができます。すべてのトポロジカル欠陥の配位について和を取ることがゲージ化でしたから、この関係式を満たせばゲージ化できることになります。
+
+アノマリーについても少し触れておきます。有限群の対称性の交差関係式は、アノマリーがある場合も含めて
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](0,0)--(0.5,0.5) node [left]{$ab$};
+      \draw[very thick](0,0)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](0,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](0.5,0.5)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+  \quad = \quad
+  \Acal(a,b,c)\quad
+  \begin{tikzpicture}[baseline=0]
+      \draw[very thick](1,0)--(0.5,0.5) node [right]{$bc$};
+      \draw[very thick](0.5,0.5)--(-0.5,-0.5) node[below]{$a$};
+      \draw[very thick](1,0)--(0.5,-0.5) node[below]{$b$};
+      \draw[very thick](1,0)--(1.5,-0.5) node[below]{$c$};
+      \draw[very thick](0.5,0.5)--(0.5,1) node[above]{$abc$};
+  \end{tikzpicture}
+\end{align}
+と書けます。ただし、$\Acal(a,b,c)$は$0$でない複素数で、アノマリーを表します。これに関して、次のようなことに注意する必要があります。
+\begin{itemize}
+  \item $\Acal(a,b,c)$は5角形関係式を満たす必要があります。
+  \begin{align}
+    \Acal(ab,c,d)
+    \Acal(a,b,cd)
+    =
+    \Acal(a,b,c)
+    \Acal(a,bc,d)
+    \Acal(b,c,d)
+    \label{groupcocycle}
+  \end{align}
+  これは教科書にのっているアノマリーの説明のWess-Zumino無矛盾条件におおよそ対応します。
+  \item ジャンクションに$0$でない複素数$C(a,b)$をかけて再定義することができます。
+  \begin{align}
+    \Acal'(a,b,c)=C(a,b)C(ab,c)C(a,bc)^{-1}C(b,c)^{-1}\Acal(a,b,c)
+    \label{groupcoboundary}
+  \end{align}
+  こうすると$\Acal(a,b,c)$は変化しますが、この操作で結びついているアノマリーは同じアノマリーとみなします。例えば、この操作で$\Acal(a,b,c)=1$とできたとすると、アノマリーは無いことになります。これは教科書にのっているアノマリーの説明の局所相殺項を足すことにおおよそ対応します。なお$\Acal$が5角形恒等式\eqref{groupcocycle}を満たすなら、$\Acal'$も満たすことに注意してください。
+\end{itemize}
+離散群を$G$、また、$\Cb^{\times}:=\Cb \setminus \{0\}$とし、掛け算でアーベル群とみなします。\eqref{groupcocycle}を満たす$\Acal: G\times G \times G\to \Cb^{\times}$全体の集合を\eqref{groupcoboundary}でつながるものを同一視した集合を$H^3(BG,\Cb^{\times})$と書いて、3次の群コホモロジーと呼びます。言い換えると２次元の離散群$G$の対称性のアノマリーは$H^3(BG,\Cb^{\times})$で分類できます\footnote{実は、いつでも局所相殺項で$|\Acal(a,b,c)|=1$とすることができるので、$\Acal: G\times G \times G\to \U(1)$に限って考えて良いです。したがって、2次元のアノマリーを分類するものは$H^3(BG,\U(1))$と書いてもよく、多くの文献ではこちらが書かれています。}。
+
+別の例として、Ising圏のF記号について説明します。前と同様にIsing圏の単純対象の$1$、spin flip $\eta$、KW欠陥$\Ncal$をそれぞれ\idline, \etaline, \KWline で表すことにします。これらは反対向きにしても同じものなので、ここからは向きを気にしないで絵を書くことにします。また、自明な欠陥はしばしば書くのを省略します。
+
+ジャンクションのうち、自明な欠陥を含むものは、他の２つの線が同じものの場合に１種類存在します。自明な欠陥を含まないものは、
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick](0,0)--(-0.5,-0.5);
+      \draw[darkgreen,thick](0,0)--(0.5,-0.5);
+      \draw[red,thick](0,0)--(0,0.7);
+  \end{tikzpicture}        
+\end{align}
+とその足を入れ替えたものになります。
+
+まず、\idline と \etaline は、先ほど述べたアノマリーの無い$\Zb_2$の交差関係式を満たします。新しいのは\KWline を含む交差関係式です。足の入れ替えなどを除くと、非自明なのは次の４種類です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick](D)--(B);
+      \draw[red,thick](A)--(-0.2,0.2);
+      \draw[red,thick](C)--(0.2,-0.2);
+  \end{tikzpicture} 
+  \quad=\quad - \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick](D)--(B);
+      \draw[red,thick](A)--(0.2,-0.2);
+      \draw[red,thick](C)--(-0.2,0.2);
+  \end{tikzpicture} \quad ,
+  \label{crossing1}
+\end{align}
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[red,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(0.3,0)--(C);
+      \draw[red,thick] (A)--(-0.3,0);
+      \draw[red,thick] (B)--(0.3,0);
+  \end{tikzpicture}
+  \quad,
+  \label{crossing2}
+\end{align}
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+  \end{tikzpicture}
+  \quad
+  +
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+      \draw[red,thick] (0.3,0)--(-0.3,0);
+  \end{tikzpicture}
+  \quad
+  \Bigg),\label{crossing3}
+\end{align}
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+      \draw[red,thick] (0,0.3)--(0,-0.3);
+  \end{tikzpicture}
+  \quad=\quad \frac{1}{\sqrt{2}}\Bigg(
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+  \end{tikzpicture}
+  \quad
+  -
+  \quad
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(-0.3,0)--(A);
+      \draw[darkgreen,thick] (C)--(0.3,0)--(B);
+      \draw[red,thick] (0.3,0)--(-0.3,0);
+  \end{tikzpicture}
+  \quad
+  \Bigg)\quad .
+  \label{crossing4}
+\end{align}
+これらについて、半空間ゲージ化の描像から説明していきます。
+
+まずは、半空間ゲージ化の立場からジャンクションがどのように記述できるかと、それがトポロジカルであることを見ます。１つめのジャンクションの見方は、$\eta$をゲージ化していない方において、背景ゲージ場として記述する方法です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (-1,0)--(0,0);
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}        
+\end{align}
+これを強調するために、背景ゲージ場の色を変えて、$B$というラベルをつけて表しています。この線の上でのみ、背景ゲージ場の値$B=1$にしています。端がありますが、これは$D$の中に続いていたとしても動的なゲージ場に吸収してしまうことができるために、ここで止めることができます。ただし、終わっているサイトでの拘束条件は、背景ゲージ場も含めてflatであるというものにしていることに注意します。トポロジカルであることは、次の恒等式で説明できます。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,-1)--(0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}    
+  \quad \notag \\= \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](0,-1)--(-1,-1)--(-1,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \label{topologicaljunctionB}
+\end{align}
+１つめの等号は、背景ゲージ場を動的なゲージ場に吸収できることから、$D$に含まれるリンクで伸ばしても変わらないことを用いました。２つめの等号は、ゲージ変換で、これは$\eta$の欠陥がトポロジカルであることと同じ議論です。このようにしてジャンクションの位置を連続的に変えることができること、つまりトポロジカルであることが示せました。
+
+次に、もう一つ別の方向から$\eta$を見てみます。$D$の中では、$\eta$はWilsonラインで表されます。これを強調するために、少し色を変えて、$W$というラベルを付けて表します。
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (1,0)--(0,0);
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow,, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}        
+\end{align}
+左端は突き出ていて、$\Lambdah$のプラケットの中心で終わっています。これについて少しコメントします。まず、端があるのでゲージ不変かどうかが気になります。これは$D$の外側のプラケットにはゲージ変換が割り当てられていないので、端が$D$の外にあるかぎり、ゲージ不変になります。このジャンクションがトポロジカルであることは、次のように示せます。
+
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+  \quad
+  =\quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+  \end{tikzpicture}
+  \label{topologicaljunctionW}
+\end{align}
+1つめの等号は、ゲージ場の無いところでの変形ですので、Wilsonラインの値は変わりません。２つめの等号は、サイトでの拘束条件から成り立ちます。こうしてジャンクションがトポロジカルであることが分かりました。
+
+準備が整ったので、まず関係式\eqref{crossing1}の導出をします。
+まず、
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \draw[darkgreen,thick] (0,1)--(0,-1);
+      \draw[red,thick] (-1,0)--(0,0);
+      \draw[red,thick] (1,-0.3)--(0,-0.3);
+  \end{tikzpicture}
+  \quad
+  &=\quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+\end{align}
+のように半空間ゲージ化の立場から実現できます。
+この右辺を式\eqref{topologicaljunctionW}と同様の変形をすると、次のようになります。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \quad &=\quad - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(-0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  \notag\\
+  &=\quad - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+      \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+  \end{tikzpicture}
+  .
+\end{align}
+ここで、1つめの等号は、左辺に比べてWilsonラインが背景ゲージ場$B=1$の線を一回余分に横切っているので$(-1)$がかかります。次の等号は式\eqref{topologicaljunctionW}と同様にサイトでの拘束条件から従います。最後の形は、簡略化して書くと
+\begin{align}
+  - \quad
+  \begin{tikzpicture}[baseline=0cm,scale=0.8]
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+        \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \fill[linkblue] (\x,\y) circle (1.8mm);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-1,0,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+        }
+    }
+    \foreach \x in {0,1,2}{
+        \foreach \y in {-2,-1,...,1}{
+            \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+        }
+    }
+    \draw[red!50!yellow, ultra thick](-0.5, 0.5)--(0.5, 0.5)--(0.5,-0.5)--(3.2,-0.5) node[right]{$W$};
+    \draw[red!50!blue, ultra thick](0,0)--(-2,0) node[left]{$B$};
+\end{tikzpicture}
+\quad=\quad -\quad
+\begin{tikzpicture}[baseline=0,scale=0.8]
+    \draw[darkgreen,thick] (0,1)--(0,-1);
+    \draw[red,thick] (-1,0)--(0,0);
+    \draw[red,thick] (1,-0.3)--(0,0.3);
+\end{tikzpicture}
+\end{align}
+となります。最初と最後を見ると\eqref{crossing1}になっています。
+逆に$B$の線の方を\eqref{topologicaljunctionB}と同様に変形しても導出できます。こちらは練習問題に残しておきます。
+
+次に関係式\eqref{crossing3}を導出してみます。左辺を半空間ゲージ化の見方で表すと
+\begin{align}
+  \begin{tikzpicture}[baseline=0]
+      \coordinate(A) at (-1,-1);
+      \coordinate(B) at (1,-1);
+      \coordinate(C) at (1,1);
+      \coordinate(D) at (-1,1);
+      \draw[darkgreen,thick] (D)--(0,0.3)--(C);
+      \draw[darkgreen,thick] (A)--(0,-0.3)--(B);
+  \end{tikzpicture}
+  \quad=\quad 
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,1/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+  \end{tikzpicture}
+  \quad=\quad 
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+      \node(L) at (1.5,0)[below]{$\ell$};
+  \end{tikzpicture}   
+\end{align}
+となります。２つめの等号は\ref{sec:KWtopologicalness}項の（ア）の恒等式を用いました。この右辺のリンク$\ell$に関する因子や和を陽に書き下してみます。これは、リンク変数$b_{\ell}=0,1$の和と、Euler相殺項の$\frac{1}{\sqrt{2}}$です。
+\begin{align}
+  \begin{tikzpicture}[baseline=0.5cm]
+      \foreach \x in {0,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,0) rectangle (\x+1,1);
+          }
+      }
+      \foreach \x in {1,2}{
+          \foreach \y in {0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x/\y in {0/0,1/0,2/0,0/1,2/1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+      }
+      \foreach \x in {1,2}{
+          \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+      }
+  \end{tikzpicture}
+  \quad = \frac{1}{\sqrt{2}}\left(
+      \begin{tikzpicture}[baseline=0.5cm]
+          \foreach \x in {0,2}{
+              \foreach \y in {-2,-1,...,1}{
+              \fill[plaqblue](\x,0) rectangle (\x+1,1);
+              }
+          }
+          \foreach \x in {1,2}{
+              \foreach \y in {0,1}{
+                  \fill[linkblue] (\x,\y) circle (1.8mm);
+              }
+          }
+          \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                  \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+          \foreach \x in {1,2}{
+              \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+          }
+      \end{tikzpicture}
+      \quad + \quad
+      \begin{tikzpicture}[baseline=0.5cm]
+          \foreach \x in {0,2}{
+              \foreach \y in {-2,-1,...,1}{
+              \fill[plaqblue](\x,0) rectangle (\x+1,1);
+              }
+          }
+          \foreach \x in {1,2}{
+              \foreach \y in {0,1}{
+                  \fill[linkblue] (\x,\y) circle (1.8mm);
+              }
+          }
+          \foreach \x/\y in {0/0,2/0,0/1,2/1}{
+                  \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+          \foreach \x in {1,2}{
+              \draw[linkblue, line width = 1.3mm](\x,0)--(\x, 1);
+          }
+          \draw[red!50!blue, ultra thick](1,0)--(2,0);
+      \end{tikzpicture}        
+  \right).
+\end{align}
+この式の右辺は\eqref{crossing3}の右辺になります。したがって、\eqref{crossing3}が導出できました。
+
+他の関係式\eqref{crossing2}, \eqref{crossing4}も同様に導出できます。これらは練習問題に残しておきます。
+
+\subsection{他のWard-Takahashi恒等式}
+前項までは、トポロジカル欠陥のみの変形に関するWard-Takahashi恒等式を導出しました。ここでは、その他の演算子が絡むWard-Takahashi恒等式をいくつか見ていきます。
+
+まず、KW欠陥とスピン演算子に関して、次の恒等式が成り立ちます。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad = 0
+\end{align}
+これは、まずフュージョン則\eqref{Netafusion}を用い、次にspin flipに関するWard-Takahashi恒等式を用いることで示される、次の恒等式が成り立つことから分かります。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+      \draw[red,thick](0,0) circle [radius=0.7cm];
+  \end{tikzpicture}
+  \quad = -\quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (0,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,0) circle [radius=1cm];
+  \end{tikzpicture}
+  \quad .
+\end{align}
+
+
+次に、KW欠陥がスピン演算子を横切るときに関する次の恒等式が成り立つこのを説明します
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,-1)--(0,1);
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\mu$};
+      \draw[darkgreen,thick](2,-1)--(2,1);
+      \draw[red,thick](1,0)--(2,0);
+  \end{tikzpicture}
+  \quad .
+  \label{spin-disorder-flip}
+\end{align}
+この式の左辺を半空間ゲージ化の見方で次のように表せます。
+\begin{align}
+  \begin{tikzpicture}[baseline = 0]
+      \node[xshape,draw] (xnode) at (1,0) {};
+      \node (A) at (xnode)[below right]{$\sigma$};
+      \draw[darkgreen,thick](0,-1)--(0,1);
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad .
+\end{align}
+ここで右辺の×の位置にスピン演算子が入っています。このサイトでは、入ってくる４つのリンクの$b$の和が（$0$ではなく）$1$という拘束条件がかされているというのが、スピン演算子でした。これを次のように変形します。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {0,1,2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \fill[linkblue] (1,0) circle (1.8mm);
+      \draw[linkblue, line width = 1.3mm](1,0)--(2,0);
+      \node (l) at (1.5,0)[below]{$\ell$};
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+  \quad = \quad
+  \begin{tikzpicture}[baseline=0cm]
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+          \fill[plaqblue](\x,\y) rectangle (\x+1,\y+1);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \fill[linkblue] (\x,\y) circle (1.8mm);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-1,0,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x + 1,\y);
+          }
+      }
+      \foreach \x in {2}{
+          \foreach \y in {-2,-1,...,1}{
+              \draw[linkblue, line width = 1.3mm](\x,\y)--(\x,\y + 1);
+          }
+      }
+      \draw[red!50!blue, ultra thick](1,0)--(2,0);
+      \node[xshape,draw,scale=2] (xnode) at (1,0) {};
+  \end{tikzpicture}
+\end{align}
+最初の等号は\ref{sec:KWtopologicalness}項の（ア）、（イ）の変形を次々に適用して得られます。次に×のサイトでの拘束条件を考えるとこれにつながっているリンク$\ell$の$b_{\ell}$は、$1$しか取りません。つまり、これはspin flipの欠陥が入っているのと同じです。Euler相殺項も考慮して、２つめの等号が得られます。右辺は、\eqref{spin-disorder-flip}の右辺と同じです。
+
+最後に以前に導いた次の恒等式をもう一度書いておきます。
+\begin{align}
+  \begin{tikzpicture}[baseline=0cm]
+     \draw[darkgreen, thick](0,0) circle [radius=0.6];   
+  \end{tikzpicture}
+  \quad = \sqrt{2}.
+\end{align}
+この量はKW欠陥の\kyou{量子次元}(quantum dimension)と呼ばれます。これは、交差関係式\eqref{crossing3}, \eqref{crossing4}を用いることでも導出できます。
+
+\section{応用}
+さて、ここまで非可逆対称性の例として$K=K_c$のIsing模型にあるIsing圏について見てきました。繰り返しになりますが、対称性の良いところは、対称性があるということだけから、理論の詳細を知ることなしに情報が得られるということです。ここでは、Ising圏の対称性がある理論に関して成り立つ次の定理を示します\cite{Chang:2018iay}。
+
+\begin{proposition}[定理]
+  Ising圏の対称性を持つ理論は$0$温度で「自明なギャップあり相」ではない。
+\end{proposition}
+
+ここで\kyou{自明なギャップあり相}(trivially gapped phase)とは、ギャップがあって、任意の空間のトポロジーでこの場の理論を考えたときに真空（基底状態）が唯一であることです。２次元の場合は空間が$S^1$の場合を考えれば十分です。
+
+\begin{figure}
+  \centering
+  \includegraphics{defectontorus.pdf}
+  \caption{トーラスにKW欠陥が入った系。左辺と右辺、上辺と下辺がそれぞれ同一視されている。KW欠陥を緑色で表している。}
+  \label{fig:defectontorus}
+\end{figure}
+
+定理を証明します。背理法を用います。ギャップありで真空が唯一であると仮定します。必要なら宇宙定数を付け加えて、真空のエネルギーを$0$とします。ギャップに比べて十分大きいトーラスを考えて、図\ref{fig:defectontorus}のようにKW欠陥が入った分配関数を考えます。まず図のAの方向をEuclid化時間と考えて、演算子形式で考えます。このときKW欠陥はHilbert空間に作用する演算子となるので、この演算子を$\Nh$と書きます。真空を$\ket{0}$で表します。温度はギャップに比べて十分小さいので、分配関数に寄与するのは真空のみです。したがって分配関数は
+\begin{align}
+  Z=\Tr \Nh e^{-\beta \Hh}=\ev{\Nh}{0}=\sqrt{2}\label{tempproofnontrivial}
+\end{align}
+となります。ここで
+\begin{align}
+  \Nh\ket{0}=\sqrt{2}\ket{0}
+\end{align}
+を用いました。これは、図\ref{fig:KWonvacuum}のように考えると理解できます。
+
+\begin{figure}
+  \centering
+  \includegraphics{KWonvacuum.pdf}
+  \caption{真空にKW欠陥の演算子がどう作用するかを表した図。半球のトポロジーを持ち、十分大きなEuclid化時空での経路積分を考えている。上の線は境界で状態を表しているが、十分大きいので、真空のみがのこる。左辺では、真空にKW欠陥が作用した状態になっている。ギャップありで真空が唯一なので、真空の定数倍になる。トポロジカルなので変形していって、下の方に持ってくることで量子次元で置き換えることができるので、この定数は$\sqrt{2}$であることが分かる。}
+  \label{fig:KWonvacuum}
+\end{figure}
+
+次に図\ref{fig:defectontorus}の分配関数をBの方をEuclid時間と思って演算子形式で考えます。今度は空間内の１点にトポロジカル欠陥があるような系の十分低い温度での分配関数になります。この系のHamiltonianを$H_B$、エネルギー$0$の状態のHilbert空間を$V$とすると
+\begin{align}
+  Z=\Tr e^{-\beta H_B}=\dim V
+\end{align}
+となります。つまり$Z$は非負の整数になりますから、これは\eqref{tempproofnontrivial}に矛盾します。\qed
+
+Ising圏の場合、$\Zb_2$の対称性を含むので、もしかしたら、この$\Zb_2$の対称性が本質的な役割を果たしていて縮退していると考える方もおられるかもしれません。ですので、別の非可逆対称性で、群の対称性は一切含んでいないものを紹介します。これはFibonacci圏と呼ばれるもので、その単純対象は$1,F$の２種類のみです。フュージョン則は
+\begin{align}
+  F\times F =1 + F
+\end{align}
+となります。Fibonacci圏の対称性があるとき、上と同じ議論をしてみると、$\widehat{F}^2=1+\widehat{F}$の関係が成り立ちますから、$\widehat{F}$の固有値は$\frac{1\pm \sqrt{5}}{2}$となり、やはり非負の整数ではないので、自明にギャップあり相でないことが分かります。これは、従来の対称性が全く無いのに真空の縮退があるという結果を表していて、非可逆対称性が本質的に重要な役割を果たしています。具体例の一つはZamolodchikov \cite{Zamolodchikov:1990xc}によって調べられたもので、tricritical Ising CFTをrelevant 変形したものです。これにはFibonacci圏の対称性は残っていますが、ギャップがある系です。\cite{Zamolodchikov:1990xc}では可積分性を用いて理論を解くことにより、真空が縮退していることが分かったのですが、\cite{Chang:2018iay}では、非可逆対称性の議論だけで、真空が縮退しなければならないことが説明できました。
+
+\section{ゼロ温度での相構造*}
+
+相構造に関して用語がいくつか出てくるので、説明します。考えている場の理論を有限体積の空間（時空ではない）の上で考えます。この空間の体積$V$は理論にあるスケールよりも十分大きく、曲率は十分小さいとします。このとき、Hamiltonian $\Hh$が決まります。$\Hh$のスペクトルの基底状態付近の定性的な性質によって、いくつかの言葉を定義します。
+
+まず、$\Hh$は\kyou{離散スペクトルを持つことを仮定します。}つまり、$\forall \Lambda\in \Rb$に対して$\Lambda$より小さい固有値は有限個で、それぞれの縮退度も有限個です。これは通常考えられるような健全な場の理論で成り立つと信じられています。例えば、これが成り立たないとすると、あるエネルギー以下の状態が無限個あることになり、有限温度の分配関数は定義されないことになります\footnote{離散スペクトルを持つことは有限温度の分配関数が存在することの必要条件であって、十分条件ではありません。}。
+
+まず、大きく分けてギャップありとギャップなしの分類があります。ギャップなし相は次のようなものです。
+\begin{proposition}[ギャップなし相]
+  空間の計量をスケール倍を除いて固定します。$\forall m>0,\ \forall N\in \Zb$に対して$\exists V_0$が存在し、体積$V$が、$V>V_0$を満たすとき、エネルギー固有値$E$が$E-E_0 <m$を満たす状態数が$N$個以上ある。ただし、$E_0$は基底状態のエネルギーである。
+\end{proposition}
+少し説明します。一般的に体積を大きくしていくと状態間隔は詰まっていきます。基底状態付近を見たときに体積を大きくするといくらでも密になるというのがギャップなし相です。粒子描像があるような場の理論の場合は質量の無い粒子がある場合がギャップなし、すべての粒子に質量がある場合がギャップありです。
+
+ギャップありの場合をさらに分類します。ギャップありということは、体積を大きくしたときに、エネルギーがいくらでも基底状態に近づく状態の個数が有限個ということになります。この有限個の状態を「真空」と呼ぶことにします。この言葉を用いて自明なギャップあり相を定義します。
+\begin{proposition}[自明なギャップあり相]
+  ギャップあり相であって、任意の空間のトポロジーで真空が唯一である。  
+\end{proposition}
+ギャップありだが自明でないものは、空間のトポロジーによって真空が複数個あるものです。例えば、離散対称性が自発的に破れた相はこれにあたります。また「トポロジカル秩序相」と呼ばれるものもこれにあたります。
+
+少し余談ですが、自明なギャップあり相はさらに分類できて、対称性に守られたトポロジカル相(Symmetry Protected Topological Phase)(SPT相)と本当に自明な相\footnote{正しい言葉使いかどうかよくわかりません。}に分類することもできそうです。これはHamiltonianのスペクトルだけからは区別がつかず、対称性に対する背景ゲージ場を導入したときの分配関数の位相によって区別できます。
+
+\end{document}

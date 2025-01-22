@@ -24,7 +24,7 @@
 %\usepackage[T1]{fontenc}
 
 \usepackage{tikz}
-
+\usetikzlibrary{decorations.markings}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue}
 
@@ -131,6 +131,19 @@
   \draw[thick](0,1)--(0,0) node[below]{$#1$};
  }\ 
 }
+
+\newcommand{\orientedline}[1]{
+ \         \begin{tikzpicture}[thick,baseline=0.3cm,>=stealth]
+  \draw[
+      postaction={decorate},                    
+      decoration={                              
+          markings,
+          mark=at position 0.5 with {\arrow{<}}
+      }
+  ] (0,1) -- (0,0) node[below]{$#1$};
+\end{tikzpicture} \ 
+}
+
 
 \newcommand{\idline}{
   \quad \tikz[baseline=0.3cm]{

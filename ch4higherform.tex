@@ -38,7 +38,91 @@
 \section{格子ゲージ理論の中心対称性}
 ここでは高次形式対称性の例としてゲージ理論の中心対称性を紹介します。これは格子ゲージ理論の見方からすると対称性の見方①（変換で作用を不変にするもの）でも理解できるので、まずはそれを説明します。
 
-格子ゲージ理論はすでに出てきましたが、ここで改めて説明します。ここでは問題を具体的にするためにゲージ群が$\SU(N)$の場合を考えますが、別のコンパクト群の場合でも同様に格子ゲージ理論を構成することができます。$d$次元の超立方格子を考えます。ゲージ群は各リンク$\expval{ij}$に群
+\subsection{格子ゲージ理論}
+格子ゲージ理論はすでに出てきましたが、ここで改めて説明します。ここでは問題を具体的にするためにゲージ群が$\SU(N)$の場合を考えますが、別のコンパクト群の場合でも同様に格子ゲージ理論を構成することができます。注意することは、格子ゲージ理論の場合にはLie代数ではなくて群をそのまま考えることです。$d$次元の超立方格子を考えます。ゲージ群は各リンク$\expval{ij}$に群の元$U_{ij}\in \SU(N)$を割り当てます。向きを反対にした場合の記号の使い方として$U_{ji}=U_{ij}^{-1}$とします。分配関数は
+\begin{align}
+    Z = \int \prod_{\expval{ij}: \text{すべてのリンク}} dU_{ij} \exp(-S[U_{ij}]),\nonumber\\
+    S[U_{ij}] = - K \sum_{\expval{ijkl}:\text{すべてのプラケット}} \Tr( U_{ij}U_{jk}U_{kl}U_{li})
+    \label{Wilsonaction}
+\end{align}
+と書けます。ここで$K$は定数で、ゲージ結合定数$g_{\mathrm{YM}}$と$K\sim 1/g_{\mathrm{YM}}^2$という形で関係しています。また積分$\int dU_{ij}$はHaar測度と呼ばれる積分測度で、群の元をかける作用で不変です。
+
+格子ゲージ理論のゲージ対称性は次のように記述されます。ゲージ変換のパラメータは各頂点に割り当てられたゲージ群の元$g_i\in \SU(N)$です。ゲージ変換はリンクに次のように作用します。
+\begin{align}
+    U_{ij}' = g_i U_{ij} g_j^{-1}.
+\end{align}
+Haar測度と作用\eqref{Wilsonaction}はこの変換で不変です。
+
+\subsection{格子ゲージ理論の中心対称性}
+
+格子ゲージ理論の中心対称性を説明するために少し群についての準備をします。$\SU(N)$の元の中で単位行列に比例するような元を考えます。例えば$\omega=\exp(2\pi i/N)$として$\omega \mathbf{1}$は$\SU(N)$の元です。このような元をすべて集めてきた集合
+\begin{align}
+    \Zcal = \{ \omega^k \mathbf{1} | k=0,1,\dots,N-1 \}\subset \SU(N)
+\end{align}
+は$\SU(N)$のすべての元を可換な最大の部分群です\footnote{$\SU(N)$のすべての元と可換な元は単位行列に比例することは、Schurの補題から分かります。}。このような部分群を中心と呼びます。$\Zcal$は群として$\Zb_N$と同型です。
+
+次に中心対称性を記述します。ここでは\ref{sec:symmetrydefect2}節で説明したのと同様のやり方で説明します。図\ref{fig:faceboundary}のように、立方格子の時空の中で余次元1の向きのついた面$M$を考えます。$M$はサイトを通らないことにします。$M$は境界を持っていて、その境界を$\Sigma=\del M$とします。$M$は余次元1でリンクを横切っていっていて、$\Sigma$は余次元２でプラケットの中を繋いでいっていることに注意してください。
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+        % グリッド（(0,0) から (5,4) まで 1cm ごと）
+        \draw[step=0.5cm, thick] (0,0) grid (5,4);
+        
+        % 青い経路と始点・終点
+        \draw[blue, thick, smooth] plot coordinates {(1.25,3.25) (1.25, 1.25) (0.75,1.25) (1,0.25) (2.5,1.75) (4.25,1.25)};
+        \draw[blue, thick] (1.25,3.25) node[fill=blue,circle,inner sep=2pt]{};
+        \draw[blue, thick] (4.25,1.25) node[fill=blue,circle,inner sep=2pt] {};
+        
+        % 経路付近に “M” のラベル
+        \node[blue] at (3,1.4) {$M$};
+        
+        % 赤い矢印とシグマの記号（上の矢印は右向き，下の矢印は左向き）
+        \draw[<-, red, thick] (1.1,3.25) -- (-0.5,3.25) node[above] {$\Sigma$};
+        \draw[<-, red, thick] (4.4,1.25) -- (5.5,1.25) node[below] {$\Sigma$};
+    \end{tikzpicture}
+    \caption{面$M$とその境界$\Sigma$}
+    \label{fig:faceboundary}
+\end{figure}
+
+この上で次のような積分変数の変換をします。簡単のために中心$\Zcal$の元$\omega$に注目します。
+\begin{align}
+    U_{ij}'=
+    \begin{cases}
+        U_{ij} & \text{$\expval{ij}$が$\Sigma$を横切らない},\\
+        \omega U_{ij} & \text{$\expval{ij}$が$\Sigma$正の方向に横切る}.
+        \begin{tikzpicture}[baseline=0pt, line cap=round, line join=round, scale=1]
+            % 水平矢印（中心から右へ）
+            \draw[->, thick] (0,0) -- (0.7,0);
+            \draw[thick] (0,0) -- (2,0);
+            \node[right] at (2,0) {$j$};        
+            \node[left] at (0,0) {$i$};        
+            % --- 青い縦線 ---
+            % 下から上へ線
+            \draw[blue, thick] (1,-0.8) -- (1,0.8)node[above,right]{$M$};
+            % --- 上部の青い矢印（左→右）
+            \draw[->, blue, thick] (1,0.3) -- (1.5,0.3);
+            % --- “j” の文字ラベル ---
+        \end{tikzpicture}
+        \\
+        \omega^{-1} U_{ij} & \text{$\expval{ij}$が$\Sigma$負の方向に横切る}.
+        \begin{tikzpicture}[baseline=0pt, line cap=round, line join=round, scale=1]
+            % 水平矢印（中心から右へ）
+            \draw[->, thick] (0,0) -- (0.7,0);
+            \draw[thick] (0,0) -- (2,0);
+            \node[right] at (2,0) {$j$};        
+            \node[left] at (0,0) {$i$};        
+            % --- 青い縦線 ---
+            % 下から上へ線
+            \draw[blue, thick] (1,-0.8) -- (1,0.8)node[above,right]{$M$};
+            % --- 上部の青い矢印（左→右）
+            \draw[->, blue, thick] (1,0.3) -- (0.5,0.3);
+            % --- “j” の文字ラベル ---
+        \end{tikzpicture}
+    \end{cases}
+\end{align}
+まず、この変換は群の元をかけているだけなので、Haar測度は不変です。次に作用を考えます。作用は不変ではありませんが、どれくらい変化するかを考えます。
+
 
 \section{背景ゲージ場その１}
 \section{背景ゲージ場その２：単体コホモロジー}

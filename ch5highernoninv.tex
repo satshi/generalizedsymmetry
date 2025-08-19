@@ -1,5 +1,5 @@
 \documentclass[generalized_symmetry.tex]{subfiles}
-\setcounter{chapter}{5}
+\setcounter{chapter}{4}
 \begin{document}
 
 \chapter{高次元の非可逆対称性}
@@ -11,6 +11,72 @@
 後者は\ref{sec:KWdefect}でKramers-Wannier双対性の欠陥を作るのに用いた方法の高次元版です。名前を見て分かるとおり、両方とも「ゲージ化」の方法ですので、まずは高次形式対称性のゲージ化について説明します。
 
 \section{高次形式対称性のゲージ化}
+$G$を有限アーベル群とし、$\Tcal$を$d$次元の場の理論で$p$形式$G$対称性（$G^{(p)}$対称性）っを持つものとします。$X$を$d$次元の向きのついた閉リーマン多様体とします。$K$を$X$の単体分割とします。
+この単体分割を利用して$G^{(p)}$対称性に対する背景ゲージ場を$A\in Z^{p+1}(X;G)$として導入します。この背景ゲージ場のもとでの分配関数を$Z_{\Tcal}(A)$と表します。
+
+\subsection{ゲージ化した理論の分配関数}
+
+$Z_{\Tcal}(A)$がアノマリーが無い場合、つまり$Z_{\Tcal}(A+\delta \lambda)=Z_{\Tcal}(A)$が成り立ち、しかも単体分割のしかた$K$に依存しない場合を考えます。このとき、ゲージ化した理論$\Tcal/G^{(p)}$を考えることができます。その分配関数$Z_{\Tcal/G^{(p)}}(A)$はすべてのゲージ場の配位について足し合わせることで得られます。
+\begin{align}
+  Z_{\Tcal/G^{(p)}} = \frac{1}{\mathrm{Vol}} \sum_{a \in Z^{p+1}(X;G)} Z_{\Tcal}(a)
+  \label{gaugingcochain}
+\end{align}
+$\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるようなゲージ場の配位を何回も数えている分を割っておくものです。
+
+ゲージ体積について少し考えてみます。以下、式を短くするために$C^p(K,G)$のことを引数を省略して単に$C^p$と書くことにします。素朴にはゲージ変換のパラメーター$\lambda \in C^{p}$の数なので$1/\mathrm{Vol} = 1/|C^p|$と考えられます。しかし、$\lambda \in C^p$がすべて独立なゲージ変換のパラメーターではなく、$\lambda\in C^p$と$\lambda+d\sigma$, $\sigma \in C^{p-1}$は同じゲージ変換を表しますので、$|C^{p-1}|$で割る必要があります。しかし、話はこれで終わりではなく、$\sigma \in C^{p-1}$もすべて独立なパラメーターではなく……と続けていく必要があります。最終的には
+\begin{align}
+  \frac{1}{\mathrm{Vol}} =
+  \begin{cases}
+    \frac{|C^{p-1}||C^{p-3}|\dots 1}{|C^p||C^{p-2}|\dots |C^0|}  & (p \text{ が偶数のとき}) \\
+    \frac{|C^{p-1}||C^{p-3}|\dots |C^0|}{|C^p||C^{p-2}|\dots 1}  & (p \text{ が奇数のとき})  
+  \end{cases}
+  \label{gaugevolcochain}
+\end{align}
+となります。
+
+文献等ではこれらはコチェイン$C^*$の言葉ではなくてコホモロジーの言葉で書いてあることも多いと思います。それについてここで説明します。まず、$H^{p+1}=Z^{p+1}/B^{p+1}$なので、
+\begin{align}
+  \sum_{a \in Z^{p+1}(X;G)} Z_{\Tcal}(a)=|B^{p+1}|\sum_{a \in H^{p+1}} Z_{\Tcal}(a)\label{gaugingtemp}
+\end{align}
+となります。また、完全系列（前の写像の像が次の写像の核になるような系列）
+\begin{align}
+  0 \to Z^{p} \overset{i}{\to} C^{p} \overset{\delta}{\to} B^{p} \overset{\delta}{\to} 0 
+\end{align}
+を考えることができます。ここで$i$は包含写像です。この完全系列から
+\begin{align}
+  B^{p+1}=C^{p}/Z^{p}
+\end{align}
+であることが分かります。これらの関係を用いると
+\begin{align}
+  |B^{p+1}|&=\frac{|C^{p}|}{|Z^{p}|}=\frac{|C^{p}|}{|H^p||B^p|}=\frac{|C^{p}||B^p|}{|H^p||C^{p-1}|}=\dots\\
+  &=\frac{|C^{p}||C^{p-2}|\dots }{|C^{p-1}||C^{p-3}|\dots}\times
+  \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } 
+\end{align}
+となります。これを\eqref{gaugingtemp}に代入し、さらに\eqref{gaugevolcochain}、\eqref{gaugevolcochain}を用いると
+\begin{align}
+  Z_{\Tcal/G^{(p)}} = \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a)
+\end{align}
+という表式を得ます。この他に重力に関する局所項を入れることもできます。
+
+\subsection{双対対称性}
+２次元の場合と同様に有限アーベル群$p$形式対称性をゲージ化した理論$\Tcal/G^{(p)}$には双対対称性が存在します。これについて見ていくことにしましょう。
+
+双対対称性のトポロジカル欠陥はWilsonサーフェスと呼ばれる演算子です。これは$\rho\in \hat{G}$（1次元ユニタリー表現）つまり$\rho:G\to \U(1)$（準同型）、$c \in Z_{p+1}(K,\Zb)$として
+\begin{align}
+  W_{\rho}(c) = \rho\left(\int_{c} a\right)
+\end{align}
+を挿入することです。この欠陥は$p+1$次元ですから、余次元は$d-p-1$次元になります。つまりこれは$(d-p-2)$形式対称性のトポロジカル欠陥になります。まとめると、
+\begin{emphasize}
+  $\Tcal/G^{(p)}$は$\hat{G}^{(d-p-2)}$対称性を持つ。
+\end{emphasize}
+ということが言えます。
+
+これをさらに詳しく見るために$G=\Zb_N$の場合に限って考えます。この場合、$q=d-p-2$としてWilsonループの情報は$B \in H^{q+1}$で表されます。この背景での分配関数は
+\begin{align}
+  Z_{\Tcal/G^{(p)}}(B) = \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} B\cupp a\right)
+\end{align}
+となります。
+
 \section{４次元\texorpdfstring{\Ztwo}{Z2}格子ゲージ理論}
 \section{Maxwell理論}
 

@@ -8,7 +8,7 @@
   \item 高次ゲージ化(higher gauging)
   \item 半空間ゲージ化(half-space gauging)
 \end{itemize}
-後者は\ref{sec:KWdefect}でKramers-Wannier双対性の欠陥を作るのに用いた方法の高次元版です。名前を見て分かるとおり、両方とも「ゲージ化」の方法ですので、まずは高次形式対称性のゲージ化について説明します。
+後者は\ref{sec:KWdefect}節でKramers-Wannier双対性の欠陥を作るのに用いた方法の高次元版です。名前を見て分かるとおり、両方とも「ゲージ化」の方法ですので、まずは高次形式対称性のゲージ化について説明します。
 
 \section{高次形式対称性のゲージ化}
 $G$を有限アーベル群とし、$\Tcal$を$d$次元の場の理論で$p$形式$G$対称性（$G^{(p)}$対称性）っを持つものとします。$X$を$d$次元の向きのついた閉リーマン多様体とします。$K$を$X$の単体分割とします。
@@ -75,9 +75,94 @@ $\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるよう
 \begin{align}
   Z_{\Tcal/G^{(p)}}(B) = \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} B\cupp a\right)
 \end{align}
-となります。
+となります。ゲージ化すると、だいたい分配関数はFourier変換したようなものになります。
+
+この$\hat{G}^{q}$対称性をゲージ化した理論$\Tcal/G^{p}/\hat{G}^q$を考えます。この分配関数は
+\begin{align}
+  Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}} =& \frac{|H^{q-1}||H^{q-3}|\dots }{|H^q||H^{q-2}|\dots } \sum_{c \in H^{p+1}} Z_{\Tcal/\hat{G}^{q}}(b)\notag\\
+  =&\frac{|H^{q-1}||H^{q-3}|\dots }{|H^q||H^{q-2}|\dots } \sum_{b \in H^{q+1}} \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} b\cupp a\right)
+\end{align}
+となります。ここで知られている恒等式
+\begin{align}
+  \sum_{b \in H^{q+1}}\exp\left(\frac{2\pi i}{N}\int_{X} b\cupp a\right)=
+  |H^{p+1}|\delta_{a,0}
+  \label{completenessidentity}
+\end{align}
+を用いると
+\begin{align}
+  Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}} =& \Ccal Z_{\Tcal},\\
+  \Ccal=&
+  \frac{|H^{q+1}||H^{q-1}||H^{q-3}|\dots }{|H^q||H^{q-2}|\dots }\frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } 
+\end{align}
+を得ます。つまり$\Tcal/G^{(p)}/\hat{G}^{(q)}$の分配関数と$\Tcal$の分配関数は比例係数を除いて等しいので、これら２つの理論は同じであることが期待できます。
+
+これらをもう少し精密にするために、比例係数についてもう少し詳しく見ていきます。これも一般にやるのは少し大変なので、$X$にトーションが無い場合、つまり$H^{*}(X,\Zb)$の$0$でない元を$0$でないどんな整数倍しても$0$でないような場合を考えます。このときある非負の整数$b_p$があって$H^{p}(X,\Zb)\cong \Zb^{b_p}$となります。この$b_p$を用いて$H^{p}(X,G)\cong G^{b_p}$と書けるので$|H^{p}|=N^{b_p}$となります。また、$b_{d-p}=b_p$であることも知られています。
+$p=d-q-2$であることも思い出すと比例係数は
+\begin{align}
+  \Ccal=
+  \begin{cases}
+    N^{\chi}& (q \text{ が偶数のとき}) \\
+    N^{-\chi}& (q \text{ が奇数のとき})
+  \end{cases}
+\end{align}
+となります。ここで
+\begin{align}
+  \chi = \sum_{p=0}^{d}(-1)^p b_p
+\end{align}
+はEuler数です。$d$が奇数のときは$\chi=0$になりますので、$\Ccal=1$となります。$d$が偶数のときには、ゲージ化した分配関数を先ほどの定義から
+\begin{align}
+  Z^{\text{new}}_{\Tcal/G^{(p)}} = \sqrt{\Ccal} Z^{\text{old}}_{\Tcal/G^{(p)}}
+  \label{Eulercountertermgeneral}
+\end{align}
+とすることにより$Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}} = Z_{\Tcal}$となるようにすることができます。\eqref{Eulercountertermgeneral}の再定義は作用に局所的な項を付け加えることで実現できます。これはEulerの公式
+\begin{align}
+  \chi=\sum_{r=0}^{d}(-1)^r (\text{$r$単体の数})
+\end{align}
+を用いると分かります。実際、各$r$単体に対して
+\begin{align}
+  \begin{cases}
+    \sqrt{N}^{(-1)^r} & (\text{$p$,$q$が偶数のとき}) \\
+    \sqrt{N}^{(-1)^{r+1}} & (\text{$p$,$q$が奇数のとき})
+  \end{cases}
+\end{align}
+の因子をかければ良いことになります。
+
+さらに、背景ゲージ場を入れた場合にも同様の解析ができます。このとき、
+\begin{align}
+  Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}}(A)=(\text{定数})\sum_{b\in H^{q+1}}\sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} A\cupp b\right)\exp\left(\frac{2\pi i}{N}\int_{X} b\cupp a\right)
+\end{align}
+となります。ここで
+\begin{align}
+  b\cupp a = (-1)^{(p+1)(q+1)} a \cupp b
+\end{align}
+であることを思い出して、\eqref{completenessidentity}を用いると
+\begin{align}
+  Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}} (a) =
+  \begin{cases}
+    Z_{\Tcal}(-a) & ( \text{$p$, $q$ がともに偶数のとき}) \\
+    Z_{\Tcal}(a) & (\text{それ以外})
+  \end{cases} 
+\end{align}
+を得ます。$p$,$q$がともに偶数のときの背景ゲージ場の符号が反転していますが、これは荷電共役をとった理論になります。まとめると
+\begin{emphasize}
+  $\Tcal/G^{(p)}/\hat{G}^{(q)}$は、$\Tcal$あるいはその荷電共役と同じ理論である。  
+\end{emphasize}
+
+さて２回ゲージ化して同じ理論に戻るなら、特殊な場合には１回ゲージ化しても同じ理論に戻るということがありえます。この場合には$p=q$である必要があります。つまり$d=2n$としたとき$p=q=n-1$の場合です。$n=1$の場合の例は前に詳しくやったKW双対性です。次に簡単なのは$n=2$の場合です。つまり４次元で$\Tcal/G^{(1)}\cong\Tcal$になる場合がありえます。例を挙げると
+\begin{itemize}
+  \item $\Ztwo$格子ゲージ理論、$K=K_c$の場合のKramarse-Wannier-Wegner(KWW)双対性。
+  \item Maxwell理論で$\frac{1}{g^2}=\frac{N}{4\pi}$のときの電磁双対性。
+  \item $\Ncal=4$、ゲージ群が$\SU(N)$でcoupling が$\tau=i$の超対称Yang-Mills理論のMontonen-Olive双対性。
+\end{itemize}
+このような場合には２次元のときと同様にして半空間ゲージ化によってトポロジカル欠陥を作ることができます。一般にはこれは非可逆対称性になります。このようにして作られるトポロジカル欠陥は双対性欠陥と呼ばれます。このあとでは、上２つの例を説明します。
 
 \section{４次元\texorpdfstring{\Ztwo}{Z2}格子ゲージ理論}
+
+１つ目の例は我々が\cite{Koide:2021zxj}でやったものです。これは２次元のKW双対性の４次元のアナロジーで同様の解析を行うことができます。ここではその内容を簡単に説明します。
+
+考える理論は
+
+
 \section{Maxwell理論}
 
 

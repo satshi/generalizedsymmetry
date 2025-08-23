@@ -194,6 +194,158 @@ $K=K_c$のときには、$\Tcal$と$\Tcal/\Zb_{2}^{(1)}$は同じ理論になり
 
 \section{Maxwell理論}
 
+別の双対性欠陥の例として、４次元Maxwell理論の電磁双対性を考えます。Maxwell理論には電場と磁場を入れ替える双対性がありますが、まずそれを精密に定式化します。その後で双対性欠陥を作る方法を説明します。
 
+\subsection{Maxwell理論}
+まず、Maxwell理論の作用を書きます。$X$を閉Riemann多様体（正定値計量$g_{\mu\nu}$の入った多様体）でスピン構造が入っているとします\footnote{ボゾンだけの理論なのに、なぜスピン構造が必要なのかは、かなり技術的です。スピン構造が無い場合にも双対性を議論できますが、その場合の双対性の構造はかなりややこしいものになるので、この講義では取り扱いません。}。ベクトルポテンシャルを$A=A_{\mu}dx^{\mu}$とし、$F=dA=\del_{\mu}A_{\nu}dx^{\mu}\wedge dx^{\nu}=\frac{1}{2}F_{\mu\nu}dx^{\mu}\wedge dx^{\nu}$とします。ここでは微分形式の記号を使っています。$F$のホッジ双対を
+\begin{align}
+  *F:=\frac{1}{4}\sqrt{g}\epsilon_{\mu\nu\rho\sigma}F^{\rho\sigma}dx^{\mu}\wedge dx^{\nu},\quad
+  F^{\rho\sigma}:=g^{\rho\mu}g^{\sigma\nu}F_{\mu\nu}
+\end{align}
+と定義します。ここで$g=\det g_{\mu\nu}$です。また、$\epsilon_{\mu\nu\rho\sigma}$は完全反対称テンソルで$\epsilon_{0123}=1$となるものです。このHodge双対$*$は次の性質を持ちます。$F,G$を２形式として
+\begin{align}
+  F\wedge *G = \frac{1}{2}F_{\mu\nu}G^{\mu\nu} \sqrt{g}d^4x,\quad d^4x :=dx^{1}\wedge dx^{2}\wedge dx^{3}\wedge dx^{4}.
+\end{align}
+
+Maxwell理論のパラメーターは結合定数$g^2$と$\theta$角です。これらをまとめて複素数のパラメーター$\tau$:
+\begin{align}
+  \tau=\frac{\theta}{2\pi}+i\frac{4\pi}{g^2}
+\end{align}
+を定義しておくと便利です。
+
+Maxwell理論の作用は
+\begin{align}
+  I_{\tau}=\int_{X} \Lcal_{\tau},\qquad
+  \Lcal_{\tau}=\frac{1}{g^2}F\wedge *F+\frac{i\theta}{8\pi^2}F\wedge F
+\end{align}
+と書けます。このパラメーター$\tau$で表されるMaxwell理論を$M_{\tau}$と書くことにします。
+
+準備として、$\Lcal_{\tau}$を少し書き換えておきます。まず、（反）自己双対２形式$F^{\pm}$を
+\begin{align}
+  F^{\pm}=\frac{1}{2}(F\pm *F)
+\end{align}
+で導入します。これらは
+\begin{align}
+  *F^{\pm}=\pm F^{\pm},\quad F=F^{+}+F^{-}, F^{+}\wedge F^{-}=0
+\end{align}
+という性質を満たします。これらを用いると
+\begin{align}
+  \Lcal_{\tau}=-\frac{2\pi i}{8\pi^2}(\tau F^{+}\wedge F^{+}+\taub F^{-}\wedge F^{-})
+\end{align}
+と書けます。
+
+\subsection{電磁双対性}
+電磁双対性の主張は
+\begin{emphasize}
+  $M_{\tau}$と$M_{-1/\tau}$は等価な理論である。
+\end{emphasize}
+というものです。以下でこの主張を３つのステップで導出します。説明は\cite{Witten:1995gf}に沿っています。
+
+\subsubsection{ステップ１：$\U(1)$ 2形式ゲージ場の導入}
+
+2形式$\U(1)$ゲージ場$B$を導入します。これは局所的には実数値を持つ$2$形式で、次のようなゲージ変換性を持ちます。パラメーターは普通の$\U(1)$ゲージ場$\Lambda$で、
+\begin{align}
+  B'= B + d\Lambda
+\end{align}
+と変換されます。これを$\Lambda$ゲージ変換と呼んでおくことにします。
+
+これをMaxwell場と結合させることを考えます。このためにMaxwell場$A$の$\Lambda$ゲージ変換を
+\begin{align}
+  A' = A + \Lambda
+\end{align}
+とします\footnote{$\U(1)$ゲージ場と実数値を持つ1形式の違いに注意してください。$A$も$\Lambda$も$\U(1)$ゲージ場ですから、その足し算である$A'$も$\U(1)$ゲージ場です。}。２形式$\Fcal$を
+\begin{align}
+  \Fcal := F-B 
+\end{align}
+で定義すると、$\Fcal$は$\Lambda$ゲージ変換に対して不変になります。これを利用してLagrangian密度を
+\begin{align}
+  \Lcal_{\tau}(\Fcal)=-\frac{2\pi i}{8\pi^2}(\tau \Fcal^{+}\wedge \Fcal^{+}+\taub \Fcal^{-}\wedge \Fcal^{-})
+\end{align}
+とすると$\Lambda$ゲージ変換で不変な作用が得られます。これは$B=0$のときに元のMaxwell理論の作用になることに注意してください。
+
+\subsubsection{ステップ２：Maxwell理論と等価な理論を作る}
+2形式$U(1)$ゲージ場に対する汎関数積分と汎関数$\delta$関数を導入します。
+\begin{align}
+  &\delta(B)=0, (\text{ゲージ変換をして$B=0$にできないような$B$に対して})\\
+  &\int DB \delta(B)=1.\label{functionaldelta}
+\end{align}
+
+Maxwell理論の分配関数を考えます。
+\begin{align}
+  Z_{M_{\tau}}= \int DA e^{-\int \Lcal_{\tau}(F)}.
+\end{align}
+右辺に\eqref{functionaldelta}を挿入し、$B=0$のとき$\Fcal=F$であることを用いると
+\begin{align}
+  Z_{M_{\tau}}= \int DA DB \delta(B) e^{-\int \Lcal_{\tau}(\Fcal)}.\label{MaxwellDualTemp1}
+\end{align}
+という式を得ます。
+
+次にこの汎関数$\delta$関数を積分で表すことにします。次のような関係が成り立ちます。$\At$を$\U(1)$ゲージ場として
+\begin{align}
+  \delta(B) = \int D\At \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
+  \label{integralBdelta}
+\end{align}
+が成り立ちます。この関係式の「証明」のスケッチは以下のとおりです。
+\begin{enumerate}
+  \item $\Delta(B):=\int D\At \exp\left(\frac{i}{2\pi}\int_{X} \At \wedge dB\right)$として、まず、ゲージ変換しても$B=0$にできない場合$\Delta(B)=0$となることを示します。簡単のためにトーションが無い場合を考えます。トポロジカルに非自明な$\U(1)$ゲージ場$\At$の配位は$\left[\frac{dA}{2\pi}\right] \in H^2(X,\Zb)$に対応します。$H^2(X,\Zb)$の生成子の代表元を$\omega_j,\ j=1,\dots,b_2$とすると、$\At$の配位は
+  \begin{align}
+    \frac{d\At}{2\pi} = \sum_{j=1}^{b_2} n_j \omega_j + b,\quad n_j \in \Zb
+  \end{align}
+  と書けます。ここで$b$はトポロジー的に自明な$\U(1)$ゲージ場、つまり単に1形式です。こうすると
+  \begin{align}
+    \Delta(B) \propto \sum_{n_j \in \Zb} \int Db \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
+  \end{align}
+  となります。$\int Db$の積分により、$dB\ne 0$のような$B$に対しては$\Delta(B)=0$となります。残りWilsonサーフェスの自由度を考える必要がありますが、これも$n_j$の和により自明でない$B$に対しては$\Delta(B)=0$となることが分かります。$\omega_j$に双対なサイクルを$\alpha_j$とすると$dB=0$となる$B$に対して
+  \begin{align}
+    \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right) = \exp\left(-i\sum_j n_j \int_{\alpha_j} B\right)
+  \end{align}
+  となりますから、$n_j$の和を考えることにより$\int_{\alpha_j} B =0 \mod 2\pi$でないような$B$に対しては$\Delta(B)=0$となります。このようにして、ゲージ変換しても$B=0$にできないような$B$に対しては$\Delta(B)=0$となることが分かりました。
+  \item 次に$\int DB \Delta(B)=\Zcal$として$\Zcal=1$となることを示します。
+  \begin{align}
+    \Zcal=&\int DB D\At \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
+  \end{align}
+  ですから、$\Zcal$は$B$と$\At$を動的な場で$\exp$の肩にのっているものを作用とした理論の分配関数ということになります。この理論が自明であれば$\Zcal=1$であることが示せます。閉じた3次元面を$M$として$X=M \times S^1$と書ける場合には$S^1$方向をEuclid時間と思うことで演算子形式で調べることができます。詳細は省略しますが、これをやってみるとHamiltonianは$0$で、状態は１つしかないことが分かります。ですからこの場合には$\Zcal=\Tr e^{-\beta H}=1$となります。このように書けない$X$の場合には、トポロジカルな場の理論の一般論で、切ったり貼ったりをすることにより、やはり$\Zcal=1$であることが示せます。
+\end{enumerate}
+これらを合わせると$\Delta(B)=\delta(B)$であることが分かります。
+
+式\eqref{MaxwellDualTemp1}に\eqref{integralBdelta}を代入すると
+\begin{align}
+  Z_{M_{\tau}}= \int DA DB D\At e^{-\int \Mcal_{\tau}},\qquad \Mcal_{\tau}=\frac{i}{2\pi}\At \wedge dB+\Lcal_{\tau}(\Fcal)\label{MaxwellDualTemp2}
+\end{align}
+
+\subsubsection{ステップ３：別の変形}
+式\eqref{MaxwellDualTemp2}は$I_{\tau}$で表されるMaxwell理論の分配関数でした。この式の積分を別の評価の仕方をします。
+
+まず、$\Lambda$ゲージ変換を利用して$A=0$となるゲージをとります。その上で$B$を積分することを考えます。このとき全微分を除いて
+\begin{align}
+  \frac{i}{2\pi}\At \wedge dB=
+  -\frac{i}{2\pi}\Ft \wedge B=
+  -\frac{i}{2\pi}\Ft^{+} \wedge B^{+} -\frac{i}{2\pi}\Ft^{-} \wedge B^{-}
+\end{align}
+となります。ここで$\Ft=d\At$は$\At$の場の強さ、$\Ft^{\pm},B^{\pm}$は（反）自己双対部分です。これらを考慮すると
+\begin{align}
+  \frac{(2\pi)^2}{2\pi i}\Mcal_{\tau}=&
+  -\Ft^{+}\wedge B^{+}
+  -\Ft^{-}\wedge B^{-}
+  -\frac12 \tau B^{+}\wedge B^{+}
+  -\frac12 \tau B^{-}\wedge B^{-}\notag\\
+  =&
+  -\frac12 \tau 
+  (B^{+}+\frac{1}{\tau}\Ft^{+})\wedge
+  (B^{+}+\frac{1}{\tau}\Ft^{+})
+  -\frac12 \tau 
+  (B^{-}+\frac{1}{\tau}\Ft^{-})\wedge
+  (B^{-}+\frac{1}{\tau}\Ft^{-})\notag\\
+  &\qquad+\frac{1}{2\tau}\Ft^{+}\wedge\Ft^{+}
+  +\frac{1}{2\tau}\Ft^{-}\wedge\Ft^{-}
+\end{align}
+を得ます。積分変数の変換$B^{\pm}\to B'^{\pm}=B^{\pm}+\frac{1}{\tau}\Ft^{\pm}$を行うと、$B'^{\pm}$の積分は分離します。これはGauss積分で評価でき、計量や$\tau$に依存する数が出てきますが、計量による局所相殺項（Euler相殺項、符号数相殺項）に吸収することができます。したがって、積分したあとには
+\begin{align}
+  \Mcal_{\tau}\to -\frac{2\pi i}{(2\pi)^2}\left[
+  -\frac{1}{2\tau}\Ft^{+}\wedge\Ft^{+}
+  -\frac{1}{2\tau}\Ft^{-}\wedge\Ft^{-}
+  \right]=\Lcal_{-1/\tau}
+\end{align}
+が残ります。これは$\U(1)$ゲージ場$\At$に対するMaxwell理論$M_{-1/\tau}$のLagrangian密度そのものです。こうして電磁双対性が証明されました。
 
 \end{document}

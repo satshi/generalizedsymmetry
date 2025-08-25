@@ -3,25 +3,25 @@
 \begin{document}
 
 \chapter{高次元の非可逆対称性}
-高次元の非可逆対称性は比較的新しい話題で、現在も盛んに研究が進んでいる分野です。高次元の非可逆対称性の系統的な調べ方はまだありません。いくつかの例が知られているだけです。高次元の非可逆対称性の発見の仕方にはいくつかあるのですが、ここでは２つの方法を紹介します。
+高次元の非可逆対称性は比較的新しい話題で、現在も盛んに研究が進んでいる分野です。高次元の非可逆対称性の系統的な調べ方はまだありません。いくつかの例が知られているだけです。高次元の非可逆対称性の発見の仕方にはいくつかあります。例えば次のような方法があります。
 \begin{itemize}
   \item 高次ゲージ化(higher gauging)
   \item 半空間ゲージ化(half-space gauging)
 \end{itemize}
-後者は\ref{sec:KWdefect}節でKramers-Wannier双対性の欠陥を作るのに用いた方法の高次元版です。名前を見て分かるとおり、両方とも「ゲージ化」の方法ですので、まずは高次形式対称性のゲージ化について説明します。
+後者は\ref{sec:KWdefect}節でKramers-Wannier双対性の欠陥を作るのに用いた方法の高次元版です。この講義では、この後この半空間ゲージ化について詳しく紹介します。名前を見て分かるとおり、両方とも「ゲージ化」の方法ですので、まずは高次形式対称性のゲージ化について説明します。
 
 \section{高次形式対称性のゲージ化}
-$G$を有限アーベル群とし、$\Tcal$を$d$次元の場の理論で$p$形式$G$対称性（$G^{(p)}$対称性）っを持つものとします。$X$を$d$次元の向きのついた閉リーマン多様体とします。$K$を$X$の単体分割とします。
+$G$を有限アーベル群とし、$\Tcal$を$d$次元の場の理論で$p$形式$G$対称性（$G^{(p)}$対称性）を持つものとします。$X$を$d$次元の向きのついた閉リーマン多様体とします。$K$を$X$の単体分割とします。
 この単体分割を利用して$G^{(p)}$対称性に対する背景ゲージ場を$A\in Z^{p+1}(X;G)$として導入します。この背景ゲージ場のもとでの分配関数を$Z_{\Tcal}(A)$と表します。
 
 \subsection{ゲージ化した理論の分配関数}
 
 $Z_{\Tcal}(A)$がアノマリーが無い場合、つまり$Z_{\Tcal}(A+\delta \lambda)=Z_{\Tcal}(A)$が成り立ち、しかも単体分割のしかた$K$に依存しない場合を考えます。このとき、ゲージ化した理論$\Tcal/G^{(p)}$を考えることができます。その分配関数$Z_{\Tcal/G^{(p)}}(A)$はすべてのゲージ場の配位について足し合わせることで得られます。
 \begin{align}
-  Z_{\Tcal/G^{(p)}} = \frac{1}{\mathrm{Vol}} \sum_{a \in Z^{p+1}(X;G)} Z_{\Tcal}(a)
-  \label{gaugingcochain}
+  Z_{\Tcal/G^{(p)}} = \frac{1}{\mathrm{Vol}} \sum_{a \in Z^{p+1}(X;G)} Z_{\Tcal}(a).
+  \label{gaugingincochain}
 \end{align}
-$\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるようなゲージ場の配位を何回も数えている分を割っておくものです。
+ここで$\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるようなゲージ場の配位を何回も数えている分を割っておくものです。
 
 ゲージ体積について少し考えてみます。以下、式を短くするために$C^p(K,G)$のことを引数を省略して単に$C^p$と書くことにします。素朴にはゲージ変換のパラメーター$\lambda \in C^{p}$の数なので$1/\mathrm{Vol} = 1/|C^p|$と考えられます。しかし、$\lambda \in C^p$がすべて独立なゲージ変換のパラメーターではなく、$\lambda\in C^p$と$\lambda+d\sigma$, $\sigma \in C^{p-1}$は同じゲージ変換を表しますので、$|C^{p-1}|$で割る必要があります。しかし、話はこれで終わりではなく、$\sigma \in C^{p-1}$もすべて独立なパラメーターではなく……と続けていく必要があります。最終的には
 \begin{align}
@@ -40,7 +40,7 @@ $\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるよう
 \end{align}
 となります。また、完全系列（前の写像の像が次の写像の核になるような系列）
 \begin{align}
-  0 \to Z^{p} \overset{i}{\to} C^{p} \overset{\delta}{\to} B^{p} \overset{\delta}{\to} 0 
+  0 \to Z^{p} \overset{i}{\to} C^{p} \overset{\delta}{\to} B^{p+1} \overset{\delta}{\to} 0 
 \end{align}
 を考えることができます。ここで$i$は包含写像です。この完全系列から
 \begin{align}
@@ -48,41 +48,43 @@ $\mathrm{Vol}$はゲージ体積であり、ゲージ変換でつながるよう
 \end{align}
 であることが分かります。これらの関係を用いると
 \begin{align}
-  |B^{p+1}|&=\frac{|C^{p}|}{|Z^{p}|}=\frac{|C^{p}|}{|H^p||B^p|}=\frac{|C^{p}||B^p|}{|H^p||C^{p-1}|}=\dots\\
+  |B^{p+1}|&=\frac{|C^{p}|}{|Z^{p}|}
+  =\frac{|C^{p}|}{|H^p||B^p|}=\frac{|C^{p}||Z^{p-1}|}{|H^p||C^{p-1}|}
+  =\frac{|C^{p}||H^{p-1}||B^{p-1}|}{|H^p||C^{p-1}|}
+  =\dots\\
   &=\frac{|C^{p}||C^{p-2}|\dots }{|C^{p-1}||C^{p-3}|\dots}\times
   \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } 
 \end{align}
-となります。これを\eqref{gaugingtemp}に代入し、さらに\eqref{gaugevolcochain}、\eqref{gaugevolcochain}を用いると
+となります。これを\eqref{gaugingtemp}に代入し、さらに\eqref{gaugingincochain}、\eqref{gaugevolcochain}を用いると
 \begin{align}
   Z_{\Tcal/G^{(p)}} = \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a)
 \end{align}
 という表式を得ます。この他に重力に関する局所項を入れることもできます。
 
 \subsection{双対対称性}
-２次元の場合と同様に有限アーベル群$p$形式対称性をゲージ化した理論$\Tcal/G^{(p)}$には双対対称性が存在します。これについて見ていくことにしましょう。
+２次元の場合と同様に有限アーベル群$G$の$p$形式対称性をゲージ化した理論$\Tcal/G^{(p)}$には双対対称性が存在します。これについて見ていくことにしましょう。
 
 双対対称性のトポロジカル欠陥はWilsonサーフェスと呼ばれる演算子です。これは$\rho\in \hat{G}$（1次元ユニタリー表現）つまり$\rho:G\to \U(1)$（準同型）、$c \in Z_{p+1}(K,\Zb)$として
 \begin{align}
   W_{\rho}(c) = \rho\left(\int_{c} a\right)
 \end{align}
-を挿入することです。この欠陥は$p+1$次元ですから、余次元は$d-p-1$次元になります。つまりこれは$(d-p-2)$形式対称性のトポロジカル欠陥になります。まとめると、
+を挿入することです。この欠陥は$p+1$次元ですから、余次元は$d-p-1$次元になります。つまりこれは$(d-p-2)$形式対称性のトポロジカル欠陥になります。まとめると、次のことが言えました。
 \begin{emphasize}
   $\Tcal/G^{(p)}$は$\hat{G}^{(d-p-2)}$対称性を持つ。
 \end{emphasize}
-ということが言えます。
 
 これをさらに詳しく見るために$G=\Zb_N$の場合に限って考えます。この場合、$q=d-p-2$としてWilsonループの情報は$B \in H^{q+1}$で表されます。この背景での分配関数は
 \begin{align}
   Z_{\Tcal/G^{(p)}}(B) = \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} B\cupp a\right)
 \end{align}
-となります。ゲージ化すると、だいたい分配関数はFourier変換したようなものになります。
+となります。ゲージ化すると、分配関数はだいたいFourier変換したようなものになります。
 
 この$\hat{G}^{q}$対称性をゲージ化した理論$\Tcal/G^{p}/\hat{G}^q$を考えます。この分配関数は
 \begin{align}
   Z_{\Tcal/G^{(p)}/\hat{G}^{(q)}} =& \frac{|H^{q-1}||H^{q-3}|\dots }{|H^q||H^{q-2}|\dots } \sum_{c \in H^{p+1}} Z_{\Tcal/\hat{G}^{q}}(b)\notag\\
   =&\frac{|H^{q-1}||H^{q-3}|\dots }{|H^q||H^{q-2}|\dots } \sum_{b \in H^{q+1}} \frac{|H^{p-1}||H^{p-3}|\dots }{|H^p||H^{p-2}|\dots } \sum_{a \in H^{p+1}} Z_{\Tcal}(a) \exp\left(\frac{2\pi i}{N}\int_{X} b\cupp a\right)
 \end{align}
-となります。ここで知られている恒等式
+となります。ここで、知られている恒等式
 \begin{align}
   \sum_{b \in H^{q+1}}\exp\left(\frac{2\pi i}{N}\int_{X} b\cupp a\right)=
   |H^{p+1}|\delta_{a,0}
@@ -143,7 +145,7 @@ $p=d-q-2$であることも思い出すと比例係数は
     Z_{\Tcal}(a) & (\text{それ以外})
   \end{cases} 
 \end{align}
-を得ます。$p$,$q$がともに偶数のときの背景ゲージ場の符号が反転していますが、これは荷電共役をとった理論になります。まとめると
+を得ます。$p$,$q$がともに偶数のときの背景ゲージ場の符号が反転していますが、これは荷電共役をとった理論になります。したがって、次のことが言えました。
 \begin{emphasize}
   $\Tcal/G^{(p)}/\hat{G}^{(q)}$は、$\Tcal$あるいはその荷電共役と同じ理論である。  
 \end{emphasize}
@@ -152,23 +154,23 @@ $p=d-q-2$であることも思い出すと比例係数は
 \begin{itemize}
   \item $\Ztwo$格子ゲージ理論、$K=K_c$の場合のKramarse-Wannier-Wegner(KWW)双対性。
   \item Maxwell理論で$\frac{1}{g^2}=\frac{N}{4\pi}$のときの電磁双対性。
-  \item $\Ncal=4$、ゲージ群が$\SU(N)$でcoupling が$\tau=i$の超対称Yang-Mills理論のMontonen-Olive双対性。
+  \item $\Ncal=4$超対称Yang-Millsでゲージ群が$\SU(N)$、coupling が$\tau=i$の場合のMontonen-Olive双対性。
 \end{itemize}
-このような場合には２次元のときと同様にして半空間ゲージ化によってトポロジカル欠陥を作ることができます。一般にはこれは非可逆対称性になります。このようにして作られるトポロジカル欠陥は双対性欠陥と呼ばれます。このあとでは、上２つの例を説明します。
+このような場合には２次元のときと同様にして半空間ゲージ化によってトポロジカル欠陥を作ることができます。一般にはこれは非可逆対称性になります。このようにして作られるトポロジカル欠陥は双対性欠陥と呼ばれます。この講義の残りで、上２つの例：$\Ztwo$格子ゲージ理論とMaxwell理論の双対性欠陥について説明します。
 
 \section{４次元\texorpdfstring{\Ztwo}{Z2}格子ゲージ理論}
 
-１つ目の例は我々が\cite{Koide:2021zxj}でやったものです。これは２次元のKW双対性の４次元のアナロジーで同様の解析を行うことができます。ここではその内容を簡単に説明します。
+１つ目の例は我々が\cite{Koide:2021zxj}でやったものです。これは２次元のKW双対性の４次元のアナロジーです。第\ref{ch:Ising}章でやったのと同様の解析によりその性質を調べることができます。ここではその内容を簡単に説明します。
 
-考える理論は４次元$\Ztwo$格子ゲージ理論で、これは\ref{subsec:latticegauge}項で取り扱った格子ゲージ理論でゲージ群を$\SU(N)$の代わりに$\Ztwo$としたものです。つまり４次元の立方格子において、各リンク$\ell$に$\Ztwo$の元$a_{\ell}=0,1$を割り当てます。分配関数は$K$を正の実数の定数として
+考える理論は４次元$\Ztwo$格子ゲージ理論で、これは\ref{subsec:latticegauge}項で取り扱った格子ゲージ理論においてゲージ群を$\SU(N)$の代わりに$\Ztwo$としたものです。つまり４次元の立方格子において、各リンク$\ell$に$\Ztwo$の元$a_{\ell}=0,1$を割り当てます。分配関数は$K$を正の実数の定数として
 \begin{align}
   Z_{\Tcal}(K)=\sum_{\{a\}} \exp\left(K\sum_{\text{すべてのプラケット}\expval{1234}}(-1)^{a_1+a_2+a_3+a_4}\right)
 \end{align}
-と書けます。Ising模型の似ているのが分かってもらえるでしょうか。
+と書けます。Ising模型と似ているのが分かってもらえるでしょうか。
 
-この理論には中心対称性$\Ztwo^{(1)}$があります。これは\ref{sec:latticecentersymmetry}節で説明したとおりのものです。これは、Ising模型のときのスピン反転対称性のアナロジーです。
+この理論には中心対称性$\Ztwo^{(1)}$があります。これは\ref{sec:latticecentersymmetry}節で説明したとおりのものです。中心対称性$\Ztwo^{(1)}$は２次元Ising模型のときのスピン反転対称性のアナロジーです。
 
-さらに、この理論にはKW双対性に似た双対性KWW双対性があります。これの主張は適切な局所相殺項を加えると
+さらに、この理論にはKW双対性に似た双対性であるKWW双対性があります。これの主張は適切な局所相殺項を加えると
 \begin{align}
   Z_{\Tcal/\Zb_{2}^{(1)}}(K) = Z_{\Tcal}(\Kt),\quad \sinh 2K \sinh 2\Kt=1
 \end{align}
@@ -177,7 +179,7 @@ $p=d-q-2$であることも思い出すと比例係数は
 この理論の相構造について見ておきます。用語など、適宜\ref{sec:phasestructure}を参照してください。まず、極端な場合について考えておきます。
 \begin{itemize}
   \item $K\ll 1$（強結合）のとき、強結合展開により、Wilsonループは面積則であることが分かります。つまり、閉じ込め相であり、$\Ztwo^{(1)}$対称性が保たれている相です。真空は唯一であり、自明にギャップがある相です。
-  \item $K\gg 1$（弱結合）のとき、flatな配位が支配的になり、Wilsonループは自明に$1$になります。つまり、脱閉じ込め相であり、$\Ztwo^{(1)}$対称性が破れている相です。ギャップはあいていますが、空間のトポロジーによって真空に有限個の縮退があるトポロジカル秩序相になります。
+  \item $K\gg 1$（弱結合）のとき、flatな配位が支配的になり、Wilsonループは自明に$1$になります。つまり、非閉じ込め相であり、$\Ztwo^{(1)}$対称性が自発的に破れている相です。ギャップはあいていますが、空間のトポロジーによって真空に有限個の縮退があるトポロジカル秩序相になります。
 \end{itemize}
 これらは対称性が異なる相なので相転移は必ずあります。２次元Isingと同様の双対性を用いた論理で、相転移が一回だけあるとすると、それは自己双対の点$K=K_c$であることが分かります。これらをまとめると図\ref{fig:z2latticephasestructure}のようになります。これも２次元Ising模型の相構造と似ています。
 
@@ -194,7 +196,7 @@ $K=K_c$のときには、$\Tcal$と$\Tcal/\Zb_{2}^{(1)}$は同じ理論になり
 
 \section{Maxwell理論}
 
-別の双対性欠陥の例として、４次元Maxwell理論の電磁双対性を考えます。Maxwell理論には電場と磁場を入れ替える双対性がありますが、まずそれを精密に定式化します。その後で双対性欠陥を作る方法を説明します。
+別の双対性欠陥の例として、４次元Maxwell理論の電磁双対性から来る双対性欠陥を考えます。Maxwell理論には電場と磁場を入れ替える双対性がありますが、まずそれを精密に定式化します。その後で双対性欠陥を作る方法を説明します。
 
 \subsection{Maxwell理論}
 まず、Maxwell理論の作用を書きます。$X$を閉Riemann多様体（正定値計量$g_{\mu\nu}$の入った多様体）でスピン構造が入っているとします\footnote{ボゾンだけの理論なのに、なぜスピン構造が必要なのかは、かなり技術的です。スピン構造が無い場合にも双対性を議論できますが、その場合の双対性の構造はかなりややこしいものになるので、この講義では取り扱いません。}。ベクトルポテンシャルを$A=A_{\mu}dx^{\mu}$とし、$F=dA=\del_{\mu}A_{\nu}dx^{\mu}\wedge dx^{\nu}=\frac{1}{2}F_{\mu\nu}dx^{\mu}\wedge dx^{\nu}$とします。ここでは微分形式の記号を使っています。$F$のホッジ双対を
@@ -226,7 +228,7 @@ Maxwell理論の作用は
 \end{align}
 で導入します。これらは
 \begin{align}
-  *F^{\pm}=\pm F^{\pm},\quad F=F^{+}+F^{-}, F^{+}\wedge F^{-}=0
+  *F^{\pm}=\pm F^{\pm},\quad F=F^{+}+F^{-},\quad F^{+}\wedge F^{-}=0
 \end{align}
 という性質を満たします。これらを用いると
 \begin{align}
@@ -239,11 +241,11 @@ Maxwell理論の作用は
 \begin{emphasize}
   $M_{\tau}$と$M_{-1/\tau}$は等価な理論である。
 \end{emphasize}
-というものです。以下でこの主張を３つのステップで導出します。説明は\cite{Witten:1995gf}に沿っています。
+というものです。以下でこの主張を３つのステップで導出します。ここでの説明は\cite{Witten:1995gf}に沿っています。
 
-\subsubsection{ステップ１：$\U(1)$ 2形式ゲージ場の導入}
+\subsubsection{ステップ１：\texorpdfstring{$\U(1)$}{U(1)} 2形式ゲージ場の導入}
 
-2形式$\U(1)$ゲージ場$B$を導入します。これは局所的には実数値を持つ$2$形式で、次のようなゲージ変換性を持ちます。パラメーターは普通の$\U(1)$ゲージ場$\Lambda$で、
+$\U(1)$２形式ゲージ場$B$を導入します。これは局所的には実数値を持つ$2$形式で、次のようなゲージ変換性を持ちます。パラメーターは普通の$\U(1)$ゲージ場$\Lambda$で、
 \begin{align}
   B'= B + d\Lambda
 \end{align}
@@ -280,22 +282,26 @@ Maxwell理論の分配関数を考えます。
 \end{align}
 という式を得ます。
 
-次にこの汎関数$\delta$関数を積分で表すことにします。次のような関係が成り立ちます。$\At$を$\U(1)$ゲージ場として
+次にこの汎関数$\delta$関数を積分で表すことにします。$\At$を$\U(1)$ゲージ場として
 \begin{align}
   \delta(B) = \int D\At \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
   \label{integralBdelta}
 \end{align}
 が成り立ちます。この関係式の「証明」のスケッチは以下のとおりです。
+\begin{align}
+\Delta(B):=\int D\At \exp\left(\frac{i}{2\pi}\int_{X} \At \wedge dB\right)  
+\end{align}
+と定義して、$\Delta(B)=\delta(A)$であることを示します。
 \begin{enumerate}
-  \item $\Delta(B):=\int D\At \exp\left(\frac{i}{2\pi}\int_{X} \At \wedge dB\right)$として、まず、ゲージ変換しても$B=0$にできない場合$\Delta(B)=0$となることを示します。簡単のためにトーションが無い場合を考えます。トポロジカルに非自明な$\U(1)$ゲージ場$\At$の配位は$\left[\frac{dA}{2\pi}\right] \in H^2(X,\Zb)$に対応します。$H^2(X,\Zb)$の生成子の代表元を$\omega_j,\ j=1,\dots,b_2$とすると、$\At$の配位は
+  \item まず、ゲージ変換しても$B=0$にできない場合$\Delta(B)=0$となることを示します。簡単のためにトーションが無い場合を考えます。トポロジカルに非自明な$\U(1)$ゲージ場$\At$の配位は$\left[\frac{dA}{2\pi}\right] \in H^2(X,\Zb)$に対応します。$H^2(X,\Zb)$の生成子の代表元を$\omega_j,\ j=1,\dots,b_2$とし、$dc_j=2\pi \omega_j$となる$\U(1)$ゲージ場$c_j$を持ってきます。すると、$\At$の配位は
   \begin{align}
-    \frac{d\At}{2\pi} = \sum_{j=1}^{b_2} n_j \omega_j + b,\quad n_j \in \Zb
+    \At = \sum_{j=1}^{b_2} n_j c_j + b,\quad n_j \in \Zb
   \end{align}
   と書けます。ここで$b$はトポロジー的に自明な$\U(1)$ゲージ場、つまり単に1形式です。こうすると
   \begin{align}
-    \Delta(B) \propto \sum_{n_j \in \Zb} \int Db \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
+    \Delta(B) \propto \sum_{\{n\} } \int Db \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
   \end{align}
-  となります。$\int Db$の積分により、$dB\ne 0$のような$B$に対しては$\Delta(B)=0$となります。残りWilsonサーフェスの自由度を考える必要がありますが、これも$n_j$の和により自明でない$B$に対しては$\Delta(B)=0$となることが分かります。$\omega_j$に双対なサイクルを$\alpha_j$とすると$dB=0$となる$B$に対して
+  となります。$\int Db$の積分により、$dB\ne 0$のような$B$に対しては$\Delta(B)=0$となります。$dB=0$でもゲージ変換で$B=0$にできるとは限りません。このとき「$B=0$に出来なさ」はWilsonサーフェスで特徴づけられます。これ次のように$n_j$の和を考えることにより取り扱うことができます。$\omega_j$に双対なサイクルを$\alpha_j$とすると$dB=0$となる$B$に対して
   \begin{align}
     \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right) = \exp\left(-i\sum_j n_j \int_{\alpha_j} B\right)
   \end{align}
@@ -313,9 +319,10 @@ Maxwell理論の分配関数を考えます。
 \begin{align}
   Z_{M_{\tau}}= \int DA DB D\At e^{-\int \Mcal_{\tau}},\qquad \Mcal_{\tau}=\frac{i}{2\pi}\At \wedge dB+\Lcal_{\tau}(\Fcal)\label{MaxwellDualTemp2}
 \end{align}
+となります。
 
 \subsubsection{ステップ３：別の変形}
-式\eqref{MaxwellDualTemp2}は$I_{\tau}$で表されるMaxwell理論の分配関数でした。この式の積分を別の評価の仕方をします。
+式\eqref{MaxwellDualTemp2}はMaxwell理論$M_{\tau}$の分配関数でした。この式の積分を別の評価の仕方をします。
 
 まず、$\Lambda$ゲージ変換を利用して$A=0$となるゲージをとります。その上で$B$を積分することを考えます。このとき全微分を除いて
 \begin{align}
@@ -349,7 +356,7 @@ Maxwell理論の分配関数を考えます。
 \end{align}
 が残ります。これは$\U(1)$ゲージ場$\At$に対するMaxwell理論$M_{-1/\tau}$のLagrangian密度そのものです。こうして電磁双対性が証明されました。
 
-\subsection{$\Zb_{N}^{(1)}$ゲージ化}
+\subsection{\texorpdfstring{$\Zb_{N}^{(1)}$}{ZN1}ゲージ化}
 
 Maxwell理論には$\U(1)^{(1)}$中心対称性があります。この部分群として$\Zb_N^{(1)}$を考え、これをゲージ化することを考えます。
 
@@ -364,23 +371,24 @@ $\Zb_N^{(1)}$ゲージ理論\eqref{ZN1gaugetheory}をMaxwell理論$M_{\tau}$に�
 \begin{align}
   Z_{M_{\tau}/\Zb_N^{(1)}}= \int DA DB D\At e^{-\int \Mcal_{\tau,N}},\qquad \Mcal_{\tau,N}=\frac{iN}{2\pi}\At \wedge dB+\Lcal_{\tau}(\Fcal)\label{Maxwell/ZN}
 \end{align}
+となります。
 ここで、先程と同じように$A=0$ゲージをとって$B$を積分すると
 \begin{align}
   Z_{M_{\tau}/\Zb_N^{(1)}}=Z_{M_{-N^2/\tau}}
 \end{align}
 という関係式を得ます。つまり$M_{\tau}/\Zb_N^{(1)}\cong M_{-N^2/\tau}$という理論の双対性を得ました。
 
-$\Tcal:=M_{\tau=iN}$という理論を考えます。ここで上の双対性を利用すると
+この双対性が面白いのは、双対性で元に戻るような理論を考えることができるからです。実際$M_{\tau=iN}$という理論に対して上の双対性を利用すると
 \begin{align}
-  \Tcal/\Zb_N^{(1)} = \Tcal
+  M_{iN}/\Zb_N^{(1)} = M_{iN}
 \end{align}
-という関係が得られます。つまり$\Tcal$は$\Zb_N^{(1)}$をゲージ化しても元の理論と同じ理論になる、という関係を得ました。一般的に議論したように、このような場合には非可逆対称性があります。
+という関係が得られます。つまり$M_{iN}$は$\Zb_N^{(1)}$をゲージ化しても元の理論と同じ理論になる、という関係を得ました。一般的に議論したように、このような場合には非可逆対称性があります。
 
 \subsection{双対性欠陥}
 
 最後に半空間ゲージ化を行って、双対性欠陥を作ってみます。
 
-Maxwell理論$M_{\tau=iN}$を閉多様体$X$で考えます。領域$D$をとって$D$の内部のみ$\At,B$を導入します。特に$B$に対して$Y=\del D$でのDirichlet境界条件
+Maxwell理論$M_{\tau=iN}$を閉多様体$X$で考えます。領域$D\subset X$をとって$D$の内部のみに$\At,B$を導入します。特に$B$に対して$Y=\del D$でのDirichlet境界条件
 \begin{align}
   B|_{Y}=0
 \end{align}
@@ -421,7 +429,7 @@ $D$の中でのLagrangian密度は
   \caption{半空間ゲージ化により得られる欠陥の様子。}
   \label{fig:dualitydefectMaxwell}
 \end{figure}
-最後に$N=1$の場合についてコメントします。この場合は普通の対称性になります。この場合、Lagrangian密度として$\tau=i$で全体で\eqref{MaxwellDualTemp2}のものをとって考えるのが分かりやすいです。このとき全体で$\At,B$を積分すると全体で$\tau=i$のMaxwell理論が得られます。一方で、$D$の中では$A,B$を積分、$D$の外では$\At$を積分すると、$D$の外でも中でも$\tau=i$のMaxwell理論が得られますが、$Y=\del D$上で欠陥が現れます。この場合、積分のしかたが異なるだけなので、$D$の中に他の演算子が入っていないかぎり欠陥の期待値は$1$になります。したがってこの欠陥で表される一般化対称性は普通の対称性になります。
+最後に$N=1$の場合についてコメントします。この場合は普通の対称性になります。この場合、Lagrangian密度として$\tau=i$で全体で\eqref{MaxwellDualTemp2}のものをとって考えるのが分かりやすいと思います。このとき全体で$\At,B$を積分すると全体で$\tau=i$のMaxwell理論が得られます。一方で、$D$の中では$A,B$を積分、$D$の外では$\At$を積分すると、$D$の外でも中でも$\tau=i$のMaxwell理論が得られますが、$Y=\del D$上で欠陥が現れます。この場合、積分のしかたが異なるだけなので、$D$の中に他の演算子が入っていないかぎり欠陥の期待値は$1$になります。したがってこの欠陥で表される一般化対称性は普通の対称性になります。
 
 ２次元の自由スカラー場でも似たような議論ができて、もっとよく調べられています。自己双対の点では半空間ゲージ化により得られる一般化対称性はやはり普通の対称性になります。この場合、実は対称性がもっと大きく拡大していて$\SU(2)\times \SU(2)$になっていることが知られています。４次元でこのような、さらに大きな拡大が分かると面白いと思います。
 \end{document}

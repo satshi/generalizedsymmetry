@@ -303,6 +303,7 @@ Maxwell理論の分配関数を考えます。
   \item 次に$\int DB \Delta(B)=\Zcal$として$\Zcal=1$となることを示します。
   \begin{align}
     \Zcal=&\int DB D\At \exp\left(-\frac{i}{2\pi}\int_{X} \At \wedge dB\right)
+    \label{trivialtheory}
   \end{align}
   ですから、$\Zcal$は$B$と$\At$を動的な場で$\exp$の肩にのっているものを作用とした理論の分配関数ということになります。この理論が自明であれば$\Zcal=1$であることが示せます。閉じた3次元面を$M$として$X=M \times S^1$と書ける場合には$S^1$方向をEuclid時間と思うことで演算子形式で調べることができます。詳細は省略しますが、これをやってみるとHamiltonianは$0$で、状態は１つしかないことが分かります。ですからこの場合には$\Zcal=\Tr e^{-\beta H}=1$となります。このように書けない$X$の場合には、トポロジカルな場の理論の一般論で、切ったり貼ったりをすることにより、やはり$\Zcal=1$であることが示せます。
 \end{enumerate}
@@ -348,4 +349,79 @@ Maxwell理論の分配関数を考えます。
 \end{align}
 が残ります。これは$\U(1)$ゲージ場$\At$に対するMaxwell理論$M_{-1/\tau}$のLagrangian密度そのものです。こうして電磁双対性が証明されました。
 
+\subsection{$\Zb_{N}^{(1)}$ゲージ化}
+
+Maxwell理論には$\U(1)^{(1)}$中心対称性があります。この部分群として$\Zb_N^{(1)}$を考え、これをゲージ化することを考えます。
+
+まず、$\Zb_N^{(1)}$ゲージ理論を考えます。前は単体コホモロジーで考えましたが、Maxwell理論に結合する場合には微分形式で考えるほうが便利です。これは実は\eqref{trivialtheory}を一般化したような理論
+\begin{align}
+  \int DB D\At \exp\left(-\frac{iN}{2\pi}\int_{X} \At \wedge dB\right)
+    \label{ZN1gaugetheory}
+\end{align}
+で表すことができます。これが実際$\Zb_N^{(1)}$ゲージ理論であることは正準量子化などで確かめることができます。
+
+$\Zb_N^{(1)}$ゲージ理論\eqref{ZN1gaugetheory}をMaxwell理論$M_{\tau}$に結合させて、$M_{\tau}/\Zb_N^{(1)}$理論を作ります。これは\eqref{MaxwellDualTemp2}とほぼ同じで、
+\begin{align}
+  Z_{M_{\tau}/\Zb_N^{(1)}}= \int DA DB D\At e^{-\int \Mcal_{\tau,N}},\qquad \Mcal_{\tau,N}=\frac{iN}{2\pi}\At \wedge dB+\Lcal_{\tau}(\Fcal)\label{Maxwell/ZN}
+\end{align}
+ここで、先程と同じように$A=0$ゲージをとって$B$を積分すると
+\begin{align}
+  Z_{M_{\tau}/\Zb_N^{(1)}}=Z_{M_{-N^2/\tau}}
+\end{align}
+という関係式を得ます。つまり$M_{\tau}/\Zb_N^{(1)}\cong M_{-N^2/\tau}$という理論の双対性を得ました。
+
+$\Tcal:=M_{\tau=iN}$という理論を考えます。ここで上の双対性を利用すると
+\begin{align}
+  \Tcal/\Zb_N^{(1)} = \Tcal
+\end{align}
+という関係が得られます。つまり$\Tcal$は$\Zb_N^{(1)}$をゲージ化しても元の理論と同じ理論になる、という関係を得ました。一般的に議論したように、このような場合には非可逆対称性があります。
+
+\subsection{双対性欠陥}
+
+最後に半空間ゲージ化を行って、双対性欠陥を作ってみます。
+
+Maxwell理論$M_{\tau=iN}$を閉多様体$X$で考えます。領域$D$をとって$D$の内部のみ$\At,B$を導入します。特に$B$に対して$Y=\del D$でのDirichlet境界条件
+\begin{align}
+  B|_{Y}=0
+\end{align}
+を課します。
+
+$D$の中でのLagrangian密度は
+\begin{align}
+  \Lcal_{D\text{の中}}
+  =\frac{iN}{2\pi}\At\wedge d B + \Lcal_{iN}(\Fcal)
+  =\frac{iN}{2\pi}\Ft\wedge \Fcal + \Lcal_{iN}(\Fcal)
+\end{align}
+となります。１行目から２行目へは部分積分をし、$\Lambda$ゲージ対称性があらわであるように書き換えました。ここからさらに$D$の中だけで$A=0$ゲージをとって$B$を積分するということをします。注意することはDirichlet境界条件のために、境界では$\Lambda=0$とする必要があり、境界で$A=0$のゲージ固定条件を取れるかどうか分からないことです。このことを考慮して
+\begin{align}
+  \Lcal_{D\text{の中}}
+  =&\frac{iN}{2\pi}\Ft \wedge F - \frac{iN}{2\pi}\Ft\wedge B + \Lcal_{iN}(\Fcal)
+\end{align}
+と変形します。後ろ２項は$B$を積分することで$\At$をゲージ場とした$M_{iN}$のMaxwell理論になります。第１項目はトポロジカルな項で、これを積分したものは$\mod 2\pi i$で表面項になり、
+\begin{align}
+  \int_{D}\frac{iN}{2\pi}\Ft \wedge F = \int_{Y} \frac{iN}{2\pi}\At \wedge dA \mod 2\pi i
+  \label{dualitydefectaction}
+\end{align}
+と表すことができます。
+
+まとめると、半空間ゲージ化によって得られた理論は$Y$以外の部分では$M_{iN}$であり$Y$に局在する欠陥があります。これは、$Y$の両側のゲージ場$A,\At$を用いて\eqref{dualitydefectaction}のような作用で表すことができます。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \fill[pink!30!white] (-3, 2) rectangle (3, -1);
+    \draw[green!50!black, ultra thick] (0,2)--(0,-1);
+    \node at (0,-1)[below]{$Y$};
+    \node at (0,-1.5)[below]{$\int_Y\frac{iN}{2\pi}\At \wedge dA$ };
+    \node at (-1.5,1)[below]{$A$};
+    \node at (-1.5,0)[below]{$\Lcal_{iN}(F)$};
+    \node at (1.5,1)[below]{$\At$};
+    \node at (1.5,0)[below]{$\Lcal_{iN}(\Ft)$};
+  \end{tikzpicture}
+  \caption{半空間ゲージ化により得られる欠陥の様子。}
+  \label{fig:dualitydefectMaxwell}
+\end{figure}
+最後に$N=1$の場合についてコメントします。この場合は普通の対称性になります。この場合、Lagrangian密度として$\tau=i$で全体で\eqref{MaxwellDualTemp2}のものをとって考えるのが分かりやすいです。このとき全体で$\At,B$を積分すると全体で$\tau=i$のMaxwell理論が得られます。一方で、$D$の中では$A,B$を積分、$D$の外では$\At$を積分すると、$D$の外でも中でも$\tau=i$のMaxwell理論が得られますが、$Y=\del D$上で欠陥が現れます。この場合、積分のしかたが異なるだけなので、$D$の中に他の演算子が入っていないかぎり欠陥の期待値は$1$になります。したがってこの欠陥で表される一般化対称性は普通の対称性になります。
+
+２次元の自由スカラー場でも似たような議論ができて、もっとよく調べられています。自己双対の点では半空間ゲージ化により得られる一般化対称性はやはり普通の対称性になります。この場合、実は対称性がもっと大きく拡大していて$\SU(2)\times \SU(2)$になっていることが知られています。４次元でこのような、さらに大きな拡大が分かると面白いと思います。
 \end{document}
